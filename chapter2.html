@@ -44,6 +44,8 @@
             font-weight: bold;
             transition: background 0.2s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
         }
 
         .home-btn:hover {
@@ -396,7 +398,7 @@
 <body>
 
 <div class="container">
-    <a href="index.html" class="home-btn">返回主頁</a>
+    <button class="home-btn" onclick="goToHome()">返回主頁</button>
     <header>
         <h1>中史互動溫習平台</h1>
         <p>課題2 西周的封建 - 簡易自訂溫習模式</p>
@@ -792,6 +794,18 @@
         onQuizTypeChange();
     });
 
+    // 返回主頁處理函式：如果網址存在 index.html 則跳轉，否則回退或重置畫面
+    function goToHome() {
+        try {
+            // 嘗試導向 index.html
+            window.location.href = "index.html";
+        } catch (e) {
+            // 如果失敗則退回設定畫面並回到最頂部
+            backToConfig();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
     function onQuizTypeChange() {
         const quizType = document.getElementById('quizTypeSelect').value;
         const subMatchingGroup = document.getElementById('sub-matching-group');
@@ -890,7 +904,7 @@
             if (mCount > 0) {
                 if (matchingType === 'person' || matchingType === 'both') activeMatchingData.push(matchingDatabase.person);
                 if (matchingType === 'geo' || matchingType === 'both') activeMatchingData.push(matchingDatabase.geo);
-                if (matchingType === 'both' && mCount === 1) activeMatchingData = [matchingDatabase.person]; // 依數量限制
+                if (matchingType === 'both' && mCount === 1) activeMatchingData = [matchingDatabase.person];
             }
             totalRequested = activeMatchingData.length;
         } else if (quizType === 'sequence') {
