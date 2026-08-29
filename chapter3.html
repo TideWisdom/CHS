@@ -30,10 +30,16 @@
             position: relative;
         }
 
+        /* 頂部導航列容器（用於放置返回按鈕與標題） */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
         .btn-home {
-            position: absolute;
-            top: 0;
-            right: 0;
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
@@ -43,6 +49,9 @@
             font-weight: bold;
             transition: background 0.2s;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+            z-index: 10;
         }
 
         .btn-home:hover {
@@ -51,17 +60,18 @@
 
         header {
             text-align: center;
-            margin-bottom: 25px;
-            position: relative;
+            flex-grow: 1;
         }
 
         header h1 {
             color: var(--primary-color);
             margin-bottom: 5px;
+            font-size: 24px;
         }
 
         header p {
             color: #666;
+            margin: 0;
         }
 
         .card {
@@ -395,11 +405,13 @@
 <body>
 
 <div class="container">
-    <a href="index.html" class="btn-home">返回首頁</a>
-    <header>
-        <h1>中史互動溫習平台</h1>
-        <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
-    </header>
+    <div class="top-nav-bar">
+        <button class="btn-home" onclick="goToHome()">返回首頁</button>
+        <header>
+            <h1>中史互動溫習平台</h1>
+            <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
+        </header>
+    </div>
 
     <!-- 設定面板 -->
     <div class="card" id="config-section">
@@ -847,6 +859,16 @@
     window.addEventListener('DOMContentLoaded', () => {
         onQuizTypeChange();
     });
+
+    // 返回主頁按鈕跳轉處理
+    function goToHome() {
+        try {
+            window.location.href = "index.html";
+        } catch (e) {
+            backToConfig();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
 
     function onQuizTypeChange() {
         const quizType = document.getElementById('quizTypeSelect').value;
