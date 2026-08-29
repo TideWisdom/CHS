@@ -27,11 +27,33 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        /* 右上角返回鍵樣式 */
+        .home-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .home-btn:hover {
+            background-color: #1a252f;
         }
 
         header {
             text-align: center;
             margin-bottom: 25px;
+            position: relative;
         }
 
         header h1 {
@@ -374,6 +396,7 @@
 <body>
 
 <div class="container">
+    <a href="index.html" class="home-btn">返回主頁</a>
     <header>
         <h1>中史互動溫習平台</h1>
         <p>課題2 西周的封建 - 簡易自訂溫習模式</p>
@@ -605,7 +628,7 @@
             { q: "周公平定亂事後所推行的第二次封建，主要分封了大量哪一類的諸侯？", options: ["(A) 異姓功臣", "(B) 同姓宗室", "(C) 商朝舊部", "(D) 外族首領"], answer: 1, explanation: "第二次封建分封大量同姓宗室為諸侯，以鞏固周朝統治。" }
         ],
         "1.1.2": [
-            { q: "在封建制度下，周王所冊封的諸侯，按甚麼分為公、侯、伯、子、男五等？", options: ["(A) 功勞大小", "(B) 爵位", "(C) 封地遠近", "(D) 軍隊多寡"], answer: 1, explanation: "按爵位分為公、侯、伯、子、男五等。" },
+            { q: "在封建制度下，周王所冊封的諸侯，按甚麼分為公、侯、伯、子、男五等？", options: ["(A) 功勞大小", "(B) 爵位", "(C) 封地遠近", "(D) 軍隊多寡"], answer: 1, explanation: "按爵位分為公、侯、伯, 子、男五等。" },
             { q: "諸侯在自己的封國內擁有甚麼權力？", options: ["(A) 絕對民主權", "(B) 世襲統治權", "(C) 獨立建國權", "(D) 遷徙人民權"], answer: 1, explanation: "諸侯在封國內有世襲統治權。" },
             { q: "在封建制度中，卿大夫可再把封地賜給誰？", options: ["(A) 平民", "(B) 奴隸", "(C) 士", "(D) 諸侯"], answer: 2, explanation: "卿大夫再賜給士，士以下是平民。" }
         ],
@@ -637,7 +660,7 @@
             { q: "根據課文，幽王廢掉誰的太子之位？", options: ["(A) 申侯", "(B) 武庚", "(C) 宜臼", "(D) 三監"], answer: 2, explanation: "根據課文，「廢掉宜臼太子之位」。" },
             { q: "根據課文，是誰殺死幽王並立宜臼為平王的？", options: ["(A) 周公", "(B) 申侯", "(C) 武庚", "(D) 諸侯"], answer: 1, explanation: "根據課文，「申侯殺死幽王，立宜臼為平王」。" },
             { q: "根據課文，申侯殺死幽王並立宜臼為平王，造成了什麼結果？", options: ["(A) 令平王有殺父嫌疑", "(B) 讓周朝版圖大為擴展", "(C) 使華夏族與邊疆民族血統融合", "(D) 讓天子實力比諸侯更加雄厚"], answer: 0, explanation: "根據課文，「申侯殺死幽王，立宜臼為平王，也令平王有殺父嫌疑」。" },
-            { q: "根據課文，幽王與平王帶頭破壞封建秩序，造成了什麼影響？", options: ["(A) 諸侯關係更密切", "(B) 王命不再受重視，加快封建制崩潰", "(C) 中央成功加強對地方的控制", "(D) 嫡長子繼承制度從此更為穩固"], answer: 1, explanation: "根據課文，「幽王、平王作為天子，帶頭破壞封建秩序，令王命不再受到諸侯重視，加快封建制的崩潰。」" }
+            { q: "根據課文，幽王與平王帶頭破壞封建秩序，造成了什麼影響？", options: ["(A) 諸侯關係更密切", "(B) 王命不再受重視，加快封建制崩潰", "(C) 中央成功加強對地方控制", "(D) 嫡長子繼承制度從此更為穩固"], answer: 1, explanation: "根據課文，「幽王、平王作為天子，帶頭破壞封建秩序，令王命不再受到諸侯重視，加快封建制的崩潰。」" }
         ],
         "2.3": [
             { q: "根據課文，平王東遷後，王畿面積發生了什麼變化？", options: ["(A) 擴大了一倍", "(B) 完全沒有改變", "(C) 縮減過半", "(D) 被全部分封給諸侯"], answer: 2, explanation: "根據課文第一句，「平王東遷後，王畿面積縮減過半」。" },
