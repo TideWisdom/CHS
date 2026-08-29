@@ -49,6 +49,7 @@
             flex-wrap: wrap;
         }
 
+        /* 調整按鈕樣式，讓 <a> 標籤外觀保持一致 */
         .nav-btn {
             background-color: transparent;
             border: 2px solid #DEB887;
@@ -58,7 +59,9 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s ease;
+            display: inline-block;
         }
 
         .nav-btn:hover, .nav-btn.active {
@@ -73,7 +76,6 @@
         }
 
         .section-content {
-            display: none;
             background: white;
             padding: 2.5rem;
             border-radius: 8px;
@@ -81,38 +83,11 @@
             border-top: 5px solid var(--accent-color);
         }
 
-        .section-content.active {
-            display: block;
-        }
-
         h2 {
             color: var(--primary-color);
             border-bottom: 2px solid #eee;
             padding-bottom: 0.5rem;
             margin-top: 0;
-        }
-
-        .interactive-box {
-            background-color: #f9f9f9;
-            border-left: 4px solid var(--accent-color);
-            padding: 1.2rem;
-            margin: 1.5rem 0;
-            border-radius: 0 5px 5px 0;
-        }
-
-        .quiz-option {
-            display: block;
-            margin: 0.5rem 0;
-            padding: 0.6rem 1rem;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .quiz-option:hover {
-            background-color: #f0f0f0;
         }
 
         footer {
@@ -133,13 +108,13 @@
     </header>
 
     <nav>
-        <button class="nav-btn active" onclick="switchSection('home')">首頁</button>
-        <button class="nav-btn" onclick="switchSection('topic2')">課題2 西周的封建</button>
-        <button class="nav-btn" onclick="switchSection('topic3')">課題3 春秋戰國時期的變局</button>
+        <a href="index.html" class="nav-btn active">首頁</a>
+        <a href="Chapter2.html" class="nav-btn">課題2 西周的封建</a>
+        <a href="Chapter3.html" class="nav-btn">課題3 春秋戰國時期的變局</a>
     </nav>
 
     <main>
-        <div id="home" class="section-content active">
+        <div class="section-content">
             <h2>歡迎來到中史溫習天地</h2>
             <p>本平台旨在幫助同學透過互動方式溫習初中中國歷史課程。</p>
             <p>請點擊上方導航列中的相應課題按鈕，開始你的溫習之旅：</p>
@@ -148,68 +123,11 @@
                 <li><strong>課題3 春秋戰國時期的變局：</strong> 探討社會轉型、百家爭鳴與各國變法。</li>
             </ul>
         </div>
-
-        <div id="topic2" class="section-content">
-            <h2>課題2：西周的封建</h2>
-            <p>西周初年，周武王及周公為了鞏固統治，實行了<strong>封建制度</strong>（分封制），將宗親、功臣及先代貴族分封到各地建立諸侯國。</p>
-            
-            <h3>核心概念：</h3>
-            <ul>
-                <li><strong>目的：</strong> 「封建親藩，以蕃屏周」，加強對地方的控制。</li>
-                <li><strong>諸侯義務：</strong> 必須向周天子納貢、鎮守疆土、定期朝覲及派兵參戰。</li>
-                <li><strong>宗法制度：</strong> 以「嫡長子繼承制」為核心，確立了嚴密的宗廟階級與權力分配。</li>
-            </ul>
-
-            <div class="interactive-box">
-                <h3>💡 互動小測驗</h3>
-                <p><strong>問題：</strong> 西周實行封建制度的主要目的為何？</p>
-                <div class="quiz-option" onclick="alert('答對了！鞏固周室統治，屏衛王室。')">A. 鞏固周室統治，屏衛王室</div>
-                <div class="quiz-option" onclick="alert('答錯了，請再溫習一下課本內容。')">B. 發展商業貿易，促進經濟</div>
-                <div class="quiz-option" onclick="alert('答錯了，請再溫習一下課本內容。')">C. 統一文字與度量衡</div>
-            </div>
-        </div>
-
-        <div id="topic3" class="section-content">
-            <h2>課題3：春秋戰國時期的變局</h2>
-            <p>東周分為春秋與戰國兩個時期，是一個「禮崩樂壞」、劇烈變動的時代。周天子權勢衰落，諸侯爭霸，最終走向戰國七雄的兼併戰爭。</p>
-
-            <h3>核心概念：</h3>
-            <ul>
-                <li><strong>春秋時期：</strong> 「尊王攘夷」，霸主相繼興起（如齊桓公、晉文公）。</li>
-                <li><strong>戰國時期：</strong> 「弱肉強食」，兼併更趨劇烈，各國紛紛推行變法（如商鞅變法）。</li>
-                <li><strong>思想文化：</strong> 「百家爭鳴」，儒、法、道、墨等學派湧現，為中國古代思想奠定基礎。</li>
-            </ul>
-
-            <div class="interactive-box">
-                <h3>💡 互動小測驗</h3>
-                <p><strong>問題：</strong> 戰國時期秦國透過哪一場變法而變得富強？</p>
-                <div class="quiz-option" onclick="alert('答錯了，那是春秋時期的管仲改革。')">A. 管仲改革</div>
-                <div class="quiz-option" onclick="alert('答對了！商鞅變法使秦國實力大增，為統一六國奠定基礎。')">B. 商鞅變法</div>
-                <div class="quiz-option" onclick="alert('答錯了，王安石變法發生在宋代。')">C. 王安石變法</div>
-            </div>
-        </div>
     </main>
 
     <footer>
         <p>&copy; 2026 中國歷史互動溫習平台. 版權所有.</p>
     </footer>
-
-    <script>
-        function switchSection(sectionId) {
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-            });
-
-            document.getElementById(sectionId).classList.add('active');
-            event.target.classList.add('active');
-        }
-    </script>
 
 </body>
 </html>
