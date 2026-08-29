@@ -30,11 +30,17 @@
             position: relative;
         }
 
-        /* 右上角返回鍵樣式 */
+        /* 頂部導航列容器（用於放置返回按鈕與標題） */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        /* 返回主頁按鈕樣式 */
         .home-btn {
-            position: absolute;
-            top: 0;
-            right: 0;
             background-color: var(--primary-color);
             color: white;
             padding: 8px 16px;
@@ -46,6 +52,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             cursor: pointer;
             border: none;
+            z-index: 10;
         }
 
         .home-btn:hover {
@@ -54,17 +61,18 @@
 
         header {
             text-align: center;
-            margin-bottom: 25px;
-            position: relative;
+            flex-grow: 1;
         }
 
         header h1 {
             color: var(--primary-color);
             margin-bottom: 5px;
+            font-size: 24px;
         }
 
         header p {
             color: #666;
+            margin: 0;
         }
 
         .card {
@@ -398,11 +406,13 @@
 <body>
 
 <div class="container">
-    <button class="home-btn" onclick="goToHome()">返回主頁</button>
-    <header>
-        <h1>中史互動溫習平台</h1>
-        <p>課題2 西周的封建 - 簡易自訂溫習模式</p>
-    </header>
+    <div class="top-nav-bar">
+        <button class="home-btn" onclick="goToHome()">返回主頁</button>
+        <header>
+            <h1>中史互動溫習平台</h1>
+            <p>課題2 西周的封建 - 簡易自訂溫習模式</p>
+        </header>
+    </div>
 
     <!-- 設定面板 -->
     <div class="card" id="config-section">
@@ -794,13 +804,11 @@
         onQuizTypeChange();
     });
 
-    // 返回主頁處理函式：如果網址存在 index.html 則跳轉，否則回退或重置畫面
+    // 返回主頁按鈕的點擊事件
     function goToHome() {
         try {
-            // 嘗試導向 index.html
             window.location.href = "index.html";
         } catch (e) {
-            // 如果失敗則退回設定畫面並回到最頂部
             backToConfig();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
