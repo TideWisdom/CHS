@@ -138,6 +138,14 @@
             font-size: 14px;
         }
 
+        .extra-options-container {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-top: 15px;
+        }
+
         .btn-action {
             background-color: var(--accent-color);
             color: white;
@@ -385,15 +393,6 @@
             </select>
         </div>
 
-        <!-- 選擇填充題時的子選項 -->
-        <div class="config-group sub-config-group" id="sub-drag-group">
-            <label for="dragVersionSelect">請選擇填充題版本：</label>
-            <select id="dragVersionSelect" onchange="updateTopicVisibility()">
-                <option value="basic">基礎填充題</option>
-                <option value="advanced">進階填充題</option>
-            </select>
-        </div>
-
         <!-- 選擇配對題時的子選項 -->
         <div class="config-group sub-config-group" id="sub-matching-group">
             <label for="matchingTypeSelect">請選擇配對題主題：</label>
@@ -421,12 +420,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="1">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="1.1.2">
@@ -436,12 +435,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="2">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="1">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="1.1.3">
@@ -451,12 +450,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="1">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="1.2.1">
@@ -466,12 +465,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="1">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="1.2.2">
@@ -481,12 +480,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="0">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="0">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="1.2.3">
@@ -496,12 +495,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="0">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="0">
                     </div>
                 </div>
             </div>
@@ -515,12 +514,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="1">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="2.2">
@@ -530,12 +529,12 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="0">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="0">
                     </div>
                 </div>
                 <div class="topic-card" data-topic="2.3">
@@ -545,12 +544,27 @@
                         <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題數量：</span>
+                        <span>基礎填充題：</span>
                         <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
                     </div>
                     <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題數量：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="1" min="0" max="0">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 配對與時序題數量設定 -->
+            <div class="extra-options-container" id="extra-qty-container">
+                <div class="section-title" style="margin-top: 0;">配對題與時序題設定</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div class="topic-count-container matching-qty-row">
+                        <span>配對題數量（組）：</span>
+                        <input type="number" id="matching-qty" value="1" min="0" max="2">
+                    </div>
+                    <div class="topic-count-container sequence-qty-row">
+                        <span>時序題數量：</span>
+                        <input type="number" id="sequence-qty" value="1" min="0" max="1">
                     </div>
                 </div>
             </div>
@@ -687,7 +701,6 @@
         ]
     };
 
-    // 配對題題庫（選項已包含英文字母標示）
     const matchingDatabase = {
         person: {
             title: "一、人物配對題",
@@ -733,7 +746,6 @@
         }
     };
 
-    // 時序題題庫
     const sequenceDatabase = {
         intro: "請將下列事件按照在文中出現的先後順序進行排序（由先至後）：",
         events: [
@@ -759,150 +771,81 @@
 
     function onQuizTypeChange() {
         const quizType = document.getElementById('quizTypeSelect').value;
-        const subDragGroup = document.getElementById('sub-drag-group');
         const subMatchingGroup = document.getElementById('sub-matching-group');
         const topicContainer = document.getElementById('topic-config-container');
+        const extraQtyContainer = document.getElementById('extra-qty-container');
+        const matchingQtyRow = document.querySelector('.matching-qty-row');
+        const sequenceQtyRow = document.querySelector('.sequence-qty-row');
 
-        subDragGroup.style.display = 'none';
         subMatchingGroup.style.display = 'none';
         topicContainer.style.display = 'block';
+        extraQtyContainer.style.display = 'block';
+        matchingQtyRow.style.display = 'flex';
+        sequenceQtyRow.style.display = 'flex';
 
-        if (quizType === 'drag') {
-            subDragGroup.style.display = 'block';
-            updateTopicVisibility();
+        if (quizType === 'mc') {
+            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'flex');
+            extraQtyContainer.style.display = 'none';
+        } else if (quizType === 'drag') {
+            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
+            extraQtyContainer.style.display = 'none';
         } else if (quizType === 'matching') {
             subMatchingGroup.style.display = 'block';
             topicContainer.style.display = 'none';
         } else if (quizType === 'sequence') {
             topicContainer.style.display = 'none';
         } else if (quizType === 'comprehensive') {
-            subDragGroup.style.display = 'block';
-            updateTopicVisibility();
-        } else {
-            updateTopicVisibility();
+            document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
+            matchingQtyRow.style.display = 'flex';
+            sequenceQtyRow.style.display = 'flex';
         }
     }
 
-    function updateTopicVisibility() {
-        const quizType = document.getElementById('quizTypeSelect').value;
-        const dragVersion = document.getElementById('dragVersionSelect').value;
-
-        document.querySelectorAll('.topic-card').forEach(card => {
-            const topic = card.getAttribute('data-topic');
-            const mcRow = card.querySelector('.mc-row');
-            const dragBasicRow = card.querySelector('.drag-basic-row');
-            const dragAdvRow = card.querySelector('.drag-adv-row');
-            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
-
-            if (quizType === 'mc') {
-                mcRow.style.display = 'flex';
-                dragBasicRow.style.display = 'none';
-                dragAdvRow.style.display = 'none';
-                card.style.display = 'flex';
-            } else if (quizType === 'drag') {
-                mcRow.style.display = 'none';
-                if (dragVersion === 'basic') {
-                    dragBasicRow.style.display = 'flex';
-                    dragAdvRow.style.display = 'none';
-                    let maxVal = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 1;
-                    dragBasicInput.max = maxVal;
-                    if (parseInt(dragBasicInput.value) > maxVal) dragBasicInput.value = maxVal;
-                    card.style.display = 'flex';
-                } else {
-                    dragBasicRow.style.display = 'none';
-                    dragAdvRow.style.display = 'flex';
-                    let maxVal = (topic.startsWith('1.1') || topic === '1.2.1' || topic === '2.1') ? 1 : 0;
-                    dragAdvInput.max = maxVal;
-                    if (parseInt(dragAdvInput.value) > maxVal) dragAdvInput.value = maxVal;
-                    card.style.display = (maxVal === 0) ? 'none' : 'flex';
-                }
-            } else if (quizType === 'comprehensive') {
-                mcRow.style.display = 'flex';
-                if (dragVersion === 'basic') {
-                    dragBasicRow.style.display = 'flex';
-                    dragAdvRow.style.display = 'none';
-                    let maxBasic = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 1;
-                    dragBasicInput.max = maxBasic;
-                    if (parseInt(dragBasicInput.value) > maxBasic) dragBasicInput.value = maxBasic;
-                    card.style.display = 'flex';
-                } else {
-                    dragBasicRow.style.display = 'none';
-                    dragAdvRow.style.display = 'flex';
-                    let maxAdv = (topic.startsWith('1.1') || topic === '1.2.1' || topic === '2.1') ? 1 : 0;
-                    dragAdvInput.max = maxAdv;
-                    if (parseInt(dragAdvInput.value) > maxAdv) dragAdvInput.value = maxAdv;
-                    card.style.display = (maxAdv === 0) ? 'none' : 'flex';
-                }
-            } else {
-                mcRow.style.display = 'flex';
-                dragBasicRow.style.display = 'none';
-                dragAdvRow.style.display = 'none';
-                card.style.display = 'flex';
-            }
-        });
-    }
-
     function setAllCounts(val) {
-        const quizType = document.getElementById('quizTypeSelect').value;
-        const dragVersion = document.getElementById('dragVersionSelect').value;
-
         document.querySelectorAll('.topic-card').forEach(card => {
             if (card.style.display === 'none') return;
             const mcInput = card.querySelector('.topic-mc-qty');
             const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
             const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
 
-            if (quizType !== 'drag' && mcInput) mcInput.value = val;
-            if (quizType !== 'mc') {
-                if ((quizType === 'drag' || quizType === 'comprehensive') && dragVersion === 'advanced') {
-                    if (dragAdvInput) {
-                        const maxVal = parseInt(dragAdvInput.max) || 0;
-                        dragAdvInput.value = Math.min(val, maxVal);
-                    }
-                } else if ((quizType === 'drag' || quizType === 'comprehensive') && dragVersion === 'basic') {
-                    if (dragBasicInput) {
-                        const maxVal = parseInt(dragBasicInput.max) || val;
-                        dragBasicInput.value = Math.min(val, maxVal);
-                    }
-                }
-            }
+            if (mcInput) mcInput.value = val;
+            if (dragBasicInput) dragBasicInput.value = Math.min(val, parseInt(dragBasicInput.max) || val);
+            if (dragAdvInput) dragAdvInput.value = Math.min(val, parseInt(dragAdvInput.max) || 0);
         });
+        const mInput = document.getElementById('matching-qty');
+        const sInput = document.getElementById('sequence-qty');
+        if (mInput) mInput.value = Math.min(val, parseInt(mInput.max) || 2);
+        if (sInput) sInput.value = Math.min(val, parseInt(sInput.max) || 1);
     }
 
     function randomizeCounts() {
-        const quizType = document.getElementById('quizTypeSelect').value;
-        const dragVersion = document.getElementById('dragVersionSelect').value;
-
         document.querySelectorAll('.topic-card').forEach(card => {
             if (card.style.display === 'none') return;
             const mcInput = card.querySelector('.topic-mc-qty');
             const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
             const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
 
-            if (quizType !== 'drag' && mcInput) {
-                mcInput.value = Math.floor(Math.random() * 3);
+            if (mcInput) mcInput.value = Math.floor(Math.random() * 3);
+            if (dragBasicInput) {
+                let maxB = parseInt(dragBasicInput.max) || 1;
+                dragBasicInput.value = Math.floor(Math.random() * (maxB + 1));
             }
-            if (quizType !== 'mc') {
-                if ((quizType === 'drag' || quizType === 'comprehensive') && dragVersion === 'advanced') {
-                    if (dragAdvInput) {
-                        const maxVal = parseInt(dragAdvInput.max) || 0;
-                        dragAdvInput.value = Math.floor(Math.random() * (maxVal + 1));
-                    }
-                } else if ((quizType === 'drag' || quizType === 'comprehensive') && dragVersion === 'basic') {
-                    if (dragBasicInput) {
-                        const maxVal = parseInt(dragBasicInput.max) || 1;
-                        dragBasicInput.value = Math.floor(Math.random() * (maxVal + 1));
-                    }
-                }
+            if (dragAdvInput) {
+                let maxA = parseInt(dragAdvInput.max) || 0;
+                dragAdvInput.value = Math.floor(Math.random() * (maxA + 1));
             }
         });
+        const mInput = document.getElementById('matching-qty');
+        const sInput = document.getElementById('sequence-qty');
+        if (mInput) mInput.value = Math.floor(Math.random() * 3);
+        if (sInput) sInput.value = Math.floor(Math.random() * 2);
     }
 
     function startQuiz() {
         const quizTypeSelect = document.getElementById('quizTypeSelect');
         const quizType = quizTypeSelect.value;
-        const dragVersion = document.getElementById('dragVersionSelect').value;
         const matchingType = document.getElementById('matchingTypeSelect').value;
 
         if (!quizType) {
@@ -920,16 +863,19 @@
 
         if (quizType === 'matching') {
             activeMatchingData = [];
-            if (matchingType === 'person' || matchingType === 'both') {
-                activeMatchingData.push(matchingDatabase.person);
+            let mCount = parseInt(document.getElementById('matching-qty').value) || 1;
+            if (mCount > 0) {
+                if (matchingType === 'person' || matchingType === 'both') activeMatchingData.push(matchingDatabase.person);
+                if (matchingType === 'geo' || matchingType === 'both') activeMatchingData.push(matchingDatabase.geo);
+                if (matchingType === 'both' && mCount === 1) activeMatchingData = [matchingDatabase.person]; // 依數量限制
             }
-            if (matchingType === 'geo' || matchingType === 'both') {
-                activeMatchingData.push(matchingDatabase.geo);
-            }
-            totalRequested = 1;
+            totalRequested = activeMatchingData.length;
         } else if (quizType === 'sequence') {
-            activeSequenceData = sequenceDatabase;
-            totalRequested = 1;
+            let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
+            if (sCount > 0) {
+                activeSequenceData = sequenceDatabase;
+                totalRequested = 1;
+            }
         } else {
             document.querySelectorAll('.topic-card').forEach(card => {
                 if (card.style.display === 'none') return;
@@ -939,13 +885,8 @@
                 const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
 
                 const mcCount = (quizType !== 'drag' && mcInput) ? (parseInt(mcInput.value) || 0) : 0;
-                let dragBasicCount = 0;
-                let dragAdvCount = 0;
-
-                if (quizType === 'drag' || quizType === 'comprehensive') {
-                    if (dragVersion === 'basic' && dragBasicInput) dragBasicCount = parseInt(dragBasicInput.value) || 0;
-                    if (dragVersion === 'advanced' && dragAdvInput) dragAdvCount = parseInt(dragAdvInput.value) || 0;
-                }
+                const dragBasicCount = (quizType !== 'mc' && dragBasicInput) ? (parseInt(dragBasicInput.value) || 0) : 0;
+                const dragAdvCount = (quizType !== 'mc' && dragAdvInput) ? (parseInt(dragAdvInput.value) || 0) : 0;
 
                 totalRequested += (mcCount + dragBasicCount + dragAdvCount);
 
@@ -984,14 +925,22 @@
             });
 
             if (quizType === 'comprehensive') {
-                activeMatchingData = [matchingDatabase.person, matchingDatabase.geo];
-                activeSequenceData = sequenceDatabase;
-                totalRequested += 2;
+                let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
+                let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
+                
+                if (mCount > 0) {
+                    activeMatchingData = [matchingDatabase.person];
+                    if (mCount > 1) activeMatchingData.push(matchingDatabase.geo);
+                }
+                if (sCount > 0) {
+                    activeSequenceData = sequenceDatabase;
+                }
+                totalRequested += (mCount + sCount);
             }
         }
 
         if (totalRequested === 0) {
-            alert("請至少在某個課題設定 1 道或以上的題目！");
+            alert("請至少在某個項目設定 1 道或以上的數量！");
             return;
         }
 
@@ -1045,7 +994,6 @@
                 html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四、]+/, '')}</h2>`;
                 html += `<p><strong>${matchSec.intro}</strong></p>`;
                 
-                // 顯示選項卡
                 html += `<div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
                 matchSec.options.forEach(opt => {
                     html += `<div style="margin: 4px 0;"><strong>${opt.text}</strong></div>`;
