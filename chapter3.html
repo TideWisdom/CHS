@@ -27,11 +27,32 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .btn-home {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn-home:hover {
+            background-color: #1a252f;
         }
 
         header {
             text-align: center;
             margin-bottom: 25px;
+            position: relative;
         }
 
         header h1 {
@@ -374,6 +395,7 @@
 <body>
 
 <div class="container">
+    <a href="index.html" class="btn-home">返回首頁</a>
     <header>
         <h1>中史互動溫習平台</h1>
         <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
@@ -685,7 +707,7 @@
         "2.2": [
             { q: "根據課文，商鞅變法在政治方面推行什麼制度？", options: ["(A) 封建制度", "(B) 縣制", "(C) 井田制度", "(D) 宗法制度"], answer: 1, explanation: "根據課文政治方面內容，「推行縣制，在全國設三十多縣」。" },
             { q: "根據課文，商鞅變法在經濟方面廢除了哪一種制度？", options: ["(A) 封建制度", "(B) 井田制度", "(C) 縣制", "(D) 宗法制度"], answer: 1, explanation: "根據課文，「經濟方面：廢除井田制度」。" },
-            { q: "根據課文，商鞅變法在社會方面將多少家編成一「伍」？", options: ["(A) 三家", "(B) 五家", "(C) 十家", "(D) 十五家"], answer: 1, explanation: "根據課文，「社會方面：把五家編成一『伍』」。" }
+            { q: "根據課文，商鞅變法在社會方面將多少家編成一「伍」？", options: ["(A) 三家", "(B) 五家", "(C) 十家", "(D) 十五家"], answer: 1, explanation: "根據課文、「社會方面：把五家編成一『伍』」。" }
         ],
         "2.3": [
             { q: "根據課文，經過商鞅變法後，秦國的官吏表現如何？", options: ["(A) 貪污腐敗", "(B) 盡忠職守", "(C) 互相監視", "(D) 冗員過多"], answer: 1, explanation: "根據課文第一句，「經過商鞅變法後，秦國官吏盡忠職守」。" },
