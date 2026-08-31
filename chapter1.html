@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="zh-HHK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中史互動溫習平台：課題1 中華民族與早期國家的起源</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --correct-color: #27ae60;
+            --incorrect-color: #c0392b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* 頂部導航列與按鈕區塊 */
+        header {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        header p {
+            color: #666;
+            margin: 0 0 15px 0;
+        }
+
+        .nav-buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-home, .btn-prev-page, .btn-wrongbook {
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-prev-page {
+            background-color: #7f8c8d;
+        }
+
+        .btn-wrongbook {
+            background-color: #e74c3c;
+        }
+
+        .btn-home:hover {
+            background-color: #1a252f;
+        }
+
+        .btn-prev-page:hover {
+            background-color: #626a6b;
+        }
+
+        .btn-wrongbook:hover {
+            background-color: #c0392b;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        h2, h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .config-group {
+            margin-bottom: 15px;
+        }
+
+        .config-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .config-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 16px;
+            background: #fff;
+        }
+
+        .sub-config-group {
+            display: none;
+            background: #fdf2e9;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #f39c12;
+            margin-top: 10px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 15px;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .topic-card label {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 15px;
+        }
+
+        .topic-count-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 4px;
+        }
+
+        .topic-count-container input[type="number"] {
+            width: 65px;
+            padding: 4px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .extra-options-container {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-top: 15px;
+        }
+
+        .btn-action {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-action:hover {
+            background-color: #d35400;
+        }
+
+        .btn-secondary {
+            background-color: #94a3b8;
+            margin-top: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #64748b;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 14px;
+            display: inline-block;
+            width: auto;
+            margin-top: 0;
+            margin-right: 8px;
+        }
+
+        /* 遊戲區域與錯題簿區域 */
+        #quiz-section, #wrongbook-section {
+            display: none;
+        }
+
+        .section-divider {
+            margin: 30px 0 15px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .question-tag {
+            display: inline-block;
+            background: #e2e8f0;
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .mc-question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .mc-options label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .mc-options label:hover {
+            background: #f1f5f9;
+        }
+
+        .mc-options input {
+            margin-right: 10px;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            padding: 8px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        /* 填充題樣式 */
+        .drag-card {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .drag-text-box {
+            font-size: 17px;
+            line-height: 2.8;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            margin-top: 10px;
+        }
+
+        .dropzone {
+            display: inline-block;
+            min-width: 90px;
+            height: 32px;
+            border: 2px dashed var(--accent-color);
+            background: #fffdf9;
+            vertical-align: middle;
+            text-align: center;
+            border-radius: 6px;
+            margin: 0 4px;
+            padding: 2px 8px;
+            color: #b9770e;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dropzone.filled {
+            border-style: solid;
+            border-color: #94a3b8;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 1px dashed #cbd5e1;
+            margin-bottom: 5px;
+            min-height: 45px;
+        }
+
+        .draggable-word {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background-color 0.2s;
+        }
+
+        .draggable-word:active {
+            transform: scale(0.95);
+        }
+
+        .draggable-word.selected-word {
+            background: var(--accent-color) !important;
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* 配對題樣式 */
+        .matching-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .matching-table th, .matching-table td {
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .matching-table th {
+            background: #f1f5f9;
+            color: var(--primary-color);
+        }
+
+        .matching-table select {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            font-size: 15px;
+            background: #fff;
+        }
+
+        .score-display {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .wrong-item-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--incorrect-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>中史互動溫習平台</h1>
+        <p>課題1 中華民族與早期國家的起源</p>
+    </header>
+
+    <div class="nav-buttons-group">
+        <button class="btn-home" onclick="goToHome()">返回主頁</button>
+        <button class="btn-prev-page" onclick="goBackPage()">返回上一頁</button>
+        <button class="btn-wrongbook" onclick="openWrongBook()">查看錯題簿 (<span id="wrong-count">0</span>)</button>
+    </div>
+
+    <!-- 設定面板 -->
+    <div class="card" id="config-section">
+        <h2>第一步：選擇溫習題型</h2>
+        <div class="config-group">
+            <select id="quizTypeSelect" onchange="onQuizTypeChange()">
+                <option value="" disabled selected>-- 請選擇溫習題型 --</option>
+                <option value="mc">選擇題</option>
+                <option value="drag">填充題</option>
+                <option value="matching">配對題</option>
+                <option value="comprehensive">綜合練習</option>
+            </select>
+        </div>
+
+        <!-- 選擇配對題時的子選項 -->
+        <div class="config-group sub-config-group" id="sub-matching-group">
+            <label for="matchingTypeSelect">請選擇配對題主題：</label>
+            <select id="matchingTypeSelect">
+                <option value="person">人物題</option>
+                <option value="geo">地理題</option>
+                <option value="both">人物題＋地理題全部</option>
+            </select>
+        </div>
+
+        <div id="topic-config-container">
+            <h2>第二步：設定各課題出題數量</h2>
+            <div style="margin-bottom: 15px;" id="bulk-btns">
+                <button type="button" class="btn-action btn-small" onclick="setAllCounts(1)">全設為 1 題</button>
+                <button type="button" class="btn-action btn-small btn-secondary" onclick="setAllCounts(0)">全部清零 (0)</button>
+                <button type="button" class="btn-action btn-small" style="background-color: #27ae60;" onclick="randomizeCounts()">一鍵隨機數量</button>
+            </div>
+
+            <div class="section-title">第1節 中國多元一體文化的起源</div>
+            <div class="options-grid">
+                <div class="topic-card" data-topic="1.1">
+                    <label>1.1 石器時代的概況</label>
+                    <div class="topic-count-container mc-row">
+                        <span>選擇題數量：</span>
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="20">
+                    </div>
+                    <div class="topic-count-container drag-basic-row">
+                        <span>基礎填充題：</span>
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="4">
+                    </div>
+                    <div class="topic-count-container drag-adv-row">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
+                    </div>
+                </div>
+                <div class="topic-card" data-topic="1.2">
+                    <label>1.2 多元一體文化的起源與形成</label>
+                    <div class="topic-count-container mc-row">
+                        <span>選擇題數量：</span>
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
+                    </div>
+                    <div class="topic-count-container drag-basic-row">
+                        <span>基礎填充題：</span>
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="6">
+                    </div>
+                    <div class="topic-count-container drag-adv-row">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">第2節 中華民族與早期國家的形成</div>
+            <div class="options-grid">
+                <div class="topic-card" data-topic="2.1">
+                    <label>2.1 炎帝與黃帝華夏族的始祖</label>
+                    <div class="topic-count-container mc-row">
+                        <span>選擇題數量：</span>
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="25">
+                    </div>
+                    <div class="topic-count-container drag-basic-row">
+                        <span>基礎填充題：</span>
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="5">
+                    </div>
+                    <div class="topic-count-container drag-adv-row">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
+                    </div>
+                </div>
+                <div class="topic-card" data-topic="2.2">
+                    <label>2.2 堯、舜、禹與禪讓政治</label>
+                    <div class="topic-count-container mc-row">
+                        <span>選擇題數量：</span>
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="15">
+                    </div>
+                    <div class="topic-count-container drag-basic-row">
+                        <span>基礎填充題：</span>
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
+                    </div>
+                    <div class="topic-count-container drag-adv-row">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
+                    </div>
+                </div>
+                <div class="topic-card" data-topic="2.3">
+                    <label>2.3 夏、商、周的興替概況</label>
+                    <div class="topic-count-container mc-row">
+                        <span>選擇題數量：</span>
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="25">
+                    </div>
+                    <div class="topic-count-container drag-basic-row">
+                        <span>基礎填充題：</span>
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="5">
+                    </div>
+                    <div class="topic-count-container drag-adv-row">
+                        <span>進階填充題：</span>
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 配對題數量設定 -->
+            <div class="extra-options-container" id="extra-qty-container">
+                <div class="section-title" style="margin-top: 0;">配對題設定</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div class="topic-count-container matching-qty-row">
+                        <span>配對題數量（組）：</span>
+                        <input type="number" id="matching-qty" value="1" min="0" max="4">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-action" onclick="startQuiz()" style="margin-top: 25px; font-size: 18px; padding: 15px;">生成測驗</button>
+    </div>
+
+    <!-- 答題區域面板 -->
+    <div class="card" id="quiz-section">
+        <div id="quiz-content"></div>
+        <button class="btn-action" id="submit-btn" onclick="submitAnswers()">提交答案</button>
+        <button class="btn-action btn-secondary" onclick="backToConfig()">返回重新設定</button>
+        <div id="score-result" class="score-display"></div>
+    </div>
+
+    <!-- 錯題簿面板 -->
+    <div class="card" id="wrongbook-section">
+        <h2>我的錯題簿</h2>
+        <p>系統自動記錄您在測驗中答錯或未作答的題目，方便您集中溫習。</p>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button class="btn-action btn-small" style="background-color: #27ae60; width: auto;" onclick="exportWrongBook('doc')">匯出為 Word (DOC)</button>
+            <button class="btn-action btn-small" style="background-color: #2980b9; width: auto;" onclick="exportWrongBook('excel')">匯出為 Excel (CSV)</button>
+            <button class="btn-action btn-small" style="background-color: #c0392b; width: auto;" onclick="clearWrongBook()">清空錯題簿</button>
+        </div>
+        <div id="wrongbook-content"></div>
+        <button class="btn-action btn-secondary" onclick="backToConfig()">返回設定頁面</button>
+    </div>
+</div>
+
+<script>
+    const topicNames = {
+        "1.1": "1.1 石器時代的概況",
+        "1.2": "1.2 多元一體文化的起源與形成",
+        "2.1": "2.1 炎帝與黃帝華夏族的始祖",
+        "2.2": "2.2 堯、舜、禹與禪讓政治",
+        "2.3": "2.3 夏、商、周的興替概況",
+        "1_adv": "第1節綜合填充",
+        "2_adv": "第2節綜合填充"
+    };
+
+    const mcDatabase = {
+        "1.1": [
+            { q: "人類祖先主要利用石頭來製造工具和武器的時期大約從何時開始？", options: ["(A) 四千年前", "(B) 五十萬年前", "(C) 一百七十萬年前", "(D) 兩百萬年前"], answer: 2, explanation: "課文明確指出，大約一百七十萬年前至四千年前，人類祖先主要利用石頭來製造工具和武器。" },
+            { q: "根據課文，人類祖先在大約一百七十萬年前至四千年前主要利用什麼來製造工具和武器？", options: ["(A) 木頭", "(B) 石頭", "(C) 青銅", "(D) 鐵器"], answer: 1, explanation: "課文中提到此時期人類祖先主要利用石頭來製造工具和武器。" },
+            { q: "學者把人類祖先主要利用石頭來製造工具和武器的時期稱為什麼？", options: ["(A) 石器時代", "(B) 史前時代", "(C) 舊石器時代", "(D) 新石器時代"], answer: 0, explanation: "課文指出，學者把人類祖先主要利用石頭來製造工具和武器的這段時期稱為「石器時代」。" },
+            { q: "石器時代可根據人類所用石器的什麼程度再細分？", options: ["(A) 大小與重量", "(B) 數量與多寡", "(C) 粗精程度", "(D) 顏色與材質"], answer: 2, explanation: "課文說明石器時代可根據人類所用石器的「粗精程度」，再細分為舊石器時代和新石器時代。" },
+            { q: "石器時代可細分為哪兩個時期？", options: ["(A) 舊石器時代與新石器時代", "(B) 石器時代與史前時代", "(C) 遠古時代與上古時代", "(D) 工具時代與武器時代"], answer: 0, explanation: "課文提到石器時代可再細分為「舊石器時代」和「新石器時代」。" },
+            { q: "石器時代被細分為舊石器時代和新石器時代的依據是什麼？", options: ["(A) 人類出現的時間長短", "(B) 人類所用石器的粗精程度", "(C) 武器與工具的數量多寡", "(D) 是否有正式的歷史記載"], answer: 1, explanation: "課文指出石器時代是「根據人類所用石器的粗精程度」再細分出舊石器時代和新石器時代。" },
+            { q: "為什麼石器時代又被稱為「史前時代」？", options: ["(A) 因為這個時期人類尚未出現", "(B) 因為這個時期尚未有正式的歷史記載", "(C) 因為這個時期只使用石頭做武器", "(D) 因為這個時期距離現在非常遙遠"], answer: 1, explanation: "課文最後一句說明：「因這個時期尚未有正式的歷史記載，故又稱為『史前時代』」。" },
+            { q: "根據課文內容，被稱為「史前時代」的原因是什麼？", options: ["(A) 尚未有正式的歷史記載", "(B) 只有石頭製造的工具", "(C) 時間發生在四千年前以後", "(D) 尚未有人類祖先的足跡"], answer: 0, explanation: "課文中明確指出，因石器時代尚未有正式的歷史記載，故又稱為『史前時代』。" },
+            { q: "根據課文，下列關於「石器時代」時間範圍的敘述何者正確？", options: ["(A) 大約五百萬年前至一千年前", "(B) 大約一百七十萬年前至四千年前", "(C) 大約兩百萬年前至五千年前", "(D) 大約一百萬年前至兩千年前"], answer: 1, explanation: "課文開頭明確記載時間範圍為「大約一百七十萬年前至四千年前」。" },
+            { q: "舊石器時代的中國古人類包含下列哪一項？", options: ["(A) 山頂洞人", "(B) 元謀人", "(C) 河姆渡人", "(D) 半坡人"], answer: 1, explanation: "課文明確指出，舊石器時代的中國古人類包括「元謀人」、「北京人」等。" },
+            { q: "下列哪一個是舊石器時代中國古人類的代表之一？", options: ["(A) 北京人", "(B) 藍田人", "(C) 鄖縣人", "(D) 和縣人"], answer: 0, explanation: "課文中提到舊石器時代的中國古人類包括「元謀人」、「北京人」等。" },
+            { q: "考古學者認為，舊石器時代的古人類已會進行下列哪一項活動？", options: ["(A) 農業耕種", "(B) 漁獵", "(C) 紡織", "(D) 畜牧業"], answer: 1, explanation: "課文指出考古學者認為他們已會打製石器，從事漁獵、採集野果等活動，並懂得用火。" },
+            { q: "舊石器時代的古人類除了漁獵與採集野果外，還懂得哪一項重要技能？", options: ["(A) 用火", "(B) 製陶", "(C) 建屋", "(D) 磨製石器"], answer: 0, explanation: "課文明確記載他們從事漁獵、採集野果等活動，並懂得用火。" },
+            { q: "舊石器時代的人們主要製作哪一種石器？", options: ["(A) 磨製石器", "(B) 打製石器", "(C) 打磨兼備石器", "(D) 精緻玉器"], answer: 1, explanation: "課文提到舊石器時代的中國古人類已會「打製石器」。" },
+            { q: "當人類步入新石器時代時，人們懂得製作哪一種石器？", options: ["(A) 打製石器", "(B) 粗糙石器", "(C) 磨製石器", "(D) 青銅器"], answer: 2, explanation: "課文指出步入新石器時代時，人們懂得「磨製石器」。" },
+            { q: "新石器時代的人們主要是以什麼為生？", options: ["(A) 漁獵與採集", "(B) 農業、畜牧業", "(C) 商業與貿易", "(D) 手工業與製陶"], answer: 1, explanation: "課文提到新石器時代人們以「農業、畜牧業」為生。" },
+            { q: "新石器時代的人們除了農業與畜牧業外，還會哪些生活技能？", options: ["(A) 打製石器與用火", "(B) 製陶、紡織、建屋定居", "(C) 漁獵與採集野果", "(D) 冶鐵與鑄銅"], answer: 1, explanation: "課文指出新石器時代人們以農業、畜牧業為生，又會製陶、紡織、建屋定居。" },
+            { q: "根據課文內容，新石器時代的生活與舊石器時代相比有什麼改變？", options: ["(A) 生活明顯比舊石器時代進步", "(B) 退步為過著游牧生活", "(C) 生活型態沒有改變", "(D) 放棄了農業改以漁獵為主"], answer: 0, explanation: "課文最後一句明確指出新石器時代「生活明顯比舊石器時代進步」。" },
+            { q: "綜合課文內容，下列關於舊石器時代與新石器時代的比較，何者正確？", options: ["(A) 舊石器時代以農業為生，新石器時代以漁獵為生", "(B) 舊石器時代懂得磨製石器，新石器時代懂得打製石器", "(C) 舊石器時代懂得用火與打製石器，新石器時代則懂得製陶、紡織與建屋定居", "(D) 舊石器時代的生活比新石器時代還要進步"], answer: 2, explanation: "課文說明舊石器時代會打製石器並懂得用火；新石器時代懂得磨製石器、以農業畜牧為生、製陶、紡織、建屋定居，生活比舊石器時代進步。" }
+        ],
+        "1.2": [
+            { q: "二十世紀六十年代以前，人們認為中華文明起源於哪裡？", options: ["(A) 長江流域", "(B) 黃河流域", "(C) 東北地區", "(D) 華南地區"], answer: 1, explanation: "課文開頭指出，二十世紀六十年代以前，人們認為中華文明起源於黃河流域。" },
+            { q: "二十世紀六十年代以前，人們認為中華文明起源於黃河流域後會向哪裡散布？", options: ["(A) 東北", "(B) 四方", "(C) 長江", "(D) 華南"], answer: 1, explanation: "課文提到中華文明起源於黃河流域，然後才向四方散布。" },
+            { q: "二十世紀七十年代以來，考古學者在東北、黃河流域、長江流域以及哪裡發現新石器時代遺址？", options: ["(A) 西南各地區", "(B) 華南各地區", "(C) 中原各地區", "(D) 沿海各地區"], answer: 1, explanation: "課文指出考古學者在東北、黃河流域、長江流域、華南各地區均發現新石器時代遺址。" },
+            { q: "考古學者在東北、黃河流域、長江流域、華南各地區發現了哪一時期的代表性遺址？", options: ["(A) 舊石器時代", "(B) 新石器時代", "(C) 青銅時代", "(D) 鐵器時代"], answer: 1, explanation: "課文明確記載考古學者在上述地區發現具代表性的「新石器時代」遺址。" },
+            { q: "考古學者在各地發現的新石器時代遺址具有什麼特點？", options: ["(A) 完全相同", "(B) 互相模仿", "(C) 各具獨特性", "(D) 來源單一"], answer: 2, explanation: "課文指出這些新石器時代文化「各具獨特性」。" },
+            { q: "依據課文，各地新石器時代文化各具獨特性，反映了中華文化的起源應該是怎樣的？", options: ["(A) 單一的", "(B) 外傳的", "(C) 多元的", "(D) 集中的"], answer: 2, explanation: "課文指出這些新石器時代文化各具獨特性，反映中華文化的起源應是「多元，而非單一」。" },
+            { q: "北方黃河流域的新石器時代文化中，以哪一個文化最著名？", options: ["(A) 龍山文化", "(B) 仰韶文化", "(C) 紅山文化", "(D) 良渚文化"], answer: 1, explanation: "課文明確指出，北方黃河流域的新石器時代文化，以「仰韶文化」最著名。" },
+            { q: "仰韶文化主要分布在黃河的哪兩個區域？", options: ["(A) 上游與下游地區", "(B) 中游與下游地區", "(C) 中、上游地區", "(D) 河套與下游地區"], answer: 2, explanation: "課文提到仰韶文化主要分布在「黃河中、上游地區」。" },
+            { q: "仰韶文化遺址所屬的年代距今大約是多少年？", options: ["(A) 約三千至四千年", "(B) 約五千至七千年", "(C) 約八千至一萬年", "(D) 約一萬至兩萬年"], answer: 1, explanation: "課文明確記載其遺址所屬年代距今約「五千至七千年」。" },
+            { q: "仰韶文化的房子形式是什麼？", options: ["(A) 干欄式", "(B) 半地穴式", "(C) 磚瓦平房", "(D) 木造高架屋"], answer: 1, explanation: "課文明確記載房子為「半地穴式」。" },
+            { q: "仰韶文化出土了大量繪有精美圖紋的什麼器物？", options: ["(A) 青銅器", "(B) 玉器", "(C) 彩色陶器", "(D) 黑陶器"], answer: 2, explanation: "課文提到出土大量繪有精美圖紋的「彩色陶器」。" },
+            { q: "為什麼仰韶文化會被稱為「彩陶文化」？", options: ["(A) 因為出土大量繪有精美圖紋的彩色陶器", "(B) 因為房屋牆壁塗有彩色顏料", "(C) 因為出土的石器都塗上色彩", "(D) 因為其陶器只在祭祀時使用彩繪"], answer: 0, explanation: "課文說明因為出土大量繪有精美圖紋的彩色陶器，故仰韶文化被稱為「彩陶文化」。" },
+            { q: "南方長江流域的新石器時代文化以哪一個文化為代表？", options: ["(A) 仰韶文化", "(B) 良渚文化", "(C) 龍山文化", "(D) 紅山文化"], answer: 1, explanation: "課文開頭明確指出，南方長江流域的新石器時代文化，以「良渚文化」為代表。" },
+            { q: "良渚文化主要分布在哪一個地區？", options: ["(A) 黃河流域", "(B) 長江下游地區", "(C) 華南各地區", "(D) 東北地區"], answer: 1, explanation: "課文明確記載良渚文化主要分布在「長江下游地區」。" },
+            { q: "良渚文化遺址所屬的年代距今大約是多少年？", options: ["(A) 約五千至七千年", "(B) 約四千三百至五千三百年", "(C) 約三千至四千年", "(D) 約六千至八千年"], answer: 1, explanation: "課文指出其遺址所屬年代距今約「四千三百至五千三百年」。" },
+            { q: "良渚人居住的房屋形式是什麼？", options: ["(A) 半地穴式房屋", "(B) 干欄式房屋", "(C) 磚瓦平房", "(D) 石造洞穴"], answer: 1, explanation: "課文提到良渚人居住在「干欄式房屋」。" },
+            { q: "為什麼良渚人要居住在干欄式房屋？", options: ["(A) 為了防範猛獸攻擊", "(B) 為了遠離潮濕的地面", "(C) 為了方便祭祀祖先", "(D) 為了便於隨時搬遷"], answer: 1, explanation: "課文說明干欄式房屋可以「遠離潮濕的地面」。" },
+            { q: "良渚人主要以什麼為生？", options: ["(A) 漁獵與採集", "(B) 游牧與畜牧", "(C) 務農", "(D) 商業與貿易"], answer: 2, explanation: "課文明確指出良渚人「以務農為生」。" },
+            { q: "良渚文化的工藝水平很高，其中陶器主要以哪一種為主且質地細膩？", options: ["(A) 彩陶", "(B) 白陶", "(C) 紅陶", "(D) 黑陶"], answer: 3, explanation: "課文指出其工藝水平很高，陶器以「黑陶」為主，質地細膩。" },
+            { q: "下列哪一項是良渚文物的一大特色？", options: ["(A) 繪有精美圖紋的彩色陶器", "(B) 打製粗糙的石器", "(C) 雕琢精細的玉器（如玉琮）", "(D) 各式各樣的青銅武器"], answer: 2, explanation: "課文明確說明「其雕琢精細的玉器（如玉琮），更是良渚文物的一大特色」。" },
+            { q: "除了仰韶和良渚文化外，中國新石器時代文化還包括黃河下游的什麼文化？", options: ["(A) 紅山文化", "(B) 石峽文化", "(C) 龍山文化", "(D) 二里頭文化"], answer: 2, explanation: "課文明確指出，中國新石器時代文化還包括黃河下游的「龍山文化」。" },
+            { q: "東北地區的新石器時代文化代表是什麼？", options: ["(A) 仰韶文化", "(B) 良渚文化", "(C) 龍山文化", "(D) 紅山文化"], answer: 3, explanation: "課文提到東北地區的文化為「紅山文化」。" },
+            { q: "珠江流域的新石器時代文化代表是什麼？", options: ["(A) 石峽文化", "(B) 良渚文化", "(C) 龍山文化", "(D) 紅山文化"], answer: 0, explanation: "課文指出珠江流域的文化為「石峽文化」。" },
+            { q: "中國不同地區的文化彼此交流融合後，形成了怎樣的中華文化？", options: ["(A) 完全單一而無特色的文化", "(B) 各具特色，而又渾然一體的中華文化", "(C) 僅存在於黃河流域的中華文化", "(D) 互不相容的多個獨立文化"], answer: 1, explanation: "課文指出最終形成「各具特色，而又渾然一體的中華文化」。" }
+        ],
+        "2.1": [
+            { q: "中國新石器時代初期，擁有相同祖先的人一起居住會組成什麼？", options: ["(A) 部落", "(B) 氏族", "(C) 國家", "(D) 聯盟"], answer: 1, explanation: "課文開頭明確指出，中國新石器時代初期，相同祖先的人一起居住，組成「氏族」。" },
+            { q: "不同氏族進一步結合成的是什麼組織？", options: ["(A) 國家", "(B) 氏族", "(C) 部落", "(D) 朝代"], answer: 2, explanation: "課文提到「不同氏族又結合成部落」。" },
+            { q: "各部落為了壯大勢力，應付天災和戰爭，進一步結成了什麼？", options: ["(A) 氏族聯盟", "(B) 部落聯盟", "(C) 國家聯盟", "(D) 商業聯盟"], answer: 1, explanation: "課文記載各部落為了壯大勢力，應付天災和戰爭，進一步結為「部落聯盟」。" },
+            { q: "部落聯盟會公推什麼樣的人擔任共主？", options: ["(A) 有才能的人", "(B) 年紀最長的人", "(C) 擁有最多財產的人", "(D) 武力最強的酋長"], answer: 0, explanation: "課文說明公推「有才能的人」為共主，即部落聯盟首領。" },
+            { q: "相傳大約幾年前，黃河流域有許多部落？", options: ["(A) 三千年前", "(B) 四千年前", "(C) 五千年前", "(D) 六千年前"], answer: 2, explanation: "課文開頭明確指出，相傳大約五千年前，黃河流域有許多部落。" },
+            { q: "根據課文，黃河流域當時兩個較大的部落是由誰領導的？", options: ["(A) 炎帝、黃帝", "(B) 黃帝、蚩尤", "(C) 炎帝、蚩尤", "(D) 堯、舜"], answer: 0, explanation: "課文提到當中兩個較大的部落由「炎帝、黃帝」領導。" },
+            { q: "當炎帝部落漸衰時，哪一個部落將其打敗並合併？", options: ["(A) 蚩尤部落", "(B) 黃帝部落", "(C) 華夏部落", "(D) 涿鹿部落"], answer: 1, explanation: "課文指出其時炎帝部落漸衰，黃帝便把他打敗，合併其部落。" },
+            { q: "黃帝在何處聯合各部落打敗蚩尤？", options: ["(A) 黃河", "(B) 長江", "(C) 涿鹿", "(D) 中原"], answer: 2, explanation: "課文記載黃帝又聯合各部落，在「涿鹿」打敗蚩尤。" },
+            { q: "戰後黃帝被推舉為什麼身分？", options: ["(A) 酋長", "(B) 族長", "(C) 共主", "(D) 帝王"], answer: 2, explanation: "課文明確記載戰後黃帝被推舉為「共主」。" },
+            { q: "黃帝領導的部落聯盟不斷壯大，促使了什麼族群逐漸形成？", options: ["(A) 苗族", "(B) 華夏族", "(C) 東夷族", "(D) 炎黃族"], answer: 1, explanation: "課文指出他領導的部落聯盟不斷壯大，令「華夏族」逐漸形成。" },
+            { q: "相傳誰教人農耕，並服用草藥治病？", options: ["(A) 黃帝", "(B) 炎帝", "(C) 蚩尤", "(D) 堯"], answer: 1, explanation: "課文明確指出，相傳炎帝教人農耕，服用草藥治病。" },
+            { q: "誰執政時發明了宮室、舟車、衣冠、養蠶、文字、曆法等？", options: ["(A) 炎帝", "(B) 蚩尤", "(C) 黃帝", "(D) 舜"], answer: 2, explanation: "課文明確指出到黃帝執政時，又發明了宮室、舟車、衣冠、養蠶、文字、曆法等。" },
+            { q: "為什麼炎帝和黃帝被公認為華夏族的始祖？", options: ["(A) 因為他們發明了所有的中國文字", "(B) 因為他們促使華夏族形成，奠定華夏古老文明的基礎", "(C) 因為他們兩人聯合打敗了周邊所有民族", "(D) 因為他們建立了我國第一個正式的朝代"], answer: 1, explanation: "課文指出由於炎帝和黃帝促使華夏族形成，奠定華夏古老文明的基礎，故被公認為華夏族的始祖。" },
+            { q: "近世以來，中國人常自稱為什麽？", options: ["(A) 華夏遺民", "(B) 炎黃子孫", "(C) 龍的傳人", "(D) 中華之子"], answer: 1, explanation: "課文明確記載近世以來，中國人常自稱為「炎黃子孫」。" },
+            { q: "華夏族後來改稱為什麼族？", options: ["(A) 中華民族", "(B) 唐族", "(C) 漢族", "(D) 周族"], answer: 2, explanation: "課文括號中明確指出，華夏族「後來改稱漢族」。" },
+            { q: "到了二十世紀，漢族和中國境內的其他民族被合為一體，總稱為什麽？", options: ["(A) 炎黃子孫", "(B) 中華民族", "(C) 華夏族群", "(D) 中國國民"], answer: 1, explanation: "課文提到到了二十世紀，漢族和中國境內的其他民族被合為一體，總稱為「中華民族」。" }
+        ],
+        "2.2": [
+            { q: "黃帝以後的共主相傳不包含下列哪一位？", options: ["(A) 顓頊", "(B) 嚳", "(C) 禹", "(D) 舜"], answer: 2, explanation: "課文明確指出黃帝以後的共主，相傳有顓頊、嚳、堯和舜，未提及禹。" },
+            { q: "黃帝與相傳的顓頊、嚳、堯、舜五個人合稱什麼？", options: ["(A) 三皇", "(B) 五帝", "(C) 華夏始祖", "(D) 部落共主"], answer: 1, explanation: "課文明確記載他們五個合稱「五帝」。" },
+            { q: "根據考古學者認為，在五帝時代已經出現了什麼？", options: ["(A) 統一的大帝國", "(B) 早期城市", "(C) 青銅兵器", "(D) 文字記錄"], answer: 1, explanation: "課文提到考古學者認為，五帝時代已經出現早期城市。" },
+            { q: "堯執政時天下太平，他晚年以誰為繼位人？", options: ["(A) 禹", "(B) 舜", "(C) 黃帝", "(D) 顓頊"], answer: 1, explanation: "課文明確指出，堯執政時天下太平，晚年以孝順賢能的「舜」為繼位人。" },
+            { q: "舜派誰去治理水患，讓人民安居樂業？", options: ["(A) 堯", "(B) 禹", "(C) 啟", "(D) 嚳"], answer: 1, explanation: "課文明確記載“舜派禹治理水患”。" },
+            { q: "為什麼禹在晚年能夠繼任共主之位？", options: ["(A) 因為他是舜的兒子", "(B) 因為禹治水有功", "(C) 因為他受到堯的直接指定", "(D) 因為他武力征服了各部落"], answer: 1, explanation: "課文說明「由於禹治水有功，故在晚年繼任共主之位」。" },
+            { q: "堯、舜退位讓賢、不把權位傳給子孫的做法被稱為什麼？", options: ["(A) 世襲", "(B) 禪讓", "(C) 封建", "(D) 專制"], answer: 1, explanation: "課文明確指出，堯、舜退位讓賢、不把權位傳給子孫的做法，稱為「禪讓」。" }
+        ],
+        "2.3": [
+            { q: "誰接受舜的禪讓，標誌著夏朝的建立？", options: ["(A) 啟", "(B) 禹", "(C) 黃帝", "(D) 堯"], answer: 1, explanation: "課文開頭明確指出，禹接受舜的禪讓，標誌著夏朝的建立。" },
+            { q: "禹死後，他的共主之位由誰及其子孫世代相承？", options: ["(A) 舜", "(B) 堯", "(C) 啟", "(D) 湯"], answer: 2, explanation: "課文提到禹死後，他的共主之位由兒子「啟」及其子孫世代相承。" },
+            { q: "禹死後由兒子啟及其子孫世代相承，代表哪一種制度取代了禪讓制度？", options: ["(A) 封建制度", "(B) 民主制度", "(C) 世襲制度", "(D) 禪讓制度"], answer: 2, explanation: "課文說明從此，「世襲制度」取代了禪讓制度。" },
+            { q: "夏朝最後一個國君的名字叫什麼？", options: ["(A) 禹", "(B) 啟", "(C) 桀", "(D) 湯"], answer: 2, explanation: "課文明確記載，夏朝最後一個國君叫桀。" },
+            { q: "商原本是哪一個朝代的東部屬國？", options: ["(A) 周朝", "(B) 夏朝", "(C) 漢朝", "(D) 秦朝"], answer: 1, explanation: "課文開頭明確指出，商原是夏朝的東部屬國。" },
+            { q: "商傳到誰時得到賢臣伊尹輔助而日益強盛？", options: ["(A) 湯", "(B) 桀", "(C) 禹", "(D) 啟"], answer: 0, explanation: "課文提到傳到「湯」時得到賢臣伊尹輔助，日益強盛。" },
+            { q: "大約在公元前1600年，湯聯合各部落起兵，在哪裡大敗桀的軍隊？", options: ["(A) 涿鹿", "(B) 亳", "(C) 鳴條", "(D) 殷"], answer: 2, explanation: "課文記載湯聯合各部落起兵，在「鳴條」大敗桀的軍隊。" },
+            { q: "考古學者在商朝的什麼遺址發現大量中國現存的最早文字？", options: ["(A) 亳都遺址", "(B) 殷都遺址", "(C) 鳴條遺址", "(D) 洛陽遺址"], answer: 1, explanation: "課文提到考古學者在商朝的「殷都遺址」，發現大量中國現存的最早文字。" },
+            { q: "考古學者在殷都遺址發現了中國現存的最早文字是什麼？", options: ["(A) 金文", "(B) 小篆", "(C) 甲骨文", "(D) 隸書"], answer: 2, explanation: "課文明確指出發現大量中國現存的最早文字—「甲骨文」。" },
+            { q: "商朝最後一個國君是誰？", options: ["(A) 桀", "(B) 紂王", "(C) 湯", "(D) 武王"], answer: 1, explanation: "課文明確記載，商朝最後一個國君是紂王。" },
+            { q: "商朝最終是由哪一個政權所推翻的？", options: ["(A) 夏", "(B) 周", "(C) 秦", "(D) 漢"], answer: 1, explanation: "課文最後一句指出，商朝統治不得人心，最終被「周」推翻。" },
+            { q: "周原本是商朝的哪一個屬國？", options: ["(A) 東部屬國", "(B) 西部屬國", "(C) 南部屬國", "(D) 北部屬國"], answer: 1, explanation: "課文開頭明確指出，周原是商朝的西部屬國。" },
+            { q: "周武王獲得哪一位賢臣的輔助，決心推翻紂王統治？", options: ["(A) 伊尹", "(B) 姜尚", "(C) 傅說", "(D) 管仲"], answer: 1, explanation: "課文指出傳到姬發（即周武王）時得到賢臣「姜尚」輔助。" },
+            { q: "公元前1046年，商、周雙方在哪裡進行決戰？", options: ["(A) 鳴條", "(B) 涿鹿", "(C) 牧野", "(D) 殷都"], answer: 2, explanation: "課文記載公元前1046年，商、周雙方在「牧野」決戰。" },
+            { q: "周武王建立的周朝（公元前1046-前771年），史稱什麼？", options: ["(A) 東周", "(B) 西周", "(C) 北周", "(D) 南周"], answer: 1, explanation: "課文明確記載武王建立周朝，史稱「西周」。" }
+        ]
+    };
+
+    const dragDatabaseBasic = {
+        "1.1": [
+            { text: "大約 <span class='dropzone' data-answer='一百七十萬年前'>請點選填入</span> 至 <span class='dropzone' data-answer='四千年前'>請點選填入</span> ，人類祖先主要利用 <span class='dropzone' data-answer='石頭'>請點選填入</span> 來製造工具和武器，學者把這段時期稱為「石器時代」。石器時代可根據人類所用石器的 <span class='dropzone' data-answer='粗精程度'>請點選填入</span> ，再細分為「舊石器時代」和「新石器時代」。", words: ["一百七十萬年前", "四千年前", "石頭", "粗精程度"] },
+            { text: "舊石器時代的中國古人類，包括 <span class='dropzone' data-answer='元謀人'>請點選填入</span> 、 <span class='dropzone' data-answer='北京人'>請點選填入</span> 等。考古學者認為，他們已會打製石器，從事 <span class='dropzone' data-answer='漁獵'>請點選填入</span> 、採集野果等活動，並懂得 <span class='dropzone' data-answer='用火'>請點選填入</span> 。", words: ["元謀人", "北京人", "漁獵", "用火"] }
+        ],
+        "1.2": [
+            { text: "北方黃河流域的新石器時代文化，以 <span class='dropzone' data-answer='仰韶文化'>請點選填入</span> 最著名。它主要分布在黃河中、上游地區，遺址呈現 <span class='dropzone' data-answer='村落'>請點選填入</span> 的狀態，房子為 <span class='dropzone' data-answer='半地穴式'>請點選填入</span> ，並出土大量繪有精美圖紋的 <span class='dropzone' data-answer='彩色陶器'>請點選填入</span> 。", words: ["仰韶文化", "村落", "半地穴式", "彩色陶器"] },
+            { text: "南方長江流域的新石器時代文化，以 <span class='dropzone' data-answer='良渚文化'>請點選填入</span> 為代表。良渚人居住在 <span class='dropzone' data-answer='干欄式房屋'>請點選填入</span> ，以務農為主，除了 <span class='dropzone' data-answer='水稻'>請點選填入</span> 外還有花生等，其雕琢精細的 <span class='dropzone' data-answer='玉器'>請點選填入</span> 是特色。", words: ["良渚文化", "干欄式房屋", "水稻", "玉器"] }
+        ],
+        "2.1": [
+            { text: "中國新石器時代初期，相同祖先的人一起居住，組成 <span class='dropzone' data-answer='氏族'>請點選填入</span> 。不同氏族結合成 <span class='dropzone' data-answer='部落'>請點選填入</span> ，由 <span class='dropzone' data-answer='酋長'>請點選填入</span> 領導。各部落為應付天災和戰爭，結為 <span class='dropzone' data-answer='部落聯盟'>請點選填入</span> 。", words: ["氏族", "部落", "酋長", "部落聯盟"] },
+            { text: "相傳炎帝教人 <span class='dropzone' data-answer='農耕'>請點選填入</span> ，服用 <span class='dropzone' data-answer='草藥治病'>請點選填入</span> 。黃帝執政時發明了宮室、舟車等。由於炎帝和黃帝促使 <span class='dropzone' data-answer='華夏族'>請點選填入</span> 形成，故被公認為始祖，中國人常自稱為 <span class='dropzone' data-answer='炎黃子孫'>請點選填入</span> 。", words: ["農耕", "草藥治病", "華夏族", "炎黃子孫"] }
+        ],
+        "2.2": [
+            { text: "黃帝以後的共主有顓頊、嚳、堯和舜，合稱 <span class='dropzone' data-answer='五帝'>請點選填入</span> 。五帝時代出現 <span class='dropzone' data-answer='早期城市'>請點選填入</span> ，階級分化日益明顯，具備國家的初始形態。", words: ["五帝", "早期城市"] },
+            { text: "堯執政時天下太平，晚年以孝順賢能的 <span class='dropzone' data-answer='舜'>請點選填入</span> 為繼位人。舜派 <span class='dropzone' data-answer='禹'>請點選填入</span> 治理水患，禹因 <span class='dropzone' data-answer='治水有功'>請點選填入</span> 在晚年繼任共主之位。", words: ["舜", "禹", "治水有功"] }
+        ],
+        "2.3": [
+            { text: "禹接受舜的禪讓建立夏朝。禹死後，共主之位由兒子 <span class='dropzone' data-answer='啟'>請點選填入</span> 及其子孫世代相承，從此 <span class='dropzone' data-answer='世襲制度'>請點選填入</span> 取代了禪讓制度。", words: ["啟", "世襲制度"] },
+            { text: "商湯聯合各部落在 <span class='dropzone' data-answer='鳴條'>請點選填入</span> 大敗夏桀，建立商朝並定都於 <span class='dropzone' data-answer='亳'>請點選填入</span> 。考古學者在 <span class='dropzone' data-answer='殷都遺址'>請點選填入</span> 發現中國現存最早的文字—— <span class='dropzone' data-answer='甲骨文'>請點選填入</span> 。", words: ["鳴條", "亳", "殷都遺址", "甲骨文"] }
+        ]
+    };
+
+    const dragDatabaseAdvanced = {
+        "1_adv": [
+            { text: "大約一百七十萬年前至四千年前為 <span class='dropzone' data-answer='石器時代'>請點選填入</span> 。舊石器時代有 <span class='dropzone' data-answer='北京人'>請點選填入</span> 等，新石器時代懂得磨製石器、以 <span class='dropzone' data-answer='農業、畜牧業'>請點選填入</span> 為生。中華文明起源是 <span class='dropzone' data-answer='多元'>請點選填入</span> 的。", words: ["石器時代", "北京人", "農業、畜牧業", "多元"] }
+        ],
+        "2_adv": [
+            { text: "黃帝合併炎帝、在 <span class='dropzone' data-answer='涿鹿'>請點選填入</span> 打敗蚩尤形成華夏族。夏朝被 <span class='dropzone' data-answer='商'>請點選填入</span> 推翻，商朝被 <span class='dropzone' data-answer='周'>請點選填入</span> 推翻，均以貴族身分改朝換代被視為貴族革命。", words: ["涿鹿", "商", "周"] }
+        ]
+    };
+
+    const matchingDatabase = {
+        person: {
+            title: "一、人物配對題（第一部分）",
+            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
+            items: [
+                { id: 1, label: "1. 元謀人、北京人", target: "C", desc: "舊石器時代古人類，懂得打製石器與用火。" },
+                { id: 2, label: "2. 炎帝", target: "D", desc: "教人農耕、嚐百草。" },
+                { id: 3, label: "3. 黃帝", target: "A", desc: "華夏部落聯盟首領，擊敗炎、蚩，被推為共主。" },
+                { id: 4, label: "4. 蚩尤", target: "B", desc: "與黃帝戰敗後，部落被其融合。" },
+                { id: 5, label: "5. 顓頊", target: "F", desc: "五帝之一。" },
+                { id: 6, label: "6. 堯", target: "E", desc: "堯之繼位人。" }
+            ],
+            options: [
+                { code: "A", text: "A. 華夏部落聯盟首領，擊敗炎、蚩，被推為共主。" },
+                { code: "B", text: "B. 與黃帝戰敗後，部落被其融合。" },
+                { code: "C", text: "C. 舊石器時代古人類，懂得打製石器與用火。" },
+                { code: "D", text: "D. 教人農耕、嚐百草。" },
+                { code: "E", text: "E. 堯之繼位人。" },
+                { code: "F", text: "F. 五帝之一。" }
+            ]
+        },
+        person2: {
+            title: "二、人物配對題（第二部分）",
+            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
+            items: [
+                { id: 1, label: "1. 舜", target: "D", desc: "由堯禪讓繼位並派禹治水。" },
+                { id: 2, label: "2. 禹（夏啟之父）", target: "F", desc: "治水有功，接受禪讓建立夏朝。" },
+                { id: 3, label: "3. 啟", target: "E", desc: "禹之子，開創世襲制度。" },
+                { id: 4, label: "4. 桀", target: "A", desc: "夏朝末代暴君，荒政虐民被推翻。" },
+                { id: 5, label: "5. 伊尹", target: "B", desc: "輔助商湯的賢臣。" },
+                { id: 6, label: "6. 湯", target: "C", desc: "商朝開國君主，建立「貴族革命」。" },
+                { id: 7, label: "7. 嚳", target: "G", desc: "五帝之一。" }
+            ],
+            options: [
+                { code: "A", text: "A. 夏朝末代暴君，荒政虐民被推翻。" },
+                { code: "B", text: "B. 輔助商湯的賢臣。" },
+                { code: "C", text: "C. 商朝開國君主，建立「貴族革命」。" },
+                { code: "D", text: "D. 由堯禪讓繼位並派禹治水。" },
+                { code: "E", text: "E. 禹之子，開創世襲制度。" },
+                { code: "F", text: "F. 治水有功，接受禪讓建立夏朝。" },
+                { code: "G", text: "G. 五帝之一。" }
+            ]
+        },
+        person3: {
+            title: "三、人物配對題（第三部分）",
+            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
+            items: [
+                { id: 1, label: "1. 湯", target: "B", desc: "商朝開國君主。" },
+                { id: 2, label: "2. 妹喜", target: "D", desc: "夏桀的妃子。" },
+                { id: 3, label: "3. 紂王", target: "E", desc: "商朝末代暴君。" },
+                { id: 4, label: "4. 妲己", target: "F", desc: "商紂王的寵妃。" },
+                { id: 5, label: "5. 姜尚", target: "C", desc: "輔助周武王的賢臣。" },
+                { id: 6, label: "6. 姬發", target: "A", desc: "周朝開國君主。" }
+            ],
+            options: [
+                { code: "A", text: "A. 周朝開國君主。" },
+                { code: "B", text: "B. 商朝開國君主。" },
+                { code: "C", text: "C. 輔助周武王的賢臣。" },
+                { code: "D", text: "D. 夏桀的妃子。" },
+                { code: "E", text: "E. 商朝末代暴君。" },
+                { code: "F", text: "F. 商紂王的寵妃。" }
+            ]
+        },
+        geo: {
+            title: "四、地理與文化遺跡配對題",
+            intro: "請將下列文化遺址或歷史地點與其對應特點進行配對：",
+            items: [
+                { id: 1, label: "1. 仰韶文化", target: "A", desc: "黃河中上游的彩陶文化" },
+                { id: 2, label: "2. 良渚文化", target: "B", desc: "長江下游的黑陶與玉器文化" },
+                { id: 3, label: "3. 龍山文化", target: "C", desc: "黃河下游的新石器時代文化" },
+                { id: 4, label: "4. 紅山文化", target: "D", desc: "東北地區的新石器時代文化" },
+                { id: 5, label: "5. 石峽文化", target: "E", desc: "珠江流域的新石器時代文化" },
+                { id: 6, label: "6. 殷都遺址", target: "F", desc: "出土大量甲骨文的商朝都城遺址" }
+            ],
+            options: [
+                { code: "A", text: "A. 黃河中、上游地區，以出土彩色陶器聞名" },
+                { code: "B", text: "B. 長江下游地區，以黑陶及精美玉器（如玉琮）為特色" },
+                { code: "C", text: "C. 黃河下游地區的新石器時代文化" },
+                { code: "D", text: "D. 東北地區的新石器時代文化" },
+                { code: "E", text: "E. 珠江流域的新石器時代文化" },
+                { code: "F", text: "F. 商朝後期的都城遺址，發現大量甲骨文" }
+            ]
+        }
+    };
+
+    let activeMcQuestions = [];
+    let activeDragQuestions = [];
+    let activeMatchingData = null;
+    let selectedWordElement = null;
+    let wrongBook = JSON.parse(localStorage.getItem('history_wrongbook') || '[]');
+
+    window.addEventListener('DOMContentLoaded', () => {
+        onQuizTypeChange();
+        updateWrongCount();
+    });
+
+    function updateWrongCount() {
+        document.getElementById('wrong-count').innerText = wrongBook.length;
+    }
+
+    function saveWrongBookToStorage() {
+        localStorage.setItem('history_wrongbook', JSON.stringify(wrongBook));
+        updateWrongCount();
+    }
+
+    function goToHome() {
+        try {
+            window.location.href = "index.html";
+        } catch (e) {
+            backToConfig();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function goBackPage() {
+        const quizSection = document.getElementById('quiz-section');
+        const wrongSection = document.getElementById('wrongbook-section');
+        if (quizSection.style.display === 'block' || wrongSection.style.display === 'block') {
+            backToConfig();
+        } else {
+            goToHome();
+        }
+    }
+
+    function openWrongBook() {
+        document.getElementById('config-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const container = document.getElementById('wrongbook-content');
+        if (wrongBook.length === 0) {
+            container.innerHTML = `<p style="text-align: center; color: #666; padding: 30px;">目前錯題簿內沒有記錄，快去作答挑戰吧！</p>`;
+            return;
+        }
+
+        let html = '';
+        wrongBook.forEach((item, idx) => {
+            html += `<div class="wrong-item-box">
+                <div class="question-tag">${item.type}</div>
+                <p><strong>${idx + 1}. ${item.question}</strong></p>`;
+            if (item.yourAnswer) {
+                html += `<p style="color: #c0392b; margin: 4px 0;">您的回答：${item.yourAnswer}</p>`;
+            }
+            if (item.correctAnswer) {
+                html += `<p style="color: #27ae60; margin: 4px 0;">正確答案：${item.correctAnswer}</p>`;
+            }
+            if (item.explanation) {
+                html += `<p style="color: #555; margin: 4px 0; font-size: 14px;">解析：${item.explanation}</p>`;
+            }
+            html += `</div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function clearWrongBook() {
+        if (confirm("確定要清空所有錯題記錄嗎？")) {
+            wrongBook = [];
+            saveWrongBookToStorage();
+            openWrongBook();
+        }
+    }
+
+    function exportWrongBook(type) {
+        if (wrongBook.length === 0) {
+            alert("目前沒有錯題可以匯出！");
+            return;
+        }
+
+        if (type === 'doc') {
+            let htmlContent = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+                <head><meta charset="utf-8"><title>中史錯題簿</title></head>
+                <body style="font-family: Arial, sans-serif;">
+                <h1 style="text-align: center; color: #2c3e50;">中史互動溫習平台 - 錯題複習專用</h1>
+                <hr>
+            `;
+            wrongBook.forEach((item, idx) => {
+                htmlContent += `
+                    <div style="margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ccc;">
+                        <p><strong>題目 ${idx + 1} [${item.type}]：</strong>${item.question}</p>
+                        ${item.yourAnswer ? `<p style="color: #c0392b;">您的回答：${item.yourAnswer}</p>` : ''}
+                        ${item.correctAnswer ? `<p style="color: #27ae60;">正確答案：${item.correctAnswer}</p>` : ''}
+                        ${item.explanation ? `<p>解析：${item.explanation}</p>` : ''}
+                    </div>
+                `;
+            });
+            htmlContent += `</body></html>`;
+
+            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '中史錯題簿.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } else if (type === 'excel') {
+            let csvContent = "\uFEFF題型,題目,您的回答,正確答案,解析\n";
+            wrongBook.forEach(item => {
+                let q = `"${(item.question || '').replace(/"/g, '""')}"`;
+                let t = `"${(item.type || '').replace(/"/g, '""')}"`;
+                let ya = `"${(item.yourAnswer || '').replace(/"/g, '""')}"`;
+                let ca = `"${(item.correctAnswer || '').replace(/"/g, '""')}"`;
+                let exp = `"${(item.explanation || '').replace(/"/g, '""')}"`;
+                csvContent += `${t},${q},${ya},${ca},${exp}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '中史錯題簿.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    }
+
+    function onQuizTypeChange() {
+        const quizType = document.getElementById('quizTypeSelect').value;
+        const subMatchingGroup = document.getElementById('sub-matching-group');
+        const topicContainer = document.getElementById('topic-config-container');
+        const extraQtyContainer = document.getElementById('extra-qty-container');
+        const matchingQtyRow = document.querySelector('.matching-qty-row');
+
+        subMatchingGroup.style.display = 'none';
+        topicContainer.style.display = 'block';
+        extraQtyContainer.style.display = 'block';
+        matchingQtyRow.style.display = 'flex';
+
+        if (quizType === 'mc') {
+            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'flex');
+            extraQtyContainer.style.display = 'none';
+        } else if (quizType === 'drag') {
+            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
+            extraQtyContainer.style.display = 'none';
+        } else if (quizType === 'matching') {
+            subMatchingGroup.style.display = 'block';
+            topicContainer.style.display = 'none';
+        } else if (quizType === 'comprehensive') {
+            document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
+            matchingQtyRow.style.display = 'flex';
+        }
+    }
+
+    function setAllCounts(val) {
+        document.querySelectorAll('.topic-card').forEach(card => {
+            if (card.style.display === 'none') return;
+            const mcInput = card.querySelector('.topic-mc-qty');
+            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
+            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+
+            if (mcInput) mcInput.value = val;
+            if (dragBasicInput) dragBasicInput.value = Math.min(val, parseInt(dragBasicInput.max) || val);
+            if (dragAdvInput) dragAdvInput.value = Math.min(val, parseInt(dragAdvInput.max) || 0);
+        });
+        const mInput = document.getElementById('matching-qty');
+        if (mInput) mInput.value = Math.min(val, parseInt(mInput.max) || 4);
+    }
+
+    function randomizeCounts() {
+        document.querySelectorAll('.topic-card').forEach(card => {
+            if (card.style.display === 'none') return;
+            const mcInput = card.querySelector('.topic-mc-qty');
+            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
+            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+
+            if (mcInput) mcInput.value = Math.floor(Math.random() * 3);
+            if (dragBasicInput) {
+                let maxB = parseInt(dragBasicInput.max) || 1;
+                dragBasicInput.value = Math.floor(Math.random() * (maxB + 1));
+            }
+            if (dragAdvInput) {
+                let maxA = parseInt(dragAdvInput.max) || 0;
+                dragAdvInput.value = Math.floor(Math.random() * (maxA + 1));
+            }
+        });
+        const mInput = document.getElementById('matching-qty');
+        if (mInput) mInput.value = Math.floor(Math.random() * 5);
+    }
+
+    function startQuiz() {
+        const quizTypeSelect = document.getElementById('quizTypeSelect');
+        const quizType = quizTypeSelect.value;
+        const matchingType = document.getElementById('matchingTypeSelect').value;
+
+        if (!quizType) {
+            alert("請先在第一步選擇溫習題型！");
+            quizTypeSelect.focus();
+            return;
+        }
+
+        activeMcQuestions = [];
+        activeDragQuestions = [];
+        activeMatchingData = null;
+
+        let totalRequested = 0;
+
+        if (quizType === 'matching') {
+            activeMatchingData = [];
+            let mCount = parseInt(document.getElementById('matching-qty').value) || 1;
+            if (mCount > 0) {
+                let allPersons = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3];
+                if (matchingType === 'person') {
+                    for (let i = 0; i < Math.min(mCount, allPersons.length); i++) {
+                        activeMatchingData.push(allPersons[i]);
+                    }
+                } else if (matchingType === 'geo') {
+                    activeMatchingData.push(matchingDatabase.geo);
+                } else if (matchingType === 'both') {
+                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.geo];
+                    for (let i = 0; i < Math.min(mCount, combined.length); i++) {
+                        activeMatchingData.push(combined[i]);
+                    }
+                }
+            }
+            totalRequested = activeMatchingData.length;
+        } else {
+            document.querySelectorAll('.topic-card').forEach(card => {
+                if (card.style.display === 'none') return;
+                const topic = card.getAttribute('data-topic');
+                const mcInput = card.querySelector('.topic-mc-qty');
+                const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
+                const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+
+                const mcCount = (quizType !== 'drag' && mcInput) ? (parseInt(mcInput.value) || 0) : 0;
+                const dragBasicCount = (quizType !== 'mc' && dragBasicInput) ? (parseInt(dragBasicInput.value) || 0) : 0;
+                const dragAdvCount = (quizType !== 'mc' && dragAdvInput) ? (parseInt(dragAdvInput.value) || 0) : 0;
+
+                totalRequested += (mcCount + dragBasicCount + dragAdvCount);
+
+                if (mcCount > 0 && mcDatabase[topic]) {
+                    let items = [...mcDatabase[topic]];
+                    items.sort(() => Math.random() - 0.5);
+                    items.slice(0, mcCount).forEach(item => {
+                        activeMcQuestions.push({ topicKey: topic, ...item });
+                    });
+                }
+
+                if (dragBasicCount > 0 && dragDatabaseBasic[topic]) {
+                    let items = [...dragDatabaseBasic[topic]];
+                    items.sort(() => Math.random() - 0.5);
+                    items.slice(0, dragBasicCount).forEach(item => {
+                        activeDragQuestions.push({ topicKey: topic, ...item });
+                    });
+                }
+
+                if (dragAdvCount > 0) {
+                    let dbKey = topic.startsWith('1.') ? '1_adv' : '2_adv';
+                    if (dragDatabaseAdvanced[dbKey]) {
+                        let items = [...dragDatabaseAdvanced[dbKey]];
+                        items.sort(() => Math.random() - 0.5);
+                        items.slice(0, dragAdvCount).forEach(item => {
+                            activeDragQuestions.push({ topicKey: dbKey, ...item });
+                        });
+                    }
+                }
+            });
+
+            if (quizType === 'comprehensive') {
+                let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
+                if (mCount > 0) {
+                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.geo];
+                    activeMatchingData = [];
+                    for (let i = 0; i < Math.min(mCount, combined.length); i++) {
+                        activeMatchingData.push(combined[i]);
+                    }
+                }
+                totalRequested += (activeMatchingData ? activeMatchingData.length : 0);
+            }
+        }
+
+        if (totalRequested === 0) {
+            alert("請至少在某個項目設定 1 道或以上的數量！");
+            return;
+        }
+
+        document.getElementById('config-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'block';
+        document.getElementById('score-result').innerText = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        buildQuizUI();
+    }
+
+    function buildQuizUI() {
+        const container = document.getElementById('quiz-content');
+        let html = '';
+        let sectionNum = 1;
+
+        if (activeMcQuestions.length > 0) {
+            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、選擇題測驗（共 ${activeMcQuestions.length} 題）</h2>`;
+            activeMcQuestions.forEach((item, index) => {
+                const topicName = topicNames[item.topicKey] || "";
+                html += `<div class="mc-question" id="mc-q-${index}">
+                    <div class="question-tag">${topicName}</div>
+                    <p><strong>${index + 1}. ${item.q}</strong></p>
+                    <div class="mc-options">`;
+                item.options.forEach((opt, optIndex) => {
+                    html += `<label><input type="radio" name="mc-opt-${index}" value="${optIndex}"> ${opt}</label>`;
+                });
+                html += `</div><div class="feedback" id="mc-fb-${index}"></div></div>`;
+            });
+        }
+
+        if (activeDragQuestions.length > 0) {
+            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、填充題測驗（共 ${activeDragQuestions.length} 題，操作方式：先按一下下方選項字卡，再按一下虛線空格填入）</h2>`;
+            activeDragQuestions.forEach((item, index) => {
+                const topicName = topicNames[item.topicKey] || "";
+                const shuffledWords = [...item.words].sort(() => Math.random() - 0.5);
+                html += `<div class="drag-card" id="drag-card-${index}">
+                    <div class="question-tag">${topicName}</div>
+                    <p><strong>${index + 1}.</strong></p>
+                    <div class="word-bank">`;
+                shuffledWords.forEach(w => {
+                    html += `<div class="draggable-word" onclick="handleWordClick(this)">${w}</div>`;
+                });
+                html += `</div>
+                    <div class="drag-text-box">${item.text}</div>
+                </div>`;
+            });
+        }
+
+        if (activeMatchingData && activeMatchingData.length > 0) {
+            activeMatchingData.forEach((matchSec, sIdx) => {
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四、]+/, '')}</h2>`;
+                html += `<p><strong>${matchSec.intro}</strong></p>`;
+                
+                html += `<div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
+                matchSec.options.forEach(opt => {
+                    html += `<div style="margin: 4px 0;"><strong>${opt.text}</strong></div>`;
+                });
+                html += `</div>`;
+
+                html += `<table class="matching-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">選擇代號</th>
+                            <th style="width: 75%;">項目內容</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                matchSec.items.forEach((row, rIdx) => {
+                    const selectId = `match-select-${sIdx}-${rIdx}`;
+                    html += `<tr>
+                        <td><strong>( <select id="${selectId}" data-target="${row.target}">
+                            <option value="" disabled selected>?</option>
+                            ${matchSec.options.map(opt => `<option value="${opt.code}">${opt.code}</option>`).join('')}
+                        </select> )</strong></td>
+                        <td>${row.label.replace(/^\d+\.\s*/, '')}</td>
+                    </tr>`;
+                });
+                html += `</tbody></table>`;
+            });
+        }
+
+        container.innerHTML = html;
+        document.getElementById('submit-btn').style.display = 'block';
+
+        if (activeDragQuestions.length > 0) {
+            initClickToFill();
+        }
+    }
+
+    function toChineseNum(num) {
+        const chinese = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+        return chinese[num] || num;
+    }
+
+    function backToConfig() {
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'none';
+        document.getElementById('config-section').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleWordClick(wordEl) {
+        if (wordEl === selectedWordElement) {
+            wordEl.classList.remove('selected-word');
+            selectedWordElement = null;
+            return;
+        }
+        document.querySelectorAll('.draggable-word').forEach(el => el.classList.remove('selected-word'));
+        selectedWordElement = wordEl;
+        wordEl.classList.add('selected-word');
+    }
+
+    function initClickToFill() {
+        const dropzones = document.querySelectorAll('.dropzone');
+        dropzones.forEach(zone => {
+            zone.addEventListener('click', () => {
+                if (selectedWordElement) {
+                    zone.innerText = selectedWordElement.innerText;
+                    zone.classList.add('filled');
+                    selectedWordElement.classList.remove('selected-word');
+                    selectedWordElement = null;
+                } else if (zone.classList.contains('filled')) {
+                    zone.innerText = '請點選填入';
+                    zone.classList.remove('filled');
+                }
+            });
+        });
+    }
+
+    function submitAnswers() {
+        let totalScoreText = "";
+        let newWrongItems = [];
+
+        if (activeMcQuestions.length > 0) {
+            let mcScore = 0;
+            activeMcQuestions.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="mc-opt-${index}"]:checked`);
+                const fb = document.getElementById(`mc-fb-${index}`);
+                if (selected) {
+                    const val = parseInt(selected.value);
+                    if (val === item.answer) {
+                        mcScore++;
+                        fb.className = "feedback correct";
+                        fb.innerHTML = "正確！ " + item.explanation;
+                    } else {
+                        fb.className = "feedback incorrect";
+                        fb.innerHTML = "錯誤。正確答案是 " + item.options[item.answer] + "。<br>" + item.explanation;
+                        newWrongItems.push({
+                            type: '選擇題',
+                            question: item.q,
+                            yourAnswer: item.options[val],
+                            correctAnswer: item.options[item.answer],
+                            explanation: item.explanation
+                        });
+                    }
+                } else {
+                    fb.className = "feedback incorrect";
+                    fb.innerHTML = "尚未作答！";
+                    newWrongItems.push({
+                        type: '選擇題',
+                        question: item.q,
+                        yourAnswer: '未作答',
+                        correctAnswer: item.options[item.answer],
+                        explanation: item.explanation
+                    });
+                }
+            });
+            totalScoreText += `選擇題：${mcScore}/${activeMcQuestions.length}`;
+        }
+
+        if (activeDragQuestions.length > 0) {
+            let totalBlanks = 0;
+            let correctBlanks = 0;
+            activeDragQuestions.forEach((item, index) => {
+                const card = document.getElementById(`drag-card-${index}`);
+                const dropzones = card.querySelectorAll('.dropzone');
+                let cardAllCorrect = true;
+                let userAnswersStr = [];
+                let expectedAnswersStr = [];
+
+                dropzones.forEach(zone => {
+                    totalBlanks++;
+                    const expected = zone.getAttribute('data-answer');
+                    expectedAnswersStr.push(expected);
+                    let userVal = zone.innerText.trim();
+                    userAnswersStr.push(userVal);
+
+                    if (userVal === expected) {
+                        correctBlanks++;
+                        zone.style.borderColor = "var(--correct-color)";
+                        zone.style.background = "#d4edda";
+                    } else {
+                        cardAllCorrect = false;
+                        zone.style.borderColor = "var(--incorrect-color)";
+                        zone.style.background = "#f8f7da";
+                    }
+                });
+
+                if (!cardAllCorrect) {
+                    newWrongItems.push({
+                        type: '填充題',
+                        question: item.text.replace(/class='dropzone'[^>]*>.*?<\/span>/g, '(空格)'),
+                        yourAnswer: userAnswersStr.join(', '),
+                        correctAnswer: expectedAnswersStr.join(', '),
+                        explanation: '請參閱對應課文內容'
+                    });
+                }
+            });
+            if (totalScoreText !== "") totalScoreText += " | ";
+            totalScoreText += `填充題空格：${correctBlanks}/${totalBlanks}`;
+        }
+
+        if (activeMatchingData && activeMatchingData.length > 0) {
+            let matchTotal = 0;
+            let matchCorrect = 0;
+            activeMatchingData.forEach((matchSec, sIdx) => {
+                matchSec.items.forEach((row, rIdx) => {
+                    matchTotal++;
+                    const sel = document.getElementById(`match-select-${sIdx}-${rIdx}`);
+                    if (sel.value === row.target) {
+                        matchCorrect++;
+                        sel.style.borderColor = "var(--correct-color)";
+                        sel.style.background = "#d4edda";
+                    } else {
+                        sel.style.borderColor = "var(--incorrect-color)";
+                        sel.style.background = "#f8f7da";
+                        newWrongItems.push({
+                            type: '配對題',
+                            question: `${matchSec.title} - ${row.label}`,
+                            yourAnswer: sel.value ? sel.value : '未選擇',
+                            correctAnswer: row.target,
+                            explanation: row.desc
+                        });
+                    }
+                });
+            });
+            if (totalScoreText !== "") totalScoreText += " | ";
+            totalScoreText += `配對題：${matchCorrect}/${matchTotal}`;
+        }
+
+        newWrongItems.forEach(newItem => {
+            const existsIndex = wrongBook.findIndex(w => w.question === newItem.question);
+            if (existsIndex >= 0) {
+                wrongBook[existsIndex] = newItem;
+            } else {
+                wrongBook.push(newItem);
+            }
+        });
+        saveWrongBookToStorage();
+
+        document.getElementById('score-result').innerText = totalScoreText + ` (已自動同步更新至錯題簿)`;
+        document.getElementById('score-result').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
