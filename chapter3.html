@@ -30,16 +30,32 @@
             position: relative;
         }
 
-        /* 頂部導航列容器（用於放置返回按鈕與標題） */
-        .top-nav-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            position: relative;
+        /* 頂部標題與按鈕群組 */
+        header {
+            text-align: center;
+            margin-bottom: 15px;
         }
 
-        .btn-home {
+        header h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        header p {
+            color: #666;
+            margin: 0 0 15px 0;
+        }
+
+        .nav-buttons-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-home, .btn-prev-page, .btn-wrongbook {
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
@@ -51,27 +67,26 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             cursor: pointer;
             border: none;
-            z-index: 10;
+        }
+
+        .btn-prev-page {
+            background-color: #7f8c8d;
+        }
+
+        .btn-wrongbook {
+            background-color: #e74c3c;
         }
 
         .btn-home:hover {
             background-color: #1a252f;
         }
 
-        header {
-            text-align: center;
-            flex-grow: 1;
+        .btn-prev-page:hover {
+            background-color: #626a6b;
         }
 
-        header h1 {
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            font-size: 24px;
-        }
-
-        header p {
-            color: #666;
-            margin: 0;
+        .btn-wrongbook:hover {
+            background-color: #c0392b;
         }
 
         .card {
@@ -213,8 +228,8 @@
             margin-right: 8px;
         }
 
-        /* 遊戲區域 */
-        #quiz-section {
+        /* 遊戲區域與錯題簿區域 */
+        #quiz-section, #wrongbook-section {
             display: none;
         }
 
@@ -361,7 +376,7 @@
             transform: scale(1.05);
         }
 
-        /* 配對題與時序題樣式 */
+        /* 配對與時序題樣式 */
         .matching-table, .sequence-table {
             width: 100%;
             border-collapse: collapse;
@@ -400,17 +415,29 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .wrong-item-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--incorrect-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="top-nav-bar">
-        <button class="btn-home" onclick="goToHome()">返回首頁</button>
-        <header>
-            <h1>中史互動溫習平台</h1>
-            <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
-        </header>
+    <header>
+        <h1>中史互動溫習平台</h1>
+        <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
+    </header>
+
+    <div class="nav-buttons-group">
+        <button class="btn-home" onclick="goToHome()">返回主頁</button>
+        <button class="btn-prev-page" onclick="goBackPage()">返回上一頁</button>
+        <button class="btn-wrongbook" onclick="openWrongBook()">查看錯題簿 (<span id="wrong-count">0</span>)</button>
     </div>
 
     <!-- 設定面板 -->
@@ -663,6 +690,19 @@
         <button class="btn-action btn-secondary" onclick="backToConfig()">返回重新設定</button>
         <div id="score-result" class="score-display"></div>
     </div>
+
+    <!-- 錯題簿面板 -->
+    <div class="card" id="wrongbook-section">
+        <h2>我的錯題簿</h2>
+        <p>系統自動記錄您在測驗中答錯或未作答的題目，方便您集中溫習。</p>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
+            <button class="btn-action btn-small" style="background-color: #27ae60; width: auto;" onclick="exportWrongBook('doc')">匯出為 Word (DOC)</button>
+            <button class="btn-action btn-small" style="background-color: #2980b9; width: auto;" onclick="exportWrongBook('excel')">匯出為 Excel (CSV)</button>
+            <button class="btn-action btn-small" style="background-color: #c0392b; width: auto;" onclick="clearWrongBook()">清空錯題簿</button>
+        </div>
+        <div id="wrongbook-content"></div>
+        <button class="btn-action btn-secondary" onclick="backToConfig()">返回設定頁面</button>
+    </div>
 </div>
 
 <script>
@@ -855,18 +895,135 @@
     let activeMatchingData = null;
     let activeSequenceData = null;
     let selectedWordElement = null;
+    let wrongBook = JSON.parse(localStorage.getItem('history_wrongbook_topic3') || '[]');
 
     window.addEventListener('DOMContentLoaded', () => {
         onQuizTypeChange();
+        updateWrongCount();
     });
 
-    // 返回主頁按鈕跳轉處理
+    function updateWrongCount() {
+        document.getElementById('wrong-count').innerText = wrongBook.length;
+    }
+
+    function saveWrongBookToStorage() {
+        localStorage.setItem('history_wrongbook_topic3', JSON.stringify(wrongBook));
+        updateWrongCount();
+    }
+
     function goToHome() {
         try {
             window.location.href = "index.html";
         } catch (e) {
             backToConfig();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function goBackPage() {
+        const quizSection = document.getElementById('quiz-section');
+        const wrongSection = document.getElementById('wrongbook-section');
+        if (quizSection.style.display === 'block' || wrongSection.style.display === 'block') {
+            backToConfig();
+        } else {
+            goToHome();
+        }
+    }
+
+    function openWrongBook() {
+        document.getElementById('config-section').style.display = 'none';
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        const container = document.getElementById('wrongbook-content');
+        if (wrongBook.length === 0) {
+            container.innerHTML = `<p style="text-align: center; color: #666; padding: 30px;">目前錯題簿內沒有記錄，快去作答挑戰吧！</p>`;
+            return;
+        }
+
+        let html = '';
+        wrongBook.forEach((item, idx) => {
+            html += `<div class="wrong-item-box">
+                <div class="question-tag">${item.type}</div>
+                <p><strong>${idx + 1}. ${item.question}</strong></p>`;
+            if (item.yourAnswer) {
+                html += `<p style="color: #c0392b; margin: 4px 0;">您的回答：${item.yourAnswer}</p>`;
+            }
+            if (item.correctAnswer) {
+                html += `<p style="color: #27ae60; margin: 4px 0;">正確答案：${item.correctAnswer}</p>`;
+            }
+            if (item.explanation) {
+                html += `<p style="color: #555; margin: 4px 0; font-size: 14px;">解析：${item.explanation}</p>`;
+            }
+            html += `</div>`;
+        });
+        container.innerHTML = html;
+    }
+
+    function clearWrongBook() {
+        if (confirm("確定要清空所有錯題記錄嗎？")) {
+            wrongBook = [];
+            saveWrongBookToStorage();
+            openWrongBook();
+        }
+    }
+
+    function exportWrongBook(type) {
+        if (wrongBook.length === 0) {
+            alert("目前沒有錯題可以匯出！");
+            return;
+        }
+
+        if (type === 'doc') {
+            let htmlContent = `
+                <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+                <head><meta charset="utf-8"><title>中史錯題簿 - 課題③</title></head>
+                <body style="font-family: Arial, sans-serif;">
+                <h1 style="text-align: center; color: #2c3e50;">中史互動溫習平台 - 課題③ 錯題複習專用</h1>
+                <hr>
+            `;
+            wrongBook.forEach((item, idx) => {
+                htmlContent += `
+                    <div style="margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #ccc;">
+                        <p><strong>題目 ${idx + 1} [${item.type}]：</strong>${item.question}</p>
+                        ${item.yourAnswer ? `<p style="color: #c0392b;">您的回答：${item.yourAnswer}</p>` : ''}
+                        ${item.correctAnswer ? `<p style="color: #27ae60;">正確答案：${item.correctAnswer}</p>` : ''}
+                        ${item.explanation ? `<p>解析：${item.explanation}</p>` : ''}
+                    </div>
+                `;
+            });
+            htmlContent += `</body></html>`;
+
+            const blob = new Blob(['\ufeff' + htmlContent], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '中史錯題簿_課題3.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        } else if (type === 'excel') {
+            let csvContent = "\uFEFF題型,題目,您的回答,正確答案,解析\n";
+            wrongBook.forEach(item => {
+                let q = `"${(item.question || '').replace(/"/g, '""')}"`;
+                let t = `"${(item.type || '').replace(/"/g, '""')}"`;
+                let ya = `"${(item.yourAnswer || '').replace(/"/g, '""')}"`;
+                let ca = `"${(item.correctAnswer || '').replace(/"/g, '""')}"`;
+                let exp = `"${(item.explanation || '').replace(/"/g, '""')}"`;
+                csvContent += `${t},${q},${ya},${ca},${exp}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '中史錯題簿_課題3.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     }
 
@@ -895,8 +1052,10 @@
         } else if (quizType === 'matching') {
             subMatchingGroup.style.display = 'block';
             topicContainer.style.display = 'none';
+            sequenceQtyRow.style.display = 'none';
         } else if (quizType === 'sequence') {
             topicContainer.style.display = 'none';
+            matchingQtyRow.style.display = 'none';
         } else if (quizType === 'comprehensive') {
             document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
             matchingQtyRow.style.display = 'flex';
@@ -1040,8 +1199,10 @@
         }
 
         document.getElementById('config-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'none';
         document.getElementById('quiz-section').style.display = 'block';
         document.getElementById('score-result').innerText = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
 
         buildQuizUI();
     }
@@ -1067,11 +1228,11 @@
         }
 
         if (activeDragQuestions.length > 0) {
-            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、填充題測驗（共 ${activeDragQuestions.length} 題，操作方式：先按一下下方選項字卡，再按一下虛線空格填入）</h2>`;
+            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、填充題測驗（共 ${activeDragQuestions.length} 題）</h2>`;
             activeDragQuestions.forEach((item, index) => {
                 const topicName = topicNames[item.topicKey] || "";
                 const shuffledWords = [...item.words].sort(() => Math.random() - 0.5);
-                html += `<div class="drag-card">
+                html += `<div class="drag-card" id="drag-card-${index}">
                     <div class="question-tag">${topicName}</div>
                     <p><strong>${index + 1}.</strong></p>
                     <div class="word-bank">`;
@@ -1156,7 +1317,9 @@
 
     function backToConfig() {
         document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('wrongbook-section').style.display = 'none';
         document.getElementById('config-section').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function handleWordClick(wordEl) {
@@ -1189,6 +1352,7 @@
 
     function submitAnswers() {
         let totalScoreText = "";
+        let newWrongItems = [];
 
         if (activeMcQuestions.length > 0) {
             let mcScore = 0;
@@ -1204,10 +1368,24 @@
                     } else {
                         fb.className = "feedback incorrect";
                         fb.innerHTML = "錯誤。正確答案是 " + item.options[item.answer] + "。<br>" + item.explanation;
+                        newWrongItems.push({
+                            type: '選擇題',
+                            question: item.q,
+                            yourAnswer: item.options[val],
+                            correctAnswer: item.options[item.answer],
+                            explanation: item.explanation
+                        });
                     }
                 } else {
                     fb.className = "feedback incorrect";
                     fb.innerHTML = "尚未作答！";
+                    newWrongItems.push({
+                        type: '選擇題',
+                        question: item.q,
+                        yourAnswer: '未作答',
+                        correctAnswer: item.options[item.answer],
+                        explanation: item.explanation
+                    });
                 }
             });
             totalScoreText += `選擇題：${mcScore}/${activeMcQuestions.length}`;
@@ -1216,21 +1394,43 @@
         if (activeDragQuestions.length > 0) {
             let totalBlanks = 0;
             let correctBlanks = 0;
-            const dropzones = document.querySelectorAll('.dropzone');
-            dropzones.forEach(zone => {
-                totalBlanks++;
-                const expected = zone.getAttribute('data-answer');
-                if (zone.innerText.trim() === expected) {
-                    correctBlanks++;
-                    zone.style.borderColor = "var(--correct-color)";
-                    zone.style.background = "#d4edda";
-                } else {
-                    zone.style.borderColor = "var(--incorrect-color)";
-                    zone.style.background = "#f8f7da";
+            activeDragQuestions.forEach((item, index) => {
+                const card = document.getElementById(`drag-card-${index}`);
+                const dropzones = card.querySelectorAll('.dropzone');
+                let cardAllCorrect = true;
+                let userAnswersStr = [];
+                let expectedAnswersStr = [];
+
+                dropzones.forEach(zone => {
+                    totalBlanks++;
+                    const expected = zone.getAttribute('data-answer');
+                    expectedAnswersStr.push(expected);
+                    let userVal = zone.innerText.trim();
+                    userAnswersStr.push(userVal);
+
+                    if (userVal === expected) {
+                        correctBlanks++;
+                        zone.style.borderColor = "var(--correct-color)";
+                        zone.style.background = "#d4edda";
+                    } else {
+                        cardAllCorrect = false;
+                        zone.style.borderColor = "var(--incorrect-color)";
+                        zone.style.background = "#f8f7da";
+                    }
+                });
+
+                if (!cardAllCorrect) {
+                    newWrongItems.push({
+                        type: '填充題',
+                        question: item.text.replace(/class='dropzone'[^>]*>.*?<\/span>/g, '(空格)'),
+                        yourAnswer: userAnswersStr.join(', '),
+                        correctAnswer: expectedAnswersStr.join(', '),
+                        explanation: '請參閱對應課文內容'
+                    });
                 }
             });
             if (totalScoreText !== "") totalScoreText += " | ";
-            totalScoreText += `填充題：${correctBlanks}/${totalBlanks} 空格`;
+            totalScoreText += `填充題空格：${correctBlanks}/${totalBlanks}`;
         }
 
         if (activeMatchingData && activeMatchingData.length > 0) {
@@ -1247,6 +1447,13 @@
                     } else {
                         sel.style.borderColor = "var(--incorrect-color)";
                         sel.style.background = "#f8f7da";
+                        newWrongItems.push({
+                            type: '配對題',
+                            question: `${matchSec.title} - ${row.label}`,
+                            yourAnswer: sel.value ? sel.value : '未選擇',
+                            correctAnswer: row.target,
+                            explanation: row.desc
+                        });
                     }
                 });
             });
@@ -1257,8 +1464,12 @@
         if (activeSequenceData) {
             let seqTotal = activeSequenceData.correctOrder.length;
             let seqCorrect = 0;
+            let userSeqArr = [];
+            let correctSeqArr = activeSequenceData.correctOrder;
+
             for (let i = 0; i < seqTotal; i++) {
                 const sel = document.getElementById(`seq-step-${i}`);
+                userSeqArr.push(sel.value ? sel.value : '未選擇');
                 if (sel.value === sel.getAttribute('data-correct')) {
                     seqCorrect++;
                     sel.style.borderColor = "var(--correct-color)";
@@ -1268,11 +1479,32 @@
                     sel.style.background = "#f8f7da";
                 }
             }
+
+            if (seqCorrect !== seqTotal) {
+                newWrongItems.push({
+                    type: '時序題',
+                    question: '事件先後順序排序',
+                    yourAnswer: userSeqArr.join(' ➔ '),
+                    correctAnswer: correctSeqArr.join(' ➔ '),
+                    explanation: activeSequenceData.explanation
+                });
+            }
+
             if (totalScoreText !== "") totalScoreText += " | ";
             totalScoreText += `時序題：${seqCorrect}/${seqTotal}`;
         }
 
-        document.getElementById('score-result').innerText = totalScoreText;
+        newWrongItems.forEach(newItem => {
+            const existsIndex = wrongBook.findIndex(w => w.question === newItem.question);
+            if (existsIndex >= 0) {
+                wrongBook[existsIndex] = newItem;
+            } else {
+                wrongBook.push(newItem);
+            }
+        });
+        saveWrongBookToStorage();
+
+        document.getElementById('score-result').innerText = totalScoreText + ` (已自動同步更新至錯題簿)`;
         document.getElementById('score-result').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
