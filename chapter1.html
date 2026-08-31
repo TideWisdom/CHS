@@ -376,8 +376,8 @@
             transform: scale(1.05);
         }
 
-        /* 配對題樣式 */
-        .matching-table {
+        /* 配對與時序題樣式 */
+        .matching-table, .sequence-table {
             width: 100%;
             border-collapse: collapse;
             background: #fff;
@@ -388,18 +388,19 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        .matching-table th, .matching-table td {
+        .matching-table th, .matching-table td,
+        .sequence-table th, .sequence-table td {
             border: 1px solid #e2e8f0;
             padding: 12px;
             text-align: left;
         }
 
-        .matching-table th {
+        .matching-table th, .sequence-table th {
             background: #f1f5f9;
             color: var(--primary-color);
         }
 
-        .matching-table select {
+        .matching-table select, .sequence-table select {
             padding: 6px 10px;
             border-radius: 4px;
             border: 1px solid #cbd5e1;
@@ -422,6 +423,25 @@
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 15px;
+        }
+
+        .btn-regenerate {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-regenerate:hover {
+            background-color: #219653;
         }
     </style>
 </head>
@@ -448,6 +468,7 @@
                 <option value="mc">選擇題</option>
                 <option value="drag">填充題</option>
                 <option value="matching">配對題</option>
+                <option value="sequence">時序題</option>
                 <option value="comprehensive">綜合練習</option>
             </select>
         </div>
@@ -553,13 +574,17 @@
                 </div>
             </div>
 
-            <!-- 配對題數量設定 -->
+            <!-- 配對與時序題數量設定 -->
             <div class="extra-options-container" id="extra-qty-container">
-                <div class="section-title" style="margin-top: 0;">配對題設定</div>
+                <div class="section-title" style="margin-top: 0;">配對題與時序題設定</div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     <div class="topic-count-container matching-qty-row">
                         <span>配對題數量（組）：</span>
                         <input type="number" id="matching-qty" value="1" min="0" max="4">
+                    </div>
+                    <div class="topic-count-container sequence-qty-row">
+                        <span>時序題數量：</span>
+                        <input type="number" id="sequence-qty" value="1" min="0" max="4">
                     </div>
                 </div>
             </div>
@@ -572,6 +597,7 @@
     <div class="card" id="quiz-section">
         <div id="quiz-content"></div>
         <button class="btn-action" id="submit-btn" onclick="submitAnswers()">提交答案</button>
+        <button class="btn-regenerate" onclick="startQuiz()">生成另一個練習</button>
         <button class="btn-action btn-secondary" onclick="backToConfig()">返回重新設定</button>
         <div id="score-result" class="score-display"></div>
     </div>
@@ -691,7 +717,7 @@
             { q: "周原本是商朝的哪一個屬國？", options: ["(A) 東部屬國", "(B) 西部屬國", "(C) 南部屬國", "(D) 北部屬國"], answer: 1, explanation: "課文開頭明確指出，周原是商朝的西部屬國。" },
             { q: "周武王獲得哪一位賢臣的輔助，決心推翻紂王統治？", options: ["(A) 伊尹", "(B) 姜尚", "(C) 傅說", "(D) 管仲"], answer: 1, explanation: "課文指出傳到姬發（即周武王）時得到賢臣「姜尚」輔助。" },
             { q: "公元前1046年，商、周雙方在哪裡進行決戰？", options: ["(A) 鳴條", "(B) 涿鹿", "(C) 牧野", "(D) 殷都"], answer: 2, explanation: "課文記載公元前1046年，商、周雙方在「牧野」決戰。" },
-            { q: "周武王建立的周朝（公元前1046-前771年），史稱什麼？", options: ["(A) 東周", "(B) 西周", "(C) 北周", "(D) 南周"], answer: 1, explanation: "課文明確記載武王建立周朝，史稱「西周」。" }
+            { q: "周武王建立的周朝（公元前1046-前771年），史稱什麼？", options: ["(A) 東周", "(B) 西周", "(C) 北周", "(D) 南周"], answer: 1, explanation: "課文明確記載武王建立周朝，史稱「西周」." }
         ]
     };
 
@@ -812,9 +838,63 @@
         }
     };
 
+    const sequenceDatabase = [
+        {
+            intro: "請將下列歷史事件按照發生先後順序進行排序（由先至後）：",
+            events: [
+                { key: "A", text: "A. 黃帝打敗炎帝" },
+                { key: "B", text: "B. 黃帝打敗蚩尤" },
+                { key: "C", text: "C. 新石器時代" },
+                { key: "D", text: "D. 黃帝被推舉為共主" },
+                { key: "E", text: "E. 舊石器時代" }
+            ],
+            correctOrder: ["E", "C", "A", "B", "D"],
+            explanation: "正確順序： 舊石器時代 ➔ 新石器時代 ➔ 黃帝打敗炎帝 ➔ 黃帝打敗蚩尤 ➔ 黃帝被推舉為共主"
+        },
+        {
+            intro: "請將下列歷史人物按照執政次序進行排序（由先至後）：",
+            events: [
+                { key: "A", text: "A. 顓頊" },
+                { key: "B", text: "B. 黃帝" },
+                { key: "C", text: "C. 禹" },
+                { key: "D", text: "D. 嚳" },
+                { key: "E", text: "E. 舜" },
+                { key: "F", text: "F. 堯" }
+            ],
+            correctOrder: ["B", "A", "D", "F", "E", "C"],
+            explanation: "正確順序： 黃帝 ➔ 顓頊 ➔ 嚳 ➔ 堯 ➔ 舜 ➔ 禹"
+        },
+        {
+            intro: "請將下列夏商周時期的重要歷史事件按照發生先後順序進行排序（由先至後）：",
+            events: [
+                { key: "A", text: "A. 啟繼位" },
+                { key: "B", text: "B. 桀荒廢政事" },
+                { key: "C", text: "C. 禹執政" },
+                { key: "D", text: "D. 湯建立商朝" },
+                { key: "E", text: "E. 紂王寵愛妲己" },
+                { key: "F", text: "F. 姬發建立周朝" }
+            ],
+            correctOrder: ["C", "A", "B", "D", "E", "F"],
+            explanation: "正確順序： 禹執政 ➔ 啟繼位 ➔ 桀荒廢政事 ➔ 湯建立商朝 ➔ 紂王寵愛妲己 ➔ 姬發建立周朝"
+        },
+        {
+            intro: "請將下列商周時期的歷史事件按照發生先後順序進行排序（由先至後）：",
+            events: [
+                { key: "A", text: "A. 紂王自焚而死" },
+                { key: "B", text: "B. 商湯在鳴條大敗桀的軍隊" },
+                { key: "C", text: "C. 商定都於亳" },
+                { key: "D", text: "D. 商、周雙方在牧野決戰" },
+                { key: "E", text: "E. 周定都於鎬京" }
+            ],
+            correctOrder: ["B", "C", "D", "A", "E"],
+            explanation: "正確順序： 商湯在鳴條大敗桀的軍隊 ➔ 商定都於亳 ➔ 商、周雙方在牧野決戰 ➔ 紂王自焚而死 ➔ 周定都於鎬京"
+        }
+    ];
+
     let activeMcQuestions = [];
     let activeDragQuestions = [];
     let activeMatchingData = null;
+    let activeSequenceData = [];
     let selectedWordElement = null;
     let wrongBook = JSON.parse(localStorage.getItem('history_wrongbook') || '[]');
 
@@ -954,11 +1034,13 @@
         const topicContainer = document.getElementById('topic-config-container');
         const extraQtyContainer = document.getElementById('extra-qty-container');
         const matchingQtyRow = document.querySelector('.matching-qty-row');
+        const sequenceQtyRow = document.querySelector('.sequence-qty-row');
 
         subMatchingGroup.style.display = 'none';
         topicContainer.style.display = 'block';
         extraQtyContainer.style.display = 'block';
-        matchingQtyRow.style.display = 'flex';
+        if (matchingQtyRow) matchingQtyRow.style.display = 'flex';
+        if (sequenceQtyRow) sequenceQtyRow.style.display = 'flex';
 
         if (quizType === 'mc') {
             document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'none');
@@ -971,9 +1053,14 @@
         } else if (quizType === 'matching') {
             subMatchingGroup.style.display = 'block';
             topicContainer.style.display = 'none';
+            if (sequenceQtyRow) sequenceQtyRow.style.display = 'none';
+        } else if (quizType === 'sequence') {
+            topicContainer.style.display = 'none';
+            if (matchingQtyRow) matchingQtyRow.style.display = 'none';
         } else if (quizType === 'comprehensive') {
             document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
-            matchingQtyRow.style.display = 'flex';
+            if (matchingQtyRow) matchingQtyRow.style.display = 'flex';
+            if (sequenceQtyRow) sequenceQtyRow.style.display = 'flex';
         }
     }
 
@@ -989,7 +1076,9 @@
             if (dragAdvInput) dragAdvInput.value = Math.min(val, parseInt(dragAdvInput.max) || 0);
         });
         const mInput = document.getElementById('matching-qty');
+        const sInput = document.getElementById('sequence-qty');
         if (mInput) mInput.value = Math.min(val, parseInt(mInput.max) || 4);
+        if (sInput) sInput.value = Math.min(val, parseInt(sInput.max) || 4);
     }
 
     function randomizeCounts() {
@@ -1010,7 +1099,9 @@
             }
         });
         const mInput = document.getElementById('matching-qty');
+        const sInput = document.getElementById('sequence-qty');
         if (mInput) mInput.value = Math.floor(Math.random() * 5);
+        if (sInput) sInput.value = Math.floor(Math.random() * 5);
     }
 
     function startQuiz() {
@@ -1027,6 +1118,7 @@
         activeMcQuestions = [];
         activeDragQuestions = [];
         activeMatchingData = null;
+        activeSequenceData = [];
 
         let totalRequested = 0;
 
@@ -1049,6 +1141,14 @@
                 }
             }
             totalRequested = activeMatchingData.length;
+        } else if (quizType === 'sequence') {
+            let sCount = parseInt(document.getElementById('sequence-qty').value) || 1;
+            if (sCount > 0) {
+                let allSeq = [...sequenceDatabase];
+                allSeq.sort(() => Math.random() - 0.5);
+                activeSequenceData = allSeq.slice(0, Math.min(sCount, allSeq.length));
+            }
+            totalRequested = activeSequenceData.length;
         } else {
             document.querySelectorAll('.topic-card').forEach(card => {
                 if (card.style.display === 'none') return;
@@ -1093,6 +1193,7 @@
 
             if (quizType === 'comprehensive') {
                 let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
+                let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
                 if (mCount > 0) {
                     let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.geo];
                     activeMatchingData = [];
@@ -1100,7 +1201,12 @@
                         activeMatchingData.push(combined[i]);
                     }
                 }
-                totalRequested += (activeMatchingData ? activeMatchingData.length : 0);
+                if (sCount > 0) {
+                    let allSeq = [...sequenceDatabase];
+                    allSeq.sort(() => Math.random() - 0.5);
+                    activeSequenceData = allSeq.slice(0, Math.min(sCount, allSeq.length));
+                }
+                totalRequested += (activeMatchingData ? activeMatchingData.length : 0) + (activeSequenceData ? activeSequenceData.length : 0);
             }
         }
 
@@ -1139,7 +1245,7 @@
         }
 
         if (activeDragQuestions.length > 0) {
-            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、填充題測驗（共 ${activeDragQuestions.length} 題，操作方式：先按一下下方選項字卡，再按一下虛線空格填入）</h2>`;
+            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、填充題測驗（共 ${activeDragQuestions.length} 題）</h2>`;
             activeDragQuestions.forEach((item, index) => {
                 const topicName = topicNames[item.topicKey] || "";
                 const shuffledWords = [...item.words].sort(() => Math.random() - 0.5);
@@ -1189,12 +1295,58 @@
             });
         }
 
+        if (activeSequenceData && activeSequenceData.length > 0) {
+            activeSequenceData.forEach((seqSec, sIdx) => {
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、時序題排序</h2>`;
+                html += `<p><strong>${seqSec.intro}</strong></p>`;
+                
+                html += `<div style="background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;" id="seq-box-${sIdx}">`;
+                seqSec.events.forEach(ev => {
+                    html += `<p style="margin: 6px 0;">${ev.text}</p>`;
+                });
+                html += `</div>`;
+
+                html += `<table class="sequence-table">
+                    <thead>
+                        <tr>`;
+                for (let i = 0; i < seqSec.correctOrder.length; i++) {
+                    html += `<th>第 ${i + 1} 步</th>`;
+                }
+                html += `</tr></thead><tbody><tr>`;
+                for (let i = 0; i < seqSec.correctOrder.length; i++) {
+                    const selectId = `seq-step-${sIdx}-${i}`;
+                    html += `<td><select id="${selectId}" class="seq-select-${sIdx}" data-correct="${seqSec.correctOrder[i]}" onchange="updateSequenceOptions(${sIdx})">
+                        <option value="" disabled selected>-- 選擇 --</option>
+                        ${seqSec.events.map(ev => `<option value="${ev.key}">${ev.key}</option>`).join('')}
+                    </select></td>`;
+                }
+                html += `</tr></tbody></table>`;
+            });
+        }
+
         container.innerHTML = html;
         document.getElementById('submit-btn').style.display = 'block';
 
         if (activeDragQuestions.length > 0) {
             initClickToFill();
         }
+    }
+
+    function updateSequenceOptions(sIdx) {
+        const selects = document.querySelectorAll(`.seq-select-${sIdx}`);
+        const selectedValues = Array.from(selects).map(sel => sel.value).filter(val => val !== "");
+
+        selects.forEach(sel => {
+            const currentValue = sel.value;
+            Array.from(sel.options).forEach(opt => {
+                if (opt.value === "") return;
+                if (selectedValues.includes(opt.value) && opt.value !== currentValue) {
+                    opt.disabled = true;
+                } else {
+                    opt.disabled = false;
+                }
+            });
+        });
     }
 
     function toChineseNum(num) {
@@ -1346,6 +1498,44 @@
             });
             if (totalScoreText !== "") totalScoreText += " | ";
             totalScoreText += `配對題：${matchCorrect}/${matchTotal}`;
+        }
+
+        if (activeSequenceData && activeSequenceData.length > 0) {
+            let seqTotal = 0;
+            let seqCorrect = 0;
+            activeSequenceData.forEach((seqSec, sIdx) => {
+                let secAllCorrect = true;
+                let userSeqArr = [];
+                let correctSeqArr = seqSec.correctOrder;
+
+                for (let i = 0; i < correctSeqArr.length; i++) {
+                    seqTotal++;
+                    const sel = document.getElementById(`seq-step-${sIdx}-${i}`);
+                    let val = sel.value ? sel.value : '未選擇';
+                    userSeqArr.push(val);
+                    if (sel.value === sel.getAttribute('data-correct')) {
+                        seqCorrect++;
+                        sel.style.borderColor = "var(--correct-color)";
+                        sel.style.background = "#d4edda";
+                    } else {
+                        secAllCorrect = false;
+                        sel.style.borderColor = "var(--incorrect-color)";
+                        sel.style.background = "#f8f7da";
+                    }
+                }
+
+                if (!secAllCorrect) {
+                    newWrongItems.push({
+                        type: '時序題',
+                        question: seqSec.intro,
+                        yourAnswer: userSeqArr.join(' ➔ '),
+                        correctAnswer: correctSeqArr.join(' ➔ '),
+                        explanation: seqSec.explanation
+                    });
+                }
+            });
+            if (totalScoreText !== "") totalScoreText += " | ";
+            totalScoreText += `時序題步數：${seqCorrect}/${seqTotal}`;
         }
 
         newWrongItems.forEach(newItem => {
