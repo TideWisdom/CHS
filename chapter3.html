@@ -774,7 +774,7 @@
             { q: "根據課文，當時的貴族流行做什麼事來對待士人？", options: ["(A) 限制自由", "(B) 供養士人", "(C) 免除租稅", "(D) 驅逐出境"], answer: 1, explanation: "根據課文，「當時貴族流行供養士人」。" }
         ],
         "3.3": [
-            { q: "根據課文，春秋以來封建制度出現了什麼狀況？", options: ["(A) 更加穩固", "(B) 瓦解", "(C) 轉強", "(D) 擴張"], answer: 1, explanation: "根據課文第一句，「春秋以來封建瓦解」。" },
+            { q: "根據課文，春秋以來封建制度出現了什麼狀況？", options: ["(A) 更加穩固", "(B) 瓦解", "(C) 轉強", "(D) 擴張"], answer: 1, explanation: "根據課文第一句、「春秋以來封建瓦解」。" },
             { q: "根據課文，各派學者提出各自主張的目的又是什麼？", options: ["(A) 圖重建秩序，拯救百姓", "(B) 為了爭奪各國的霸主地位", "(C) 為了推行商鞅變法與縣制", "(D) 為了擴大周朝的領土版圖"], answer: 0, explanation: "根據課文，「以圖重建秩序，拯救百姓」。" },
             { q: "根據課文，孔子以什麼作為核心思想？", options: ["(A) 仁", "(B) 法", "(C) 自然", "(D) 兼愛"], answer: 0, explanation: "根據課文，「孔子以『仁』為核心思想」。" }
         ]
@@ -828,7 +828,7 @@
 
     const dragDatabaseAdvanced = {
         "1_adv": [
-            { text: "春秋時期周室 <span class='dropzone' data-answer='衰弱'>請點選填入</span> ，諸侯以「 <span class='dropzone' data-answer='尊王攘夷'>請點選填入</span> 」為名號令天下形成「 <span class='dropzone' data-answer='霸政'>請點選填入</span> 」。戰國初晉國被韓趙魏三家 <span class='dropzone' data-answer='卿大夫'>請點選填入</span> 瓜分史稱「 <span class='dropzone' data-answer='三家分晉'>請點選填入</span> 」。戰爭特點包括戰車數百乘到戰國數十萬人，青銅兵器演變至 <span class='dropzone' data-answer='鐵兵器'>請點選填入</span> ，且 <span class='dropzone' data-answer='步兵'>請點選填入</span> 漸成主力。", words: ["衰弱", "尊王攘夷", "霸政", "卿大夫", "三家分晉", "鐵兵器", "步兵"] }
+            { text: "春秋時期周室 <span class='dropzone' data-answer='衰弱'>請點選填入</span> ，諸侯以「 <span class='dropzone' data-answer='尊王攘夷'>請點選填入</span> 」為名號令天下形成「 <span class='dropzone' data-answer='霸政'>請點選填入</span> 」。戰國初晉國被韓趙魏三家 <span class='dropzone' data-answer='卿大夫'>請點選填入</span> 分割史稱「 <span class='dropzone' data-answer='三家分晉'>請點選填入</span> 」。戰爭特點包括戰車數百乘到戰國數十萬人，青銅兵器演變至 <span class='dropzone' data-answer='鐵兵器'>請點選填入</span> ，且 <span class='dropzone' data-answer='步兵'>請點選填入</span> 漸成主力。", words: ["衰弱", "尊王攘夷", "霸政", "卿大夫", "三家分晉", "鐵兵器", "步兵"] }
         ],
         "2_adv": [
             { text: "秦國位處西部較落後受中原鄙視。秦孝公招攬衛國人 <span class='dropzone' data-answer='商鞅'>請點選填入</span> 推行變法。政治方面推行 <span class='dropzone' data-answer='縣制'>請點選填入</span> 並實行法治貴族同罪；軍事上按 <span class='dropzone' data-answer='軍功'>請點選填入</span> 賞賜爵位；經濟上廢除 <span class='dropzone' data-answer='井田制度'>請點選填入</span> 准許土地自由買賣；社會上五家編伍十家編什實行 <span class='dropzone' data-answer='連坐'>請點選填入</span> 制度。", words: ["商鞅", "縣制", "軍功", "井田制度", "連坐"] }
@@ -1294,7 +1294,7 @@
             }
             html += `</tr></thead><tbody><tr>`;
             for (let i = 0; i < activeSequenceData.correctOrder.length; i++) {
-                html += `<td><select id="seq-step-${i}" data-correct="${activeSequenceData.correctOrder[i]}">
+                html += `<td><select id="seq-step-${i}" data-correct="${activeSequenceData.correctOrder[i]}" onchange="handleSequenceChange()">
                     <option value="" disabled selected>-- 選擇 --</option>
                     ${activeSequenceData.events.map(ev => `<option value="${ev.key}">${ev.key}</option>`).join('')}
                 </select></td>`;
@@ -1308,6 +1308,23 @@
         if (activeDragQuestions.length > 0) {
             initClickToFill();
         }
+    }
+
+    function handleSequenceChange() {
+        const selects = document.querySelectorAll('.sequence-table select');
+        const selectedValues = Array.from(selects).map(s => s.value).filter(val => val !== "");
+
+        selects.forEach(sel => {
+            const currentValue = sel.value;
+            Array.from(sel.options).forEach(opt => {
+                if (opt.value === "") return;
+                if (selectedValues.includes(opt.value) && opt.value !== currentValue) {
+                    opt.disabled = true;
+                } else {
+                    opt.disabled = false;
+                }
+            });
+        });
     }
 
     function toChineseNum(num) {
@@ -1511,5 +1528,3 @@
 
 </body>
 </html>
-
-
