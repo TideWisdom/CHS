@@ -679,7 +679,7 @@
             { q: "周公平定亂事後所推行的第二次封建，主要分封了大量哪一類的諸侯？", options: ["(A) 異姓功臣", "(B) 同姓宗室", "(C) 商朝舊部", "(D) 外族首領"], answer: 1, explanation: "第二次封建分封大量同姓宗室為諸侯，以鞏固周朝統治。" }
         ],
         "1.1.2": [
-            { q: "在封建制度下，周王所冊封的諸侯，按甚麼分為公、侯、伯、子、男五等？", options: ["(A) 功勞大小", "(B) 爵位", "(C) 封地遠近", "(D) 軍隊多寡"], answer: 1, explanation: "按爵位分為公、侯,伯,子,男五等。" },
+            { q: "在封建制度下，周王所冊封的諸侯，按甚麼分為公、侯、伯,子、男五等？", options: ["(A) 功勞大小", "(B) 爵位", "(C) 封地遠近", "(D) 軍隊多寡"], answer: 1, explanation: "按爵位分為公、侯,伯,子,男五等。" },
             { q: "諸侯在自己的封國內擁有甚麼權力？", options: ["(A) 絕對民主權", "(B) 世襲統治權", "(C) 獨立建國權", "(D) 遷徙人民權"], answer: 1, explanation: "諸侯在封國內有世襲統治權。" },
             { q: "在封建制度中，卿大夫可再把封地賜給誰？", options: ["(A) 平民", "(B) 奴隸", "(C) 士", "(D) 諸侯"], answer: 2, explanation: "卿大夫再賜給士，士以下是平民。" }
         ],
@@ -1243,7 +1243,7 @@
             }
             html += `</tr></thead><tbody><tr>`;
             for (let i = 0; i < activeSequenceData.correctOrder.length; i++) {
-                html += `<td><select id="seq-step-${i}" data-correct="${activeSequenceData.correctOrder[i]}">
+                html += `<td><select class="seq-step-select" id="seq-step-${i}" data-correct="${activeSequenceData.correctOrder[i]}" onchange="handleSequenceChange()">
                     <option value="" disabled selected>-- 選擇 --</option>
                     ${activeSequenceData.events.map(ev => `<option value="${ev.key}">${ev.key}</option>`).join('')}
                 </select></td>`;
@@ -1257,6 +1257,26 @@
         if (activeDragQuestions.length > 0) {
             initClickToFill();
         }
+    }
+
+    function handleSequenceChange() {
+        const selects = document.querySelectorAll('.seq-step-select');
+        // 收集所有當前已被選擇的值
+        const selectedValues = Array.from(selects).map(s => s.value).filter(val => val !== "");
+
+        // 遍歷每個下拉選單，更新其選項的 disabled 狀態
+        selects.forEach(sel => {
+            const currentValue = sel.value;
+            Array.from(sel.options).forEach(opt => {
+                if (opt.value === "") return; // 忽略預設提示選項
+                // 如果該選項被其他選單選了，且不是當前選單本身選的，就禁用
+                if (selectedValues.includes(opt.value) && opt.value !== currentValue) {
+                    opt.disabled = true;
+                } else {
+                    opt.disabled = false;
+                }
+            });
+        });
     }
 
     function toChineseNum(num) {
@@ -1460,4 +1480,3 @@
 
 </body>
 </html>
-```eof
