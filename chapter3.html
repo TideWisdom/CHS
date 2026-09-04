@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-HHK">
+<html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,6 @@
             position: relative;
         }
 
-        /* 頂部標題與按鈕群組 */
         header {
             text-align: center;
             margin-bottom: 15px;
@@ -106,13 +105,13 @@
             font-size: 16px;
             font-weight: bold;
             color: var(--primary-color);
-            margin: 20px 0 10px 0;
+            margin: 15px 0 10px 0;
             padding-bottom: 5px;
             border-bottom: 2px solid #cbd5e1;
         }
 
         .config-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .config-group label {
@@ -121,13 +120,14 @@
             margin-bottom: 8px;
         }
 
-        .config-group select {
+        .config-group select, .config-group input[type="number"], .config-group input[type="text"] {
             width: 100%;
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #cbd5e1;
             font-size: 16px;
             background: #fff;
+            box-sizing: border-box;
         }
 
         .sub-config-group {
@@ -139,57 +139,83 @@
             margin-top: 10px;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
+        .topics-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             background: #f8fafc;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
         }
 
-        .topic-card {
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
+        .topics-checkbox-group label {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .topic-card label {
-            font-weight: bold;
-            color: var(--primary-color);
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 0;
             font-size: 15px;
         }
 
-        .topic-count-container {
+        .topics-checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .topics-actions-row {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 4px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .topic-count-container input[type="number"] {
-            width: 65px;
-            padding: 4px;
-            border-radius: 4px;
-            border: 1px solid #cbd5e1;
-            text-align: center;
-            font-size: 14px;
+        .max-limit-info {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
         }
 
-        .extra-options-container {
+        .comprehensive-config-box {
+            display: none;
             background: #f1f5f9;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             margin-top: 15px;
+        }
+
+        .comp-topic-row {
+            background: #fff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 10px;
+        }
+
+        .comp-topic-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .comp-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .comp-input-field label {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 3px;
+        }
+
+        .comp-input-field input {
+            padding: 6px;
+            font-size: 14px;
         }
 
         .btn-action {
@@ -204,7 +230,7 @@
             transition: background 0.2s;
             display: block;
             width: 100%;
-            margin-top: 15px;
+            margin-top: 25px;
         }
 
         .btn-action:hover {
@@ -228,7 +254,6 @@
             margin-right: 8px;
         }
 
-        /* 遊戲區域與錯題簿區域 */
         #quiz-section, #wrongbook-section {
             display: none;
         }
@@ -298,7 +323,6 @@
             display: block;
         }
 
-        /* 填充題樣式 */
         .drag-card {
             margin-bottom: 25px;
             padding: 15px;
@@ -376,7 +400,6 @@
             transform: scale(1.05);
         }
 
-        /* 配對與時序題樣式 */
         .matching-table, .sequence-table {
             width: 100%;
             border-collapse: collapse;
@@ -424,6 +447,25 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
+
+        .btn-regenerate {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: block;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .btn-regenerate:hover {
+            background-color: #219653;
+        }
     </style>
 </head>
 <body>
@@ -431,7 +473,7 @@
 <div class="container">
     <header>
         <h1>中史互動溫習平台</h1>
-        <p>課題③ 春秋戰國時期的變局 - 簡易自訂溫習模式</p>
+        <p>課題③ 春秋戰國時期的變局</p>
     </header>
 
     <div class="nav-buttons-group">
@@ -454,230 +496,51 @@
             </select>
         </div>
 
-        <!-- 選擇配對題時的子選項 -->
         <div class="config-group sub-config-group" id="sub-matching-group">
             <label for="matchingTypeSelect">請選擇配對題主題：</label>
             <select id="matchingTypeSelect">
                 <option value="person">人物題</option>
                 <option value="geo">地理題</option>
-                <option value="both">人物題 + 地理題全部</option>
+                <option value="both">人物題＋地理題全部</option>
             </select>
         </div>
 
-        <div id="topic-config-container">
-            <h2>第二步：設定各課題出題數量</h2>
-            <div style="margin-bottom: 15px;" id="bulk-btns">
-                <button type="button" class="btn-action btn-small" onclick="setAllCounts(1)">全設為 1 題</button>
-                <button type="button" class="btn-action btn-small btn-secondary" onclick="setAllCounts(0)">全部清零 (0)</button>
-                <button type="button" class="btn-action btn-small" style="background-color: #27ae60;" onclick="randomizeCounts()">一鍵隨機數量</button>
+        <h2 id="step2-title">第二步：選擇溫習課題與設定總題數</h2>
+        
+        <div class="config-group" id="topics-group-container">
+            <label>請選擇參與溫習的課題（可多選）：</label>
+            <div class="topics-checkbox-group" id="topics-checkbox-container">
+                <label><input type="checkbox" name="topic-chk" value="1.1.1" onchange="handleTopicCheckboxChange()"> 1.1 (1) 春秋諸侯爭霸</label>
+                <label><input type="checkbox" name="topic-chk" value="1.1.2" onchange="handleTopicCheckboxChange()"> 1.1 (2) 戰國七雄競爭</label>
+                <label><input type="checkbox" name="topic-chk" value="1.2.1" onchange="handleTopicCheckboxChange()"> 1.2 (1) 戰爭規模龐大</label>
+                <label><input type="checkbox" name="topic-chk" value="1.2.2" onchange="handleTopicCheckboxChange()"> 1.2 (2) 平民參與戰事</label>
+                <label><input type="checkbox" name="topic-chk" value="1.2.3" onchange="handleTopicCheckboxChange()"> 1.2 (3) 兵器殺傷力大</label>
+                <label><input type="checkbox" name="topic-chk" value="1.2.4" onchange="handleTopicCheckboxChange()"> 1.2 (4) 步兵成作戰主導</label>
+                <label><input type="checkbox" name="topic-chk" value="2.1" onchange="handleTopicCheckboxChange()"> 2.1 秦國受到輕視</label>
+                <label><input type="checkbox" name="topic-chk" value="2.2" onchange="handleTopicCheckboxChange()"> 2.2 商鞅變法內容</label>
+                <label><input type="checkbox" name="topic-chk" value="2.3" onchange="handleTopicCheckboxChange()"> 2.3 秦國轉弱為強</label>
+                <label><input type="checkbox" name="topic-chk" value="3.1" onchange="handleTopicCheckboxChange()"> 3.1 民間教育興起</label>
+                <label><input type="checkbox" name="topic-chk" value="3.2" onchange="handleTopicCheckboxChange()"> 3.2 列國競招人才</label>
+                <label><input type="checkbox" name="topic-chk" value="3.3" onchange="handleTopicCheckboxChange()"> 3.3 諸子積極救世</label>
             </div>
+            <div class="topics-actions-row">
+                <button type="button" class="btn-action btn-small" onclick="toggleSelectAllTopics(true)">選擇全部</button>
+                <button type="button" class="btn-action btn-small btn-secondary" onclick="toggleSelectAllTopics(false)">取消全選</button>
+            </div>
+        </div>
 
-            <div class="section-title">第1節 春秋戰國時期的兼併戰爭</div>
-            <div class="options-grid">
-                <div class="topic-card" data-topic="1.1.1">
-                    <label>1.1 (1) 春秋諸侯爭霸</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.1.2">
-                    <label>1.1 (2) 戰國七雄競爭</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.2.1">
-                    <label>1.2 (1) 戰爭規模龐大</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.2.2">
-                    <label>1.2 (2) 平民參與戰事</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.2.3">
-                    <label>1.2 (3) 兵器殺傷力大</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.2.4">
-                    <label>1.2 (4) 步兵成作戰主導</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="2">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-            </div>
+        <div class="config-group" id="total-qty-group">
+            <label for="target-total-qty">目標總題數：</label>
+            <input type="text" id="target-total-qty" value="10" oninput="validateTotalQty(this)">
+            <button type="button" class="btn-action btn-small" style="margin-top: 8px; background-color: #2980b9;" onclick="selectAllQuestionsMax()">選擇全部題目</button>
+            <div class="max-limit-info" id="max-limit-info-text">目前所選課題的題庫總上限：計算中...</div>
+        </div>
 
-            <div class="section-title">第2節 列國厲行變法</div>
-            <div class="options-grid">
-                <div class="topic-card" data-topic="2.1">
-                    <label>2.1 秦國受到輕視</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="2.2">
-                    <label>2.2 商鞅變法內容</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="4">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="2.3">
-                    <label>2.3 秦國轉弱為強</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-title">第3節 春秋戰國的百家爭鳴</div>
-            <div class="options-grid">
-                <div class="topic-card" data-topic="3.1">
-                    <label>3.1 民間教育興起</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="3.2">
-                    <label>3.2 列國競招人才</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="1">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="3.3">
-                    <label>3.3 諸子積極救世</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-            </div>
-
-            <!-- 配對與時序題數量設定 -->
-            <div class="extra-options-container" id="extra-qty-container">
-                <div class="section-title" style="margin-top: 0;">配對題與時序題設定</div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-                    <div class="topic-count-container matching-qty-row">
-                        <span>配對題數量（組）：</span>
-                        <input type="number" id="matching-qty" value="1" min="0" max="2">
-                    </div>
-                    <div class="topic-count-container sequence-qty-row">
-                        <span>時序題數量：</span>
-                        <input type="number" id="sequence-qty" value="1" min="0" max="3">
-                    </div>
-                </div>
-            </div>
+        <!-- 綜合練習自訂數量面板 -->
+        <div class="comprehensive-config-box" id="comprehensive-box">
+            <p style="margin-top: 0; font-weight: bold; color: var(--primary-color);">【綜合練習進階設定】</p>
+            <p style="font-size: 13px; color: #555; margin-bottom: 12px;">註：綜合練習中的配對題與時序題將各自固定隨機出 1 題。請設定您想練習的選擇題與填充題數量：</p>
+            <div id="comp-topics-config-container"></div>
         </div>
 
         <button class="btn-action" onclick="startQuiz()" style="margin-top: 25px; font-size: 18px; padding: 15px;">生成測驗</button>
@@ -687,6 +550,7 @@
     <div class="card" id="quiz-section">
         <div id="quiz-content"></div>
         <button class="btn-action" id="submit-btn" onclick="submitAnswers()">提交答案</button>
+        <button class="btn-regenerate" onclick="startQuiz()">生成另一個練習</button>
         <button class="btn-action btn-secondary" onclick="backToConfig()">返回重新設定</button>
         <div id="score-result" class="score-display"></div>
     </div>
@@ -718,10 +582,7 @@
         "2.3": "2.3 秦國轉弱為強",
         "3.1": "3.1 民間教育興起",
         "3.2": "3.2 列國競招人才",
-        "3.3": "3.3 諸子積極救世",
-        "1_adv": "第1節綜合填充",
-        "2_adv": "第2節綜合填充",
-        "3_adv": "第3節綜合填充"
+        "3.3": "3.3 諸子積極救世"
     };
 
     const mcDatabase = {
@@ -826,18 +687,6 @@
         ]
     };
 
-    const dragDatabaseAdvanced = {
-        "1_adv": [
-            { text: "春秋時期周室 <span class='dropzone' data-answer='衰弱'>請點選填入</span> ，諸侯以「 <span class='dropzone' data-answer='尊王攘夷'>請點選填入</span> 」為名號令天下形成「 <span class='dropzone' data-answer='霸政'>請點選填入</span> 」。戰國初晉國被韓趙魏三家 <span class='dropzone' data-answer='卿大夫'>請點選填入</span> 分割史稱「 <span class='dropzone' data-answer='三家分晉'>請點選填入</span> 」。戰爭特點包括戰車數百乘到戰國數十萬人，青銅兵器演變至 <span class='dropzone' data-answer='鐵兵器'>請點選填入</span> ，且 <span class='dropzone' data-answer='步兵'>請點選填入</span> 漸成主力。", words: ["衰弱", "尊王攘夷", "霸政", "卿大夫", "三家分晉", "鐵兵器", "步兵"] }
-        ],
-        "2_adv": [
-            { text: "秦國位處西部較落後受中原鄙視。秦孝公招攬衛國人 <span class='dropzone' data-answer='商鞅'>請點選填入</span> 推行變法。政治方面推行 <span class='dropzone' data-answer='縣制'>請點選填入</span> 並實行法治貴族同罪；軍事上按 <span class='dropzone' data-answer='軍功'>請點選填入</span> 賞賜爵位；經濟上廢除 <span class='dropzone' data-answer='井田制度'>請點選填入</span> 准許土地自由買賣；社會上五家編伍十家編什實行 <span class='dropzone' data-answer='連坐'>請點選填入</span> 制度。", words: ["商鞅", "縣制", "軍功", "井田制度", "連坐"] }
-        ],
-        "3_adv": [
-            { text: "春秋以後貴族流落民間 <span class='dropzone' data-answer='收徒講學'>請點選填入</span> 使平民受教育。列國為了變法圖強爭相招攬人才，貴族流行 <span class='dropzone' data-answer='供養士人'>請點選填入</span> 。面對亂局學者提出主張以重建 <span class='dropzone' data-answer='秩序'>請點選填入</span> 。四大重要學派為主張仁政的 <span class='dropzone' data-answer='儒家'>請點選填入</span> 、順應自然的 <span class='dropzone' data-answer='道家'>請點選填入</span> 、反對戰爭的 <span class='dropzone' data-answer='墨家'>請點選填入</span> 及以法令治國的 <span class='dropzone' data-answer='法家'>請點選填入</span> 。", words: ["收徒講學", "供養士人", "秩序", "儒家", "道家", "墨家", "法家"] }
-        ]
-    };
-
     const matchingDatabase = {
         person: {
             title: "一、人物配對題",
@@ -877,23 +726,25 @@
         }
     };
 
-    const sequenceDatabase = {
-        intro: "請將下列歷史發展事件按照在文中出現的先後順序進行排序（由先至後）：",
-        events: [
-            { key: "A", text: "A. 周室衰弱，列國爭霸並形成「霸政」，春秋五霸與吳越爭霸相繼出現" },
-            { key: "B", text: "B. 三家分晉，韓、趙、魏瓜分晉國，標誌着戰國時代開始" },
-            { key: "C", text: "C. 秦孝公招攬商鞅推行變法，秦國轉弱為強" },
-            { key: "D", text: "D. 戰國七雄互相混戰，民間教育與百家爭鳴局面繁榮" },
-            { key: "E", text: "E. 秦國展開統一戰爭，依次消滅六國，統一天下" }
-        ],
-        correctOrder: ["A", "B", "D", "C", "E"],
-        explanation: "正確順序： A ➔ B ➔ D ➔ C ➔ E"
-    };
+    const sequenceDatabase = [
+        {
+            intro: "請將下列歷史發展事件按照在文中出現的先後順序進行排序（由先至後）：",
+            events: [
+                { key: "A", text: "A. 周室衰弱，列國爭霸並形成「霸政」，春秋五霸與吳越爭霸相繼出現" },
+                { key: "B", text: "B. 三家分晉，韓、趙、魏瓜分晉國，標誌着戰國時代開始" },
+                { key: "C", text: "C. 秦孝公招攬商鞅推行變法，秦國轉弱為強" },
+                { key: "D", text: "D. 戰國七雄互相混戰，民間教育與百家爭鳴局面繁榮" },
+                { key: "E", text: "E. 秦國展開統一戰爭，依次消滅六國，統一天下" }
+            ],
+            correctOrder: ["A", "B", "D", "C", "E"],
+            explanation: "正確順序： A ➔ B ➔ D ➔ C ➔ E"
+        }
+    ];
 
     let activeMcQuestions = [];
     let activeDragQuestions = [];
     let activeMatchingData = null;
-    let activeSequenceData = null;
+    let activeSequenceData = [];
     let selectedWordElement = null;
     let wrongBook = JSON.parse(localStorage.getItem('history_wrongbook_topic3') || '[]');
 
@@ -978,9 +829,9 @@
         if (type === 'doc') {
             let htmlContent = `
                 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
-                <head><meta charset="utf-8"><title>中史錯題簿 - 課題③</title></head>
+                <head><meta charset="utf-8"><title>中史錯題簿 - 課題3</title></head>
                 <body style="font-family: Arial, sans-serif;">
-                <h1 style="text-align: center; color: #2c3e50;">中史互動溫習平台 - 課題③ 錯題複習專用</h1>
+                <h1 style="text-align: center; color: #2c3e50;">中史互動溫習平台 - 課題3 錯題複習專用</h1>
                 <hr>
             `;
             wrongBook.forEach((item, idx) => {
@@ -1027,80 +878,138 @@
         }
     }
 
-    function onQuizTypeChange() {
+    function toggleSelectAllTopics(select) {
+        const checkboxes = document.querySelectorAll('input[name="topic-chk"]');
+        checkboxes.forEach(chk => {
+            chk.checked = select;
+        });
+        handleTopicCheckboxChange();
+    }
+
+    function handleTopicCheckboxChange() {
         const quizType = document.getElementById('quizTypeSelect').value;
-        const subMatchingGroup = document.getElementById('sub-matching-group');
-        const topicContainer = document.getElementById('topic-config-container');
-        const extraQtyContainer = document.getElementById('extra-qty-container');
-        const matchingQtyRow = document.querySelector('.matching-qty-row');
-        const sequenceQtyRow = document.querySelector('.sequence-qty-row');
-
-        subMatchingGroup.style.display = 'none';
-        topicContainer.style.display = 'block';
-        extraQtyContainer.style.display = 'block';
-        matchingQtyRow.style.display = 'flex';
-        sequenceQtyRow.style.display = 'flex';
-
-        if (quizType === 'mc') {
-            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'flex');
-            extraQtyContainer.style.display = 'none';
-        } else if (quizType === 'drag') {
-            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
-            extraQtyContainer.style.display = 'none';
-        } else if (quizType === 'matching') {
-            subMatchingGroup.style.display = 'block';
-            topicContainer.style.display = 'none';
-            sequenceQtyRow.style.display = 'none';
-        } else if (quizType === 'sequence') {
-            topicContainer.style.display = 'none';
-            matchingQtyRow.style.display = 'none';
-        } else if (quizType === 'comprehensive') {
-            document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
-            matchingQtyRow.style.display = 'flex';
-            sequenceQtyRow.style.display = 'flex';
+        if (quizType === 'comprehensive') {
+            renderComprehensiveConfigInputs();
+        } else {
+            updateMaxTotalLimit();
         }
     }
 
-    function setAllCounts(val) {
-        document.querySelectorAll('.topic-card').forEach(card => {
-            if (card.style.display === 'none') return;
-            const mcInput = card.querySelector('.topic-mc-qty');
-            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+    function getSelectedTopicsMaxLimit() {
+        const quizType = document.getElementById('quizTypeSelect').value;
+        const checkedTopics = document.querySelectorAll('input[name="topic-chk"]:checked');
+        let totalLimit = 0;
 
-            if (mcInput) mcInput.value = val;
-            if (dragBasicInput) dragBasicInput.value = Math.min(val, parseInt(dragBasicInput.max) || val);
-            if (dragAdvInput) dragAdvInput.value = Math.min(val, parseInt(dragAdvInput.max) || 0);
+        checkedTopics.forEach(chk => {
+            const topic = chk.value;
+            if (quizType === 'mc') {
+                totalLimit += mcDatabase[topic] ? mcDatabase[topic].length : 0;
+            } else if (quizType === 'drag') {
+                totalLimit += dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
+            }
         });
-        const mInput = document.getElementById('matching-qty');
-        const sInput = document.getElementById('sequence-qty');
-        if (mInput) mInput.value = Math.min(val, parseInt(mInput.max) || 2);
-        if (sInput) sInput.value = Math.min(val, parseInt(sInput.max) || 3);
+
+        return totalLimit;
     }
 
-    function randomizeCounts() {
-        document.querySelectorAll('.topic-card').forEach(card => {
-            if (card.style.display === 'none') return;
-            const mcInput = card.querySelector('.topic-mc-qty');
-            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+    function updateMaxTotalLimit() {
+        const maxLimit = getSelectedTopicsMaxLimit();
+        const infoText = document.getElementById('max-limit-info-text');
+        const targetInput = document.getElementById('target-total-qty');
 
-            if (mcInput) mcInput.value = Math.floor(Math.random() * 3);
-            if (dragBasicInput) {
-                let maxB = parseInt(dragBasicInput.max) || 1;
-                dragBasicInput.value = Math.floor(Math.random() * (maxB + 1));
+        infoText.innerText = `目前所選課題的題庫總上限：${maxLimit} 題`;
+
+        let currentVal = parseInt(targetInput.value) || 0;
+        if (currentVal > maxLimit && maxLimit > 0) {
+            targetInput.value = maxLimit;
+        }
+    }
+
+    function selectAllQuestionsMax() {
+        const maxLimit = getSelectedTopicsMaxLimit();
+        const targetInput = document.getElementById('target-total-qty');
+        targetInput.value = maxLimit > 0 ? maxLimit : 1;
+    }
+
+    function validateTotalQty(inputEl) {
+        let maxLimit = getSelectedTopicsMaxLimit();
+        let rawVal = inputEl.value;
+
+        if (rawVal === "" || rawVal.endsWith("0")) {
+            return;
+        }
+
+        let val = parseInt(rawVal, 10);
+        if (isNaN(val)) return;
+
+        if (maxLimit > 0 && val > maxLimit) {
+            alert(`目標總題數不能超過所選題庫的總上限（${maxLimit} 題）！`);
+            inputEl.value = maxLimit;
+        } else if (val < 1) {
+            inputEl.value = 1;
+        }
+    }
+
+    function onQuizTypeChange() {
+        const quizType = document.getElementById('quizTypeSelect').value;
+        const subMatchingGroup = document.getElementById('sub-matching-group');
+        const totalQtyGroup = document.getElementById('total-qty-group');
+        const comprehensiveBox = document.getElementById('comprehensive-box');
+        const topicsGroupContainer = document.getElementById('topics-group-container');
+        const step2Title = document.getElementById('step2-title');
+
+        subMatchingGroup.style.display = 'none';
+        totalQtyGroup.style.display = 'block';
+        comprehensiveBox.style.display = 'none';
+        topicsGroupContainer.style.display = 'block';
+        step2Title.style.display = 'block';
+
+        if (quizType === 'matching' || quizType === 'sequence') {
+            totalQtyGroup.style.display = 'none';
+            step2Title.style.display = 'none';
+            topicsGroupContainer.style.display = 'none';
+            if (quizType === 'matching') {
+                subMatchingGroup.style.display = 'block';
             }
-            if (dragAdvInput) {
-                let maxA = parseInt(dragAdvInput.max) || 0;
-                dragAdvInput.value = Math.floor(Math.random() * (maxA + 1));
-            }
+        } else if (quizType === 'comprehensive') {
+            totalQtyGroup.style.display = 'none';
+            comprehensiveBox.style.display = 'block';
+            renderComprehensiveConfigInputs();
+        } else {
+            updateMaxTotalLimit();
+        }
+    }
+
+    function renderComprehensiveConfigInputs() {
+        const container = document.getElementById('comp-topics-config-container');
+        const checkedTopics = Array.from(document.querySelectorAll('input[name="topic-chk"]:checked')).map(el => el.value);
+
+        if (checkedTopics.length === 0) {
+            container.innerHTML = `<p style="color: #c0392b; font-size: 13px; margin: 0;">請先在上方勾選至少一個溫習課題，才可設定綜合練習題數。</p>`;
+            return;
+        }
+
+        let html = '';
+        checkedTopics.forEach(topic => {
+            const mcMax = mcDatabase[topic] ? mcDatabase[topic].length : 0;
+            const dragMax = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
+            html += `
+                <div class="comp-topic-row">
+                    <div class="comp-topic-title">${topicNames[topic]}</div>
+                    <div class="comp-inputs-grid">
+                        <div class="comp-input-field">
+                            <label>選擇題數量 (上限 ${mcMax})</label>
+                            <input type="text" id="comp-mc-${topic}" value="${Math.min(1, mcMax)}" data-max="${mcMax}">
+                        </div>
+                        <div class="comp-input-field">
+                            <label>填充題數量 (上限 ${dragMax})</label>
+                            <input type="text" id="comp-drag-${topic}" value="${Math.min(1, dragMax)}" data-max="${dragMax}">
+                        </div>
+                    </div>
+                </div>
+            `;
         });
-        const mInput = document.getElementById('matching-qty');
-        const sInput = document.getElementById('sequence-qty');
-        if (mInput) mInput.value = Math.floor(Math.random() * 3);
-        if (sInput) sInput.value = Math.floor(Math.random() * 3);
+        container.innerHTML = html;
     }
 
     function startQuiz() {
@@ -1114,87 +1023,164 @@
             return;
         }
 
+        const checkedTopics = Array.from(document.querySelectorAll('input[name="topic-chk"]:checked')).map(el => el.value);
+        if (checkedTopics.length === 0 && quizType !== 'matching' && quizType !== 'sequence') {
+            alert("請至少勾選一個溫習課題！");
+            return;
+        }
+
         activeMcQuestions = [];
         activeDragQuestions = [];
         activeMatchingData = null;
-        activeSequenceData = null;
+        activeSequenceData = [];
 
         let totalRequested = 0;
 
         if (quizType === 'matching') {
             activeMatchingData = [];
-            let mCount = parseInt(document.getElementById('matching-qty').value) || 1;
-            if (mCount > 0) {
-                if (matchingType === 'person' || matchingType === 'both') activeMatchingData.push(matchingDatabase.person);
-                if (matchingType === 'geo' || matchingType === 'both') activeMatchingData.push(matchingDatabase.geo);
-                if (matchingType === 'both' && mCount === 1) activeMatchingData = [matchingDatabase.person];
+            if (matchingType === 'person') {
+                let clonedPerson = JSON.parse(JSON.stringify(matchingDatabase.person));
+                clonedPerson.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedPerson);
+            } else if (matchingType === 'geo') {
+                let clonedGeo = JSON.parse(JSON.stringify(matchingDatabase.geo));
+                clonedGeo.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedGeo);
+            } else if (matchingType === 'both') {
+                let clonedPerson = JSON.parse(JSON.stringify(matchingDatabase.person));
+                clonedPerson.items.sort(() => Math.random() - 0.5);
+                let clonedGeo = JSON.parse(JSON.stringify(matchingDatabase.geo));
+                clonedGeo.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedPerson, clonedGeo);
             }
-            totalRequested = activeMatchingData.length;
+            totalRequested = activeMatchingData.reduce((acc, sec) => acc + sec.items.length, 0);
         } else if (quizType === 'sequence') {
-            let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
-            if (sCount > 0) {
-                activeSequenceData = sequenceDatabase;
-                totalRequested = 1;
+            let allSeq = JSON.parse(JSON.stringify(sequenceDatabase));
+            allSeq.sort(() => Math.random() - 0.5);
+            activeSequenceData = [allSeq[0]]; // 時序題固定出1題
+            totalRequested = activeSequenceData.length;
+        } else if (quizType === 'comprehensive') {
+            if (checkedTopics.length === 0) {
+                alert("請至少勾選一個溫習課題！");
+                return;
             }
-        } else {
-            document.querySelectorAll('.topic-card').forEach(card => {
-                if (card.style.display === 'none') return;
-                const topic = card.getAttribute('data-topic');
-                const mcInput = card.querySelector('.topic-mc-qty');
-                const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-                const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
 
-                const mcCount = (quizType !== 'drag' && mcInput) ? (parseInt(mcInput.value) || 0) : 0;
-                const dragBasicCount = (quizType !== 'mc' && dragBasicInput) ? (parseInt(dragBasicInput.value) || 0) : 0;
-                const dragAdvCount = (quizType !== 'mc' && dragAdvInput) ? (parseInt(dragAdvInput.value) || 0) : 0;
+            checkedTopics.forEach(topic => {
+                const mcInput = document.getElementById(`comp-mc-${topic}`);
+                const dragInput = document.getElementById(`comp-drag-${topic}`);
+                const mcMax = mcDatabase[topic] ? mcDatabase[topic].length : 0;
+                const dragMax = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
 
-                totalRequested += (mcCount + dragBasicCount + dragAdvCount);
+                let mcReq = mcInput ? parseInt(mcInput.value, 10) || 0 : 0;
+                let dragReq = dragInput ? parseInt(dragInput.value, 10) || 0 : 0;
 
-                if (mcCount > 0 && mcDatabase[topic]) {
-                    let items = [...mcDatabase[topic]];
-                    items.sort(() => Math.random() - 0.5);
-                    items.slice(0, mcCount).forEach(item => {
-                        activeMcQuestions.push({ topicKey: topic, ...item });
+                if (mcReq > mcMax) mcReq = mcMax;
+                if (dragReq > dragMax) dragReq = dragMax;
+
+                if (mcReq > 0 && mcDatabase[topic]) {
+                    let pool = [...mcDatabase[topic]].sort(() => Math.random() - 0.5);
+                    pool.slice(0, mcReq).forEach(item => {
+                        activeMcQuestions.push({ type: 'mc', topicKey: topic, ...item });
+                        totalRequested++;
                     });
                 }
 
-                if (dragBasicCount > 0 && dragDatabaseBasic[topic]) {
-                    let items = [...dragDatabaseBasic[topic]];
-                    items.sort(() => Math.random() - 0.5);
-                    items.slice(0, dragBasicCount).forEach(item => {
-                        activeDragQuestions.push({ topicKey: topic, ...item });
+                if (dragReq > 0 && dragDatabaseBasic[topic]) {
+                    let pool = [...dragDatabaseBasic[topic]].sort(() => Math.random() - 0.5);
+                    pool.slice(0, dragReq).forEach(item => {
+                        activeDragQuestions.push({ type: 'drag', topicKey: topic, ...item });
+                        totalRequested++;
                     });
-                }
-
-                if (dragAdvCount > 0) {
-                    let dbKey = topic.startsWith('1.') ? '1_adv' : (topic.startsWith('2.') ? '2_adv' : '3_adv');
-                    if (dragDatabaseAdvanced[dbKey]) {
-                        let items = [...dragDatabaseAdvanced[dbKey]];
-                        items.sort(() => Math.random() - 0.5);
-                        items.slice(0, dragAdvCount).forEach(item => {
-                            activeDragQuestions.push({ topicKey: dbKey, ...item });
-                        });
-                    }
                 }
             });
 
-            if (quizType === 'comprehensive') {
-                let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
-                let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
-                
-                if (mCount > 0) {
-                    activeMatchingData = [matchingDatabase.person];
-                    if (mCount > 1) activeMatchingData.push(matchingDatabase.geo);
-                }
-                if (sCount > 0) {
-                    activeSequenceData = sequenceDatabase;
-                }
-                totalRequested += (mCount + sCount);
+            // 綜合練習中的配對題與時序題各自固定隨機出 1 題
+            let chosenMatchSource = Math.random() < 0.5 ? matchingDatabase.person : matchingDatabase.geo;
+            let clonedCompMatch = JSON.parse(JSON.stringify(chosenMatchSource));
+            clonedCompMatch.items.sort(() => Math.random() - 0.5);
+            activeMatchingData = [clonedCompMatch];
+            totalRequested += clonedCompMatch.items.length;
+
+            let allSeq = JSON.parse(JSON.stringify(sequenceDatabase));
+            allSeq.sort(() => Math.random() - 0.5);
+            activeSequenceData = [allSeq[0]];
+            totalRequested += activeSequenceData.length;
+
+        } else {
+            const targetTotalInput = document.getElementById('target-total-qty');
+            let targetTotal = parseInt(targetTotalInput.value, 10) || 10;
+            let maxLimit = getSelectedTopicsMaxLimit();
+
+            if (targetTotal > maxLimit && maxLimit > 0) {
+                targetTotal = maxLimit;
+                targetTotalInput.value = maxLimit;
             }
+
+            let topicPools = {};
+            let availableTotal = 0;
+
+            checkedTopics.forEach(topic => {
+                let pool = [];
+                if (quizType === 'mc') {
+                    if (mcDatabase[topic]) pool = pool.concat(mcDatabase[topic].map(item => ({ type: 'mc', topicKey: topic, ...item })));
+                } else if (quizType === 'drag') {
+                    if (dragDatabaseBasic[topic]) pool = pool.concat(dragDatabaseBasic[topic].map(item => ({ type: 'drag', topicKey: topic, ...item })));
+                }
+                pool.sort(() => Math.random() - 0.5);
+                topicPools[topic] = pool;
+                availableTotal += pool.length;
+            });
+
+            if (targetTotal > availableTotal) {
+                targetTotal = availableTotal;
+            }
+
+            let distribution = {};
+            let assignedCount = 0;
+
+            let basePerTopic = Math.floor(targetTotal / checkedTopics.length);
+            checkedTopics.forEach(topic => {
+                let limit = topicPools[topic].length;
+                let assign = Math.min(limit, basePerTopic);
+                distribution[topic] = assign;
+                assignedCount += assign;
+            });
+
+            let remaining = targetTotal - assignedCount;
+            let attempts = 0;
+            while (remaining > 0 && attempts < 100) {
+                let shuffledTopics = [...checkedTopics].sort(() => Math.random() - 0.5);
+                let distributedInLoop = false;
+                for (let topic of shuffledTopics) {
+                    if (remaining > 0 && distribution[topic] < topicPools[topic].length) {
+                        distribution[topic]++;
+                        remaining--;
+                        distributedInLoop = true;
+                    }
+                }
+                if (!distributedInLoop) break;
+                attempts++;
+            }
+
+            checkedTopics.forEach(topic => {
+                let count = distribution[topic] || 0;
+                let pool = topicPools[topic];
+                let chosen = pool.slice(0, count);
+
+                chosen.forEach(item => {
+                    if (quizType === 'mc') {
+                        activeMcQuestions.push(item);
+                        totalRequested++;
+                    } else if (quizType === 'drag') {
+                        activeDragQuestions.push(item);
+                        totalRequested++;
+                    }
+                });
+            });
         }
 
         if (totalRequested === 0) {
-            alert("請至少在某個項目設定 1 道或以上的數量！");
+            alert("請至少設定大於 0 的目標總題數，或確認有勾選對應課題及數量！");
             return;
         }
 
@@ -1247,7 +1233,7 @@
 
         if (activeMatchingData && activeMatchingData.length > 0) {
             activeMatchingData.forEach((matchSec, sIdx) => {
-                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四、]+/, '')}</h2>`;
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四五、]+/, '')}（共 ${matchSec.items.length} 題）</h2>`;
                 html += `<p><strong>${matchSec.intro}</strong></p>`;
                 
                 html += `<div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
@@ -1278,28 +1264,34 @@
             });
         }
 
-        if (activeSequenceData) {
-            html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、時序題排序</h2>`;
-            html += `<p><strong>${activeSequenceData.intro}</strong></p>`;
-            html += `<div style="background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
-            activeSequenceData.events.forEach(ev => {
-                html += `<p style="margin: 6px 0;">${ev.text}</p>`;
+        if (activeSequenceData && activeSequenceData.length > 0) {
+            activeSequenceData.forEach((seqSec, sIdx) => {
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、時序題排序</h2>`;
+                html += `<p><strong>${seqSec.intro}</strong></p>`;
+                
+                html += `<div style="background: #fafafa; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;" id="seq-box-${sIdx}">`;
+                seqSec.events.forEach(ev => {
+                    html += `<p style="margin: 6px 0;">${ev.text}</p>`;
+                });
+                html += `</div>`;
+
+                html += `<table class="sequence-table">
+                    <thead>
+                        <tr>`;
+                for (let i = 0; i < seqSec.correctOrder.length; i++) {
+                    html += `<th>第 ${i + 1} 步</th>`;
+                }
+                html += `</tr></thead><tbody><tr>`;
+                for (let i = 0; i < seqSec.correctOrder.length; i++) {
+                    const selectId = `seq-step-${sIdx}-${i}`;
+                    const optionsList = seqSec.events.map(ev => ev.key);
+                    html += `<td><select id="${selectId}" class="seq-select-${sIdx}" data-correct="${seqSec.correctOrder[i]}" onchange="updateSequenceOptions(${sIdx})">
+                        <option value="" disabled selected>-- 選擇 --</option>
+                        ${optionsList.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                    </select></td>`;
+                }
+                html += `</tr></tbody></table>`;
             });
-            html += `</div>`;
-            html += `<table class="sequence-table">
-                <thead>
-                    <tr>`;
-            for (let i = 0; i < activeSequenceData.correctOrder.length; i++) {
-                html += `<th>第 ${i + 1} 步</th>`;
-            }
-            html += `</tr></thead><tbody><tr>`;
-            for (let i = 0; i < activeSequenceData.correctOrder.length; i++) {
-                html += `<td><select id="seq-step-${i}" data-correct="${activeSequenceData.correctOrder[i]}" onchange="handleSequenceChange()">
-                    <option value="" disabled selected>-- 選擇 --</option>
-                    ${activeSequenceData.events.map(ev => `<option value="${ev.key}">${ev.key}</option>`).join('')}
-                </select></td>`;
-            }
-            html += `</tr></tbody></table>`;
         }
 
         container.innerHTML = html;
@@ -1310,9 +1302,9 @@
         }
     }
 
-    function handleSequenceChange() {
-        const selects = document.querySelectorAll('.sequence-table select');
-        const selectedValues = Array.from(selects).map(s => s.value).filter(val => val !== "");
+    function updateSequenceOptions(sIdx) {
+        const selects = document.querySelectorAll(`.seq-select-${sIdx}`);
+        const selectedValues = Array.from(selects).map(sel => sel.value).filter(val => val !== "");
 
         selects.forEach(sel => {
             const currentValue = sel.value;
@@ -1478,37 +1470,42 @@
             totalScoreText += `配對題：${matchCorrect}/${matchTotal}`;
         }
 
-        if (activeSequenceData) {
-            let seqTotal = activeSequenceData.correctOrder.length;
+        if (activeSequenceData && activeSequenceData.length > 0) {
+            let seqTotal = 0;
             let seqCorrect = 0;
-            let userSeqArr = [];
-            let correctSeqArr = activeSequenceData.correctOrder;
+            activeSequenceData.forEach((seqSec, sIdx) => {
+                let secAllCorrect = true;
+                let userSeqArr = [];
+                let correctSeqArr = seqSec.correctOrder;
 
-            for (let i = 0; i < seqTotal; i++) {
-                const sel = document.getElementById(`seq-step-${i}`);
-                userSeqArr.push(sel.value ? sel.value : '未選擇');
-                if (sel.value === sel.getAttribute('data-correct')) {
-                    seqCorrect++;
-                    sel.style.borderColor = "var(--correct-color)";
-                    sel.style.background = "#d4edda";
-                } else {
-                    sel.style.borderColor = "var(--incorrect-color)";
-                    sel.style.background = "#f8f7da";
+                for (let i = 0; i < correctSeqArr.length; i++) {
+                    seqTotal++;
+                    const sel = document.getElementById(`seq-step-${sIdx}-${i}`);
+                    let val = sel.value ? sel.value : '未選擇';
+                    userSeqArr.push(val);
+                    if (sel.value === sel.getAttribute('data-correct')) {
+                        seqCorrect++;
+                        sel.style.borderColor = "var(--correct-color)";
+                        sel.style.background = "#d4edda";
+                    } else {
+                        secAllCorrect = false;
+                        sel.style.borderColor = "var(--incorrect-color)";
+                        sel.style.background = "#f8f7da";
+                    }
                 }
-            }
 
-            if (seqCorrect !== seqTotal) {
-                newWrongItems.push({
-                    type: '時序題',
-                    question: '事件先後順序排序',
-                    yourAnswer: userSeqArr.join(' ➔ '),
-                    correctAnswer: correctSeqArr.join(' ➔ '),
-                    explanation: activeSequenceData.explanation
-                });
-            }
-
+                if (!secAllCorrect) {
+                    newWrongItems.push({
+                        type: '時序題',
+                        question: seqSec.intro,
+                        yourAnswer: userSeqArr.join(' ➔ '),
+                        correctAnswer: correctSeqArr.join(' ➔ '),
+                        explanation: seqSec.explanation
+                    });
+                }
+            });
             if (totalScoreText !== "") totalScoreText += " | ";
-            totalScoreText += `時序題：${seqCorrect}/${seqTotal}`;
+            totalScoreText += `時序題步數：${seqCorrect}/${seqTotal}`;
         }
 
         newWrongItems.forEach(newItem => {
