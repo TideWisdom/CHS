@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-HHK">
+<html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,6 @@
             position: relative;
         }
 
-        /* 頂部導航列與按鈕區塊 */
         header {
             text-align: center;
             margin-bottom: 15px;
@@ -228,7 +227,6 @@
             margin-right: 8px;
         }
 
-        /* 遊戲區域與錯題簿區域 */
         #quiz-section, #wrongbook-section {
             display: none;
         }
@@ -298,7 +296,6 @@
             display: block;
         }
 
-        /* 填充題樣式 */
         .drag-card {
             margin-bottom: 25px;
             padding: 15px;
@@ -376,7 +373,6 @@
             transform: scale(1.05);
         }
 
-        /* 配對與時序題樣式 */
         .matching-table, .sequence-table {
             width: 100%;
             border-collapse: collapse;
@@ -473,7 +469,6 @@
             </select>
         </div>
 
-        <!-- 選擇配對題時的子選項 -->
         <div class="config-group sub-config-group" id="sub-matching-group">
             <label for="matchingTypeSelect">請選擇配對題主題：</label>
             <select id="matchingTypeSelect">
@@ -497,7 +492,7 @@
                     <label>1.1 石器時代的概況</label>
                     <div class="topic-count-container mc-row">
                         <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="20">
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
                     </div>
                     <div class="topic-count-container drag-basic-row">
                         <span>基礎填充題：</span>
@@ -531,7 +526,7 @@
                     <label>2.1 炎帝與黃帝華夏族的始祖</label>
                     <div class="topic-count-container mc-row">
                         <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="25">
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
                     </div>
                     <div class="topic-count-container drag-basic-row">
                         <span>基礎填充題：</span>
@@ -546,7 +541,7 @@
                     <label>2.2 堯、舜、禹與禪讓政治</label>
                     <div class="topic-count-container mc-row">
                         <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="15">
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
                     </div>
                     <div class="topic-count-container drag-basic-row">
                         <span>基礎填充題：</span>
@@ -561,30 +556,29 @@
                     <label>2.3 夏、商、周的興替概況</label>
                     <div class="topic-count-container mc-row">
                         <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="25">
+                        <input type="number" class="topic-mc-qty" value="1" min="0" max="40">
                     </div>
                     <div class="topic-count-container drag-basic-row">
                         <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="5">
+                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="10">
                     </div>
                     <div class="topic-count-container drag-adv-row">
                         <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
+                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="10">
                     </div>
                 </div>
             </div>
 
-            <!-- 配對與時序題數量設定 -->
             <div class="extra-options-container" id="extra-qty-container">
                 <div class="section-title" style="margin-top: 0;">配對題與時序題設定</div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
                     <div class="topic-count-container matching-qty-row">
                         <span>配對題數量（組）：</span>
-                        <input type="number" id="matching-qty" value="1" min="0" max="4">
+                        <input type="number" id="matching-qty" value="1" min="0" max="8">
                     </div>
                     <div class="topic-count-container sequence-qty-row">
                         <span>時序題數量：</span>
-                        <input type="number" id="sequence-qty" value="1" min="0" max="4">
+                        <input type="number" id="sequence-qty" value="1" min="0" max="7">
                     </div>
                 </div>
             </div>
@@ -673,7 +667,7 @@
             { q: "除了仰韶和良渚文化外，中國新石器時代文化還包括黃河下游的什麼文化？", options: ["(A) 紅山文化", "(B) 石峽文化", "(C) 龍山文化", "(D) 二里頭文化"], answer: 2, explanation: "課文明確指出，中國新石器時代文化還包括黃河下游的「龍山文化」。" },
             { q: "東北地區的新石器時代文化代表是什麼？", options: ["(A) 仰韶文化", "(B) 良渚文化", "(C) 龍山文化", "(D) 紅山文化"], answer: 3, explanation: "課文提到東北地區的文化為「紅山文化」。" },
             { q: "珠江流域的新石器時代文化代表是什麼？", options: ["(A) 石峽文化", "(B) 良渚文化", "(C) 龍山文化", "(D) 紅山文化"], answer: 0, explanation: "課文指出珠江流域的文化為「石峽文化」。" },
-            { q: "中國不同地區的文化彼此交流融合後，形成了怎樣的中華文化？", options: ["(A) 完全單一而無特色的文化", "(B) 各具特色，而又渾然一體的中華文化", "(C) 僅存在於黃河流域的中華文化", "(D) 互不相容的多個獨立文化"], answer: 1, explanation: "課文指出最終形成「各具特色，而又渾然一體的中華文化」。" }
+            { q: "中國不同地區的文化彼此交流融合後，形成了怎樣的中華文化？", options: ["(A) 完全單一而無特色的文化", "(B) 各具特色，而又渾然一體的中華文化", "(C) 僅存在於黃河流域的中華文化", "(D) 互不相容的多個獨立文化"], answer: 1, explanation: "課文指出最終形成各具特色，而又渾然一體的中華文化。" }
         ],
         "2.1": [
             { q: "中國新石器時代初期，擁有相同祖先的人一起居住會組成什麼？", options: ["(A) 部落", "(B) 氏族", "(C) 國家", "(D) 聯盟"], answer: 1, explanation: "課文開頭明確指出，中國新石器時代初期，相同祖先的人一起居住，組成「氏族」。" },
@@ -717,7 +711,22 @@
             { q: "周原本是商朝的哪一個屬國？", options: ["(A) 東部屬國", "(B) 西部屬國", "(C) 南部屬國", "(D) 北部屬國"], answer: 1, explanation: "課文開頭明確指出，周原是商朝的西部屬國。" },
             { q: "周武王獲得哪一位賢臣的輔助，決心推翻紂王統治？", options: ["(A) 伊尹", "(B) 姜尚", "(C) 傅說", "(D) 管仲"], answer: 1, explanation: "課文指出傳到姬發（即周武王）時得到賢臣「姜尚」輔助。" },
             { q: "公元前1046年，商、周雙方在哪裡進行決戰？", options: ["(A) 鳴條", "(B) 涿鹿", "(C) 牧野", "(D) 殷都"], answer: 2, explanation: "課文記載公元前1046年，商、周雙方在「牧野」決戰。" },
-            { q: "周武王建立的周朝（公元前1046-前771年），史稱什麼？", options: ["(A) 東周", "(B) 西周", "(C) 北周", "(D) 南周"], answer: 1, explanation: "課文明確記載武王建立周朝，史稱「西周」." }
+            { q: "周武王建立的周朝（公元前1046-前771年），史稱什麼？", options: ["(A) 東周", "(B) 西周", "(C) 北周", "(D) 南周"], answer: 1, explanation: "課文明確記載武王建立周朝，史稱「西周」。" },
+            { q: "西周傳至哪位君王時開始走向亡國？", options: ["(A) 周平王", "(B) 周幽王", "(C) 周武王", "(D) 周成王"], answer: 1, explanation: "西周傳至周幽王時，因寵愛褒姒並廢后亂政，開始走向亡國。" },
+            { q: "周幽王寵愛哪位妃子？", options: ["(A) 申后", "(B) 褒姒", "(C) 妲己", "(D) 褒后"], answer: 1, explanation: "周幽王寵愛褒姒，引發了烽火戲諸侯等一連串亂政危機。" },
+            { q: "周幽王廢掉了誰的后位和太子之位？（選出正確組合）", options: ["(A) 褒姒與宜臼", "(B) 申后與褒姒", "(C) 申后與太子宜臼", "(D) 褒后與太子宜臼"], answer: 2, explanation: "周幽王廢掉了申后的后位以及太子宜臼。" },
+            { q: "申后的父親是什麼身份？", options: ["(A) 申侯", "(B) 幽王", "(C) 平王", "(D) 犬戎首領"], answer: 0, explanation: "申后的父親為申侯。" },
+            { q: "申侯聯合了哪一股勢力攻打周幽王？", options: ["(A) 東夷", "(B) 南蠻", "(C) 西北犬戎", "(D) 北狄"], answer: 2, explanation: "申侯因女兒被廢心生不滿，便聯合西北犬戎攻打周幽王。" },
+            { q: "申侯聯合西北犬戎攻打周幽王發生在公元前哪一年？", options: ["(A) 公元前770年", "(B) 公元前771年", "(C) 公元前256年", "(D) 公元前772年"], answer: 1, explanation: "申侯聯合犬戎攻打鎬京並殺死周幽王發生在公元前771年。" },
+            { q: "西周都城鎬京陷落時的結果是什麼？", options: ["(A) 周幽王被殺，西周滅亡", "(B) 周平王即位，遷都洛邑", "(C) 諸侯擁立宜臼為王", "(D) 西周開始進入春秋時期"], answer: 0, explanation: "鎬京陷落後，周幽王被犬戎所殺，西周滅亡。" },
+            { q: "西周的國祚（存續時間）共多少年？", options: ["(A) 二百五十七年", "(B) 二百七十五年", "(C) 五百一十五年", "(D) 五百五十年"], answer: 1, explanation: "西周自公元前1046年至前771年，國祚共二百七十五年。" },
+            { q: "西周結束後，部分諸侯擁立誰為王？", options: ["(A) 申侯", "(B) 褒姒", "(C) 宜臼", "(D) 秦王"], answer: 2, explanation: "西周滅亡後，諸侯擁立原太子宜臼為王。" },
+            { q: "被擁立為王的宜臼，史稱為什麼？", options: ["(A) 周幽王", "(B) 周平王", "(C) 周武王", "(D) 周成王"], answer: 1, explanation: "被擁立為王的宜臼史稱周平王。" },
+            { q: "周平王把都城東遷至哪裡？", options: ["(A) 鎬京", "(B) 洛邑", "(C) 咸陽", "(D) 長安"], answer: 1, explanation: "周平王為了避開犬戎威脅，將都城東遷至洛邑。" },
+            { q: "周平王東遷發生在公元前哪一年？", options: ["(A) 公元前771年", "(B) 公元前770年", "(C) 公元前256年", "(D) 公元前775年"], answer: 1, explanation: "周平王東遷洛邑發生在公元前770年。" },
+            { q: "周平王東遷後的周朝被稱為甚麼？", options: ["(A) 西周", "(B) 東周", "(C) 南周", "(D) 北周"], answer: 1, explanation: "東遷洛邑後的周朝史稱東周。" },
+            { q: "東周當中可再分為哪兩個時期？", options: ["(A) 夏、商", "(B) 春秋、戰國", "(C) 西周、東周", "(D) 秦、漢"], answer: 1, explanation: "東周歷史可再細分為春秋和戰國兩個時期。" },
+            { q: "東周於公元前256年為哪一個國家所滅？", options: ["(A) 楚國", "(B) 齊國", "(C) 晉國", "(D) 秦國"], answer: 3, explanation: "東周最終於公元前256年為秦國所滅。" }
         ]
     };
 
@@ -740,7 +749,9 @@
         ],
         "2.3": [
             { text: "禹接受舜的禪讓建立夏朝。禹死後，共主之位由兒子 <span class='dropzone' data-answer='啟'>請點選填入</span> 及其子孫世代相承，從此 <span class='dropzone' data-answer='世襲制度'>請點選填入</span> 取代了禪讓制度。", words: ["啟", "世襲制度"] },
-            { text: "商湯聯合各部落在 <span class='dropzone' data-answer='鳴條'>請點選填入</span> 大敗夏桀，建立商朝並定都於 <span class='dropzone' data-answer='亳'>請點選填入</span> 。考古學者在 <span class='dropzone' data-answer='殷都遺址'>請點選填入</span> 發現中國現存最早的文字—— <span class='dropzone' data-answer='甲骨文'>請點選填入</span> 。", words: ["鳴條", "亳", "殷都遺址", "甲骨文"] }
+            { text: "商湯聯合各部落在 <span class='dropzone' data-answer='鳴條'>請點選填入</span> 大敗夏桀，建立商朝並定都於 <span class='dropzone' data-answer='亳'>請點選填入</span> 。考古學者在 <span class='dropzone' data-answer='殷都遺址'>請點選填入</span> 發現中國現存最早的文字—— <span class='dropzone' data-answer='甲骨文'>請點選填入</span> 。", words: ["鳴條", "亳", "殷都遺址", "甲骨文"] },
+            { text: "西周傳至 <span class='dropzone' data-answer='幽王'>請點選填入</span> 時，寵愛妃子 <span class='dropzone' data-answer='褒姒'>請點選填入</span> ，廢掉 <span class='dropzone' data-answer='申后'>請點選填入</span> 和太子 <span class='dropzone' data-answer='宜臼'>請點選填入</span> 。公元前771年，申后父親 <span class='dropzone' data-answer='申侯'>請點選填入</span> 聯合 <span class='dropzone' data-answer='西北犬戎'>請點選填入</span> 攻打幽王。結果 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 陷落， <span class='dropzone' data-answer='幽王'>請點選填入</span> 被殺， <span class='dropzone' data-answer='西周'>請點選填入</span> 滅亡，國祚共 <span class='dropzone' data-answer='二百七十五年'>請點選填入</span> 。", words: ["幽王", "褒姒", "申后", "宜臼", "申侯", "西北犬戎", "鎬京", "西周", "二百七十五年"] },
+            { text: "西周結束後，部分諸侯擁立 <span class='dropzone' data-answer='宜臼'>請點選填入</span> ，是為 <span class='dropzone' data-answer='周平王'>請點選填入</span> 。這時 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 因 <span class='dropzone' data-answer='戰亂'>請點選填入</span> 變得 <span class='dropzone' data-answer='殘破'>請點選填入</span> ，平王遂於公元前770年把 <span class='dropzone' data-answer='都城東遷'>請點選填入</span> <span class='dropzone' data-answer='洛邑'>請點選填入</span> ，史稱「 <span class='dropzone' data-answer='平王東遷'>請點選填入</span> 」。平王東遷後的周朝被稱為 <span class='dropzone' data-answer='東周'>請點選填入</span> ，當中可再分為 <span class='dropzone' data-answer='春秋'>請點選填入</span> 、 <span class='dropzone' data-answer='戰國'>請點選填入</span> 兩個時期。公元前256年，東周為 <span class='dropzone' data-answer='秦國'>請點選填入</span> 所滅，國祚共 <span class='dropzone' data-answer='五百一十五年'>請點選填入</span> 。", words: ["宜臼", "周平王", "鎬京", "戰亂", "殘破", "都城東遷", "洛邑", "平王東遷", "東周", "春秋", "戰國", "秦國", "五百一十五年"] }
         ]
     };
 
@@ -749,13 +760,15 @@
             { text: "大約一百七十萬年前至四千年前為 <span class='dropzone' data-answer='石器時代'>請點選填入</span> 。舊石器時代有 <span class='dropzone' data-answer='北京人'>請點選填入</span> 等，新石器時代懂得磨製石器、以 <span class='dropzone' data-answer='農業、畜牧業'>請點選填入</span> 為生。中華文明起源是 <span class='dropzone' data-answer='多元'>請點選填入</span> 的。", words: ["石器時代", "北京人", "農業、畜牧業", "多元"] }
         ],
         "2_adv": [
-            { text: "黃帝合併炎帝、在 <span class='dropzone' data-answer='涿鹿'>請點選填入</span> 打敗蚩尤形成華夏族。夏朝被 <span class='dropzone' data-answer='商'>請點選填入</span> 推翻，商朝被 <span class='dropzone' data-answer='周'>請點選填入</span> 推翻，均以貴族身分改朝換代被視為貴族革命。", words: ["涿鹿", "商", "周"] }
+            { text: "黃帝合併炎帝、在 <span class='dropzone' data-answer='涿鹿'>請點選填入</span> 打敗蚩尤形成華夏族。夏朝被 <span class='dropzone' data-answer='商'>請點選填入</span> 推翻，商朝被 <span class='dropzone' data-answer='周'>請點選填入</span> 推翻，均以貴族身分改朝換代被視為貴族革命。", words: ["涿鹿", "商", "周"] },
+            { text: "西周傳至 <span class='dropzone' data-answer='幽王'>請點選填入</span> 時，寵愛妃子 <span class='dropzone' data-answer='褒姒'>請點選填入</span> ，廢掉 <span class='dropzone' data-answer='申后'>請點選填入</span> 和太子 <span class='dropzone' data-answer='宜臼'>請點選填入</span> 。公元前771年，申后父親 <span class='dropzone' data-answer='申侯'>請點選填入</span> 聯合 <span class='dropzone' data-answer='西北犬戎'>請點選填入</span> 攻打幽王。結果 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 陷落， <span class='dropzone' data-answer='幽王'>請點選填入</span> 被殺， <span class='dropzone' data-answer='西周'>請點選填入</span> 滅亡，國祚共 <span class='dropzone' data-answer='二百七十五年'>請點選填入</span> 。", words: ["幽王", "褒姒", "申后", "宜臼", "申侯", "西北犬戎", "鎬京", "西周", "二百七十五年"] },
+            { text: "西周結束後，部分諸侯擁立 <span class='dropzone' data-answer='宜臼'>請點選填入</span> ，是為 <span class='dropzone' data-answer='周平王'>請點選填入</span> 。這時 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 因 <span class='dropzone' data-answer='戰亂'>請點選填入</span> 變得 <span class='dropzone' data-answer='殘破'>請點選填入</span> ，平王遂於公元前770年把 <span class='dropzone' data-answer='都城東遷'>請點選填入</span> <span class='dropzone' data-answer='洛邑'>請點選填入</span> ，史稱「 <span class='dropzone' data-answer='平王東遷'>請點選填入</span> 」。平王東遷後的周朝被稱為 <span class='dropzone' data-answer='東周'>請點選填入</span> ，當中可再分為 <span class='dropzone' data-answer='春秋'>請點選填入</span> 、 <span class='dropzone' data-answer='戰國'>請點選填入</span> 兩個時期。公元前256年，東周為 <span class='dropzone' data-answer='秦國'>請點選填入</span> 所滅，國祚共 <span class='dropzone' data-answer='五百一十五年'>請點選填入</span> 。", words: ["宜臼", "周平王", "鎬京", "戰亂", "殘破", "都城東遷", "洛邑", "平王東遷", "東周", "春秋", "戰國", "秦國", "五百一十五年"] }
         ]
     };
 
     const matchingDatabase = {
         person: {
-            title: "一、人物配對題（第一部分）",
+            title: "一、人物配對題（第一部分：遠古至五帝）",
             intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
             items: [
                 { id: 1, label: "1. 元謀人、北京人", target: "C", desc: "舊石器時代古人類，懂得打製石器與用火。" },
@@ -763,61 +776,79 @@
                 { id: 3, label: "3. 黃帝", target: "A", desc: "華夏部落聯盟首領，擊敗炎、蚩，被推為共主。" },
                 { id: 4, label: "4. 蚩尤", target: "B", desc: "與黃帝戰敗後，部落被其融合。" },
                 { id: 5, label: "5. 顓頊", target: "F", desc: "五帝之一。" },
-                { id: 6, label: "6. 堯", target: "E", desc: "堯之繼位人。" }
+                { id: 6, label: "6. 堯", target: "E", desc: "堯之繼位人（或禪讓天下予舜）。" }
             ],
             options: [
                 { code: "A", text: "A. 華夏部落聯盟首領，擊敗炎、蚩，被推為共主。" },
                 { code: "B", text: "B. 與黃帝戰敗後，部落被其融合。" },
                 { code: "C", text: "C. 舊石器時代古人類，懂得打製石器與用火。" },
                 { code: "D", text: "D. 教人農耕、嚐百草。" },
-                { code: "E", text: "E. 堯之繼位人。" },
+                { code: "E", text: "E. 晚年以孝順賢能的舜為繼位人。" },
                 { code: "F", text: "F. 五帝之一。" }
             ]
         },
         person2: {
-            title: "二、人物配對題（第二部分）",
+            title: "二、人物配對題（第二部分：夏商建立與暴君）",
             intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
             items: [
-                { id: 1, label: "1. 舜", target: "D", desc: "由堯禪讓繼位並派禹治水。" },
-                { id: 2, label: "2. 禹（夏啟之父）", target: "F", desc: "治水有功，接受禪讓建立夏朝。" },
-                { id: 3, label: "3. 啟", target: "E", desc: "禹之子，開創世襲制度。" },
-                { id: 4, label: "4. 桀", target: "A", desc: "夏朝末代暴君，荒政虐民被推翻。" },
-                { id: 5, label: "5. 伊尹", target: "B", desc: "輔助商湯的賢臣。" },
-                { id: 6, label: "6. 湯", target: "C", desc: "商朝開國君主，建立「貴族革命」。" },
-                { id: 7, label: "7. 嚳", target: "G", desc: "五帝之一。" }
+                { id: 1, label: "1. 禹", target: "C", desc: "接受舜的禪讓建立夏朝，死後由兒子世襲。" },
+                { id: 2, label: "2. 啟", target: "D", desc: "禹之子，他的繼位標誌著世襲制度取代了禪讓制度。" },
+                { id: 3, label: "3. 桀", target: "B", desc: "夏朝最後一個國君，荒廢政事且以虐待民眾為樂。" },
+                { id: 4, label: "4. 妹喜", target: "F", desc: "夏桀的妃子，與桀一同飲酒作樂。" },
+                { id: 5, label: "5. 伊尹", target: "A", desc: "輔助商湯的賢臣，使商朝日益強盛。" },
+                { id: 6, label: "6. 湯", target: "E", desc: "商朝開國君主，在鳴條大敗桀的軍隊。" }
             ],
             options: [
-                { code: "A", text: "A. 夏朝末代暴君，荒政虐民被推翻。" },
-                { code: "B", text: "B. 輔助商湯的賢臣。" },
-                { code: "C", text: "C. 商朝開國君主，建立「貴族革命」。" },
-                { code: "D", text: "D. 由堯禪讓繼位並派禹治水。" },
-                { code: "E", text: "E. 禹之子，開創世襲制度。" },
-                { code: "F", text: "F. 治水有功，接受禪讓建立夏朝。" },
-                { code: "G", text: "G. 五帝之一。" }
+                { code: "A", text: "A. 輔助商湯的賢臣，使商朝日益強盛。" },
+                { code: "B", text: "B. 夏朝最後一個國君，荒廢政事且以虐待民眾為樂。" },
+                { code: "C", text: "C. 接受舜的禪讓建立夏朝，死後由兒子世襲。" },
+                { code: "D", text: "D. 禹之子，他的繼位標誌著世襲制度取代了禪讓制度。" },
+                { code: "E", text: "E. 商朝開國君主，在鳴條大敗桀的軍隊。" },
+                { code: "F", text: "F. 夏桀的妃子，與桀一同飲酒作樂。" }
             ]
         },
         person3: {
-            title: "三、人物配對題（第三部分）",
+            title: "三、人物配對題（第三部分：商末周初與暴君）",
             intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
             items: [
-                { id: 1, label: "1. 湯", target: "B", desc: "商朝開國君主。" },
-                { id: 2, label: "2. 妹喜", target: "D", desc: "夏桀的妃子。" },
-                { id: 3, label: "3. 紂王", target: "E", desc: "商朝末代暴君。" },
-                { id: 4, label: "4. 妲己", target: "F", desc: "商紂王的寵妃。" },
-                { id: 5, label: "5. 姜尚", target: "C", desc: "輔助周武王的賢臣。" },
-                { id: 6, label: "6. 姬發", target: "A", desc: "周朝開國君主。" }
+                { id: 1, label: "1. 紂王", target: "C", desc: "商朝末代國君，沉迷酒色且設立炮烙等酷刑。" },
+                { id: 2, label: "2. 妲己", target: "E", desc: "紂王的寵妃，讓紂王動用民力修築奢華的鹿台。" },
+                { id: 3, label: "3. 姬發（周武王）", target: "G", desc: "建立西周的開國君主，在牧野決戰中滅商。" },
+                { id: 4, label: "4. 姜尚", target: "B", desc: "輔助周武王的賢臣，協助推翻商朝。" },
+                { id: 5, label: "5. 周幽王", target: "A", desc: "寵愛妃子並廢掉申后與太子，最終在鎬京被犬戎所殺。" },
+                { id: 6, label: "6. 褒姒", target: "F", desc: "周幽王的寵妃，其被寵愛引發了西周的亡國危機。" },
+                { id: 7, label: "7. 周平王", target: "D", desc: "東遷洛邑建立東周的周朝君主。" }
             ],
             options: [
-                { code: "A", text: "A. 周朝開國君主。" },
-                { code: "B", text: "B. 商朝開國君主。" },
-                { code: "C", text: "C. 輔助周武王的賢臣。" },
-                { code: "D", text: "D. 夏桀的妃子。" },
-                { code: "E", text: "E. 商朝末代暴君。" },
-                { code: "F", text: "F. 商紂王的寵妃。" }
+                { code: "A", text: "A. 寵愛妃子並廢掉申后與太子，最終在鎬京被犬戎所殺。" },
+                { code: "B", text: "B. 輔助周武王的賢臣，協助推翻商朝。" },
+                { code: "C", text: "C. 商朝末代國君，沉迷酒色且設立炮烙等酷刑。" },
+                { code: "D", text: "D. 東遷洛邑建立東周的周朝君主。" },
+                { code: "E", text: "E. 紂王的寵妃，讓紂王動用民力修築奢華的鹿台。" },
+                { code: "F", text: "F. 周幽王的寵妃，其被寵愛引發了西周的亡國危機。" },
+                { code: "G", text: "G. 建立西周的開國君主，在牧野決戰中滅商。" }
+            ]
+        },
+        person4: {
+            title: "四、人物配對題（第四部分：幽王烽火與申后申侯）",
+            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
+            items: [
+                { id: 1, label: "1. 周幽王", target: "B", desc: "寵愛妃子並亂政，最終在鎬京被犬戎所殺。" },
+                { id: 2, label: "2. 褒姒", target: "E", desc: "周幽王的寵妃，其受寵引發了西周的亡國危機。" },
+                { id: 3, label: "3. 申后", target: "A", desc: "被周幽王廢掉后位的申國之女。" },
+                { id: 4, label: "4. 申侯", target: "C", desc: "申后的父親，聯合西北犬戎攻打幽王。" },
+                { id: 5, label: "5. 周平王（宜臼）", target: "D", desc: "東遷洛邑建立東周的周朝君主（原為太子）。" }
+            ],
+            options: [
+                { code: "A", text: "A. 被周幽王廢掉后位的申國之女。" },
+                { code: "B", text: "B. 寵愛妃子並亂政，最終在鎬京被犬戎所殺。" },
+                { code: "C", text: "C. 申后的父親，聯合西北犬戎攻打幽王。" },
+                { code: "D", text: "D. 東遷洛邑建立東周的周朝君主（原為太子）。" },
+                { code: "E", text: "E. 周幽王的寵妃，其受寵引發了西周的亡國危機。" }
             ]
         },
         geo: {
-            title: "四、地理與文化遺跡配對題",
+            title: "五、地理與文化遺跡配對題",
             intro: "請將下列文化遺址或歷史地點與其對應特點進行配對：",
             items: [
                 { id: 1, label: "1. 仰韶文化", target: "A", desc: "黃河中上游的彩陶文化" },
@@ -888,6 +919,46 @@
             ],
             correctOrder: ["B", "C", "D", "A", "E"],
             explanation: "正確順序： 商湯在鳴條大敗桀的軍隊 ➔ 商定都於亳 ➔ 商、周雙方在牧野決戰 ➔ 紂王自焚而死 ➔ 周定都於鎬京"
+        },
+        {
+            intro: "請將下列夏商周朝代興替及重要歷史事件按發生的先後次序排列（由先至後）：",
+            events: [
+                { key: "A", text: "A. 周平王東遷洛邑，東周開始" },
+                { key: "B", text: "B. 禹接受舜的禪讓，夏朝建立" },
+                { key: "C", text: "C. 牧野之戰爆發，周武王滅商建立西周" },
+                { key: "D", text: "D. 申侯聯合犬戎攻打周幽王，西周滅亡" },
+                { key: "E", text: "E. 鳴條之戰爆發，商湯滅夏建立商朝" },
+                { key: "F", text: "F. 東周為秦國所滅" },
+                { key: "G", text: "G. 夏朝被商推翻（夏桀亡國）" }
+            ],
+            correctOrder: ["B", "G", "E", "C", "D", "A", "F"],
+            explanation: "正確順序： 禹接受舜的禪讓，夏朝建立 ➔ 夏朝被商推翻（夏桀亡國） ➔ 鳴條之戰爆發，商湯滅夏建立商朝 ➔ 牧野之戰爆發，周武王滅商建立西周 ➔ 申侯聯合犬戎攻打周幽王，西周滅亡 ➔ 周平王東遷洛邑，東周開始 ➔ 東周為秦國所滅"
+        },
+        {
+            intro: "請判斷以下關於課文中各朝代和事件發生時間的敘述，正確的請選擇「正確」，錯誤的請選擇「錯誤」：",
+            events: [
+                { key: "A", text: "A. 禹建立夏朝的時間大約在公元前2070年至約前1600年之間。" },
+                { key: "B", text: "B. 商朝立國的時間大約在公元前1600年至前1046年之間。" },
+                { key: "C", text: "C. 周武王建立西周（史稱西周）的確切年份是公元前1046年。" },
+                { key: "D", text: "D. 西周滅亡的年份是公元前771年，國祚共二百七十五年。" },
+                { key: "E", text: "E. 周平王東遷洛邑的年份是公元前770年。" },
+                { key: "F", text: "F. 東周最終於公元前256年為秦國所滅，國祚共五百一十五年。" }
+            ],
+            correctOrder: ["A", "B", "C", "D", "E", "F"],
+            explanation: "上述關於夏商周時期各重要紀年與國祚的敘述皆正確無誤。"
+        },
+        {
+            intro: "請根據課文提供的公元前紀年，將下列年份或時間段由「年代最早（距離現代最遠）」至「年代最晚（距離現代最近）」順序排列：",
+            events: [
+                { key: "A", text: "A. 約公元前2070年至約前1600年（夏朝建立與存續期間）" },
+                { key: "B", text: "B. 公元前770年（平王東遷）" },
+                { key: "C", text: "C. 公元前1046年至前771年（西周存續期間）" },
+                { key: "D", text: "D. 約公元前1600年至前1046年（商朝建立與存續期間）" },
+                { key: "E", text: "E. 公元前256年（東周滅亡）" },
+                { key: "F", text: "F. 公元前771年（西周滅亡）" }
+            ],
+            correctOrder: ["A", "D", "C", "F", "B", "E"],
+            explanation: "正確順序： A (約前2070-前1600) ➔ D (約前1600-前1046) ➔ C (前1046-前771) ➔ F (前771) ➔ B (前770) ➔ E (前256)"
         }
     ];
 
@@ -1126,7 +1197,7 @@
             activeMatchingData = [];
             let mCount = parseInt(document.getElementById('matching-qty').value) || 1;
             if (mCount > 0) {
-                let allPersons = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3];
+                let allPersons = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4];
                 if (matchingType === 'person') {
                     for (let i = 0; i < Math.min(mCount, allPersons.length); i++) {
                         activeMatchingData.push(allPersons[i]);
@@ -1134,7 +1205,7 @@
                 } else if (matchingType === 'geo') {
                     activeMatchingData.push(matchingDatabase.geo);
                 } else if (matchingType === 'both') {
-                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.geo];
+                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4, matchingDatabase.geo];
                     for (let i = 0; i < Math.min(mCount, combined.length); i++) {
                         activeMatchingData.push(combined[i]);
                     }
@@ -1195,7 +1266,7 @@
                 let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
                 let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
                 if (mCount > 0) {
-                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.geo];
+                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4, matchingDatabase.geo];
                     activeMatchingData = [];
                     for (let i = 0; i < Math.min(mCount, combined.length); i++) {
                         activeMatchingData.push(combined[i]);
@@ -1264,7 +1335,7 @@
 
         if (activeMatchingData && activeMatchingData.length > 0) {
             activeMatchingData.forEach((matchSec, sIdx) => {
-                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四、]+/, '')}</h2>`;
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四五、]+/, '')}</h2>`;
                 html += `<p><strong>${matchSec.intro}</strong></p>`;
                 
                 html += `<div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
@@ -1315,9 +1386,11 @@
                 html += `</tr></thead><tbody><tr>`;
                 for (let i = 0; i < seqSec.correctOrder.length; i++) {
                     const selectId = `seq-step-${sIdx}-${i}`;
+                    const isT_F = seqSec.events[0].text.includes("正確的請選擇") || seqSec.events[0].text.includes("正確的請寫");
+                    const optionsList = isT_F ? ["正確", "錯誤"] : seqSec.events.map(ev => ev.key);
                     html += `<td><select id="${selectId}" class="seq-select-${sIdx}" data-correct="${seqSec.correctOrder[i]}" onchange="updateSequenceOptions(${sIdx})">
                         <option value="" disabled selected>-- 選擇 --</option>
-                        ${seqSec.events.map(ev => `<option value="${ev.key}">${ev.key}</option>`).join('')}
+                        ${optionsList.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
                     </select></td>`;
                 }
                 html += `</tr></tbody></table>`;
@@ -1340,6 +1413,7 @@
             const currentValue = sel.value;
             Array.from(sel.options).forEach(opt => {
                 if (opt.value === "") return;
+                if (opt.value === "正確" || opt.value === "錯誤") return;
                 if (selectedValues.includes(opt.value) && opt.value !== currentValue) {
                     opt.disabled = true;
                 } else {
