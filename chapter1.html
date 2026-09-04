@@ -105,13 +105,13 @@
             font-size: 16px;
             font-weight: bold;
             color: var(--primary-color);
-            margin: 20px 0 10px 0;
+            margin: 15px 0 10px 0;
             padding-bottom: 5px;
             border-bottom: 2px solid #cbd5e1;
         }
 
         .config-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .config-group label {
@@ -120,13 +120,14 @@
             margin-bottom: 8px;
         }
 
-        .config-group select {
+        .config-group select, .config-group input[type="number"], .config-group input[type="text"] {
             width: 100%;
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #cbd5e1;
             font-size: 16px;
             background: #fff;
+            box-sizing: border-box;
         }
 
         .sub-config-group {
@@ -138,57 +139,83 @@
             margin-top: 10px;
         }
 
-        .options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
+        .topics-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             background: #f8fafc;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
-            margin-bottom: 15px;
         }
 
-        .topic-card {
-            background: white;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
+        .topics-checkbox-group label {
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .topic-card label {
-            font-weight: bold;
-            color: var(--primary-color);
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 0;
             font-size: 15px;
         }
 
-        .topic-count-container {
+        .topics-checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .topics-actions-row {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 4px;
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .topic-count-container input[type="number"] {
-            width: 65px;
-            padding: 4px;
-            border-radius: 4px;
-            border: 1px solid #cbd5e1;
-            text-align: center;
-            font-size: 14px;
+        .max-limit-info {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
         }
 
-        .extra-options-container {
+        .comprehensive-config-box {
+            display: none;
             background: #f1f5f9;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #cbd5e1;
             margin-top: 15px;
+        }
+
+        .comp-topic-row {
+            background: #fff;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 10px;
+        }
+
+        .comp-topic-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .comp-inputs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .comp-input-field label {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 3px;
+        }
+
+        .comp-input-field input {
+            padding: 6px;
+            font-size: 14px;
         }
 
         .btn-action {
@@ -203,7 +230,7 @@
             transition: background 0.2s;
             display: block;
             width: 100%;
-            margin-top: 15px;
+            margin-top: 25px;
         }
 
         .btn-action:hover {
@@ -478,110 +505,35 @@
             </select>
         </div>
 
-        <div id="topic-config-container">
-            <h2>第二步：設定各課題出題數量</h2>
-            <div style="margin-bottom: 15px;" id="bulk-btns">
-                <button type="button" class="btn-action btn-small" onclick="setAllCounts(1)">全設為 1 題</button>
-                <button type="button" class="btn-action btn-small btn-secondary" onclick="setAllCounts(0)">全部清零 (0)</button>
-                <button type="button" class="btn-action btn-small" style="background-color: #27ae60;" onclick="randomizeCounts()">一鍵隨機數量</button>
+        <h2 id="step2-title">第二步：選擇溫習課題與設定總題數</h2>
+        
+        <div class="config-group" id="topics-group-container">
+            <label>請選擇參與溫習的課題（可多選）：</label>
+            <div class="topics-checkbox-group" id="topics-checkbox-container">
+                <label><input type="checkbox" name="topic-chk" value="1.1" onchange="handleTopicCheckboxChange()"> 1.1 石器時代的概況</label>
+                <label><input type="checkbox" name="topic-chk" value="1.2" onchange="handleTopicCheckboxChange()"> 1.2 多元一體文化的起源與形成</label>
+                <label><input type="checkbox" name="topic-chk" value="2.1" onchange="handleTopicCheckboxChange()"> 2.1 炎帝與黃帝華夏族的始祖</label>
+                <label><input type="checkbox" name="topic-chk" value="2.2" onchange="handleTopicCheckboxChange()"> 2.2 堯、舜、禹與禪讓政治</label>
+                <label><input type="checkbox" name="topic-chk" value="2.3" onchange="handleTopicCheckboxChange()"> 2.3 夏、商、周的興替概況</label>
             </div>
+            <div class="topics-actions-row">
+                <button type="button" class="btn-action btn-small" onclick="toggleSelectAllTopics(true)">選擇全部</button>
+                <button type="button" class="btn-action btn-small btn-secondary" onclick="toggleSelectAllTopics(false)">取消全選</button>
+            </div>
+        </div>
 
-            <div class="section-title">第1節 中國多元一體文化的起源</div>
-            <div class="options-grid">
-                <div class="topic-card" data-topic="1.1">
-                    <label>1.1 石器時代的概況</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="4">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="1.2">
-                    <label>1.2 多元一體文化的起源與形成</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="6">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
-                    </div>
-                </div>
-            </div>
+        <div class="config-group" id="total-qty-group">
+            <label for="target-total-qty">目標總題數：</label>
+            <input type="text" id="target-total-qty" value="10" oninput="validateTotalQty(this)">
+            <button type="button" class="btn-action btn-small" style="margin-top: 8px; background-color: #2980b9;" onclick="selectAllQuestionsMax()">選擇全部題目</button>
+            <div class="max-limit-info" id="max-limit-info-text">目前所選課題的題庫總上限：計算中...</div>
+        </div>
 
-            <div class="section-title">第2節 中華民族與早期國家的形成</div>
-            <div class="options-grid">
-                <div class="topic-card" data-topic="2.1">
-                    <label>2.1 炎帝與黃帝華夏族的始祖</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="5">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="2">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="2.2">
-                    <label>2.2 堯、舜、禹與禪讓政治</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="30">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="3">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="1">
-                    </div>
-                </div>
-                <div class="topic-card" data-topic="2.3">
-                    <label>2.3 夏、商、周的興替概況</label>
-                    <div class="topic-count-container mc-row">
-                        <span>選擇題數量：</span>
-                        <input type="number" class="topic-mc-qty" value="1" min="0" max="40">
-                    </div>
-                    <div class="topic-count-container drag-basic-row">
-                        <span>基礎填充題：</span>
-                        <input type="number" class="topic-drag-basic-qty" value="1" min="0" max="10">
-                    </div>
-                    <div class="topic-count-container drag-adv-row">
-                        <span>進階填充題：</span>
-                        <input type="number" class="topic-drag-adv-qty" value="0" min="0" max="10">
-                    </div>
-                </div>
-            </div>
-
-            <div class="extra-options-container" id="extra-qty-container">
-                <div class="section-title" style="margin-top: 0;">配對題與時序題設定</div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-                    <div class="topic-count-container matching-qty-row">
-                        <span>配對題數量（組）：</span>
-                        <input type="number" id="matching-qty" value="1" min="0" max="8">
-                    </div>
-                    <div class="topic-count-container sequence-qty-row">
-                        <span>時序題數量：</span>
-                        <input type="number" id="sequence-qty" value="1" min="0" max="7">
-                    </div>
-                </div>
-            </div>
+        <!-- 綜合練習自訂數量面板 -->
+        <div class="comprehensive-config-box" id="comprehensive-box">
+            <p style="margin-top: 0; font-weight: bold; color: var(--primary-color);">【綜合練習進階設定】</p>
+            <p style="font-size: 13px; color: #555; margin-bottom: 12px;">註：綜合練習中的配對題與時序題將各自固定隨機出 1 題。請設定您想練習的選擇題與填充題數量：</p>
+            <div id="comp-topics-config-container"></div>
         </div>
 
         <button class="btn-action" onclick="startQuiz()" style="margin-top: 25px; font-size: 18px; padding: 15px;">生成測驗</button>
@@ -616,9 +568,7 @@
         "1.2": "1.2 多元一體文化的起源與形成",
         "2.1": "2.1 炎帝與黃帝華夏族的始祖",
         "2.2": "2.2 堯、舜、禹與禪讓政治",
-        "2.3": "2.3 夏、商、周的興替概況",
-        "1_adv": "第1節綜合填充",
-        "2_adv": "第2節綜合填充"
+        "2.3": "2.3 夏、商、周的興替概況"
     };
 
     const mcDatabase = {
@@ -749,20 +699,7 @@
         ],
         "2.3": [
             { text: "禹接受舜的禪讓建立夏朝。禹死後，共主之位由兒子 <span class='dropzone' data-answer='啟'>請點選填入</span> 及其子孫世代相承，從此 <span class='dropzone' data-answer='世襲制度'>請點選填入</span> 取代了禪讓制度。", words: ["啟", "世襲制度"] },
-            { text: "商湯聯合各部落在 <span class='dropzone' data-answer='鳴條'>請點選填入</span> 大敗夏桀，建立商朝並定都於 <span class='dropzone' data-answer='亳'>請點選填入</span> 。考古學者在 <span class='dropzone' data-answer='殷都遺址'>請點選填入</span> 發現中國現存最早的文字—— <span class='dropzone' data-answer='甲骨文'>請點選填入</span> 。", words: ["鳴條", "亳", "殷都遺址", "甲骨文"] },
-            { text: "西周傳至 <span class='dropzone' data-answer='幽王'>請點選填入</span> 時，寵愛妃子 <span class='dropzone' data-answer='褒姒'>請點選填入</span> ，廢掉 <span class='dropzone' data-answer='申后'>請點選填入</span> 和太子 <span class='dropzone' data-answer='宜臼'>請點選填入</span> 。公元前771年，申后父親 <span class='dropzone' data-answer='申侯'>請點選填入</span> 聯合 <span class='dropzone' data-answer='西北犬戎'>請點選填入</span> 攻打幽王。結果 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 陷落， <span class='dropzone' data-answer='幽王'>請點選填入</span> 被殺， <span class='dropzone' data-answer='西周'>請點選填入</span> 滅亡，國祚共 <span class='dropzone' data-answer='二百七十五年'>請點選填入</span> 。", words: ["幽王", "褒姒", "申后", "宜臼", "申侯", "西北犬戎", "鎬京", "西周", "二百七十五年"] },
-            { text: "西周結束後，部分諸侯擁立 <span class='dropzone' data-answer='宜臼'>請點選填入</span> ，是為 <span class='dropzone' data-answer='周平王'>請點選填入</span> 。這時 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 因 <span class='dropzone' data-answer='戰亂'>請點選填入</span> 變得 <span class='dropzone' data-answer='殘破'>請點選填入</span> ，平王遂於公元前770年把 <span class='dropzone' data-answer='都城東遷'>請點選填入</span> <span class='dropzone' data-answer='洛邑'>請點選填入</span> ，史稱「 <span class='dropzone' data-answer='平王東遷'>請點選填入</span> 」。平王東遷後的周朝被稱為 <span class='dropzone' data-answer='東周'>請點選填入</span> ，當中可再分為 <span class='dropzone' data-answer='春秋'>請點選填入</span> 、 <span class='dropzone' data-answer='戰國'>請點選填入</span> 兩個時期。公元前256年，東周為 <span class='dropzone' data-answer='秦國'>請點選填入</span> 所滅，國祚共 <span class='dropzone' data-answer='五百一十五年'>請點選填入</span> 。", words: ["宜臼", "周平王", "鎬京", "戰亂", "殘破", "都城東遷", "洛邑", "平王東遷", "東周", "春秋", "戰國", "秦國", "五百一十五年"] }
-        ]
-    };
-
-    const dragDatabaseAdvanced = {
-        "1_adv": [
-            { text: "大約一百七十萬年前至四千年前為 <span class='dropzone' data-answer='石器時代'>請點選填入</span> 。舊石器時代有 <span class='dropzone' data-answer='北京人'>請點選填入</span> 等，新石器時代懂得磨製石器、以 <span class='dropzone' data-answer='農業、畜牧業'>請點選填入</span> 為生。中華文明起源是 <span class='dropzone' data-answer='多元'>請點選填入</span> 的。", words: ["石器時代", "北京人", "農業、畜牧業", "多元"] }
-        ],
-        "2_adv": [
-            { text: "黃帝合併炎帝、在 <span class='dropzone' data-answer='涿鹿'>請點選填入</span> 打敗蚩尤形成華夏族。夏朝被 <span class='dropzone' data-answer='商'>請點選填入</span> 推翻，商朝被 <span class='dropzone' data-answer='周'>請點選填入</span> 推翻，均以貴族身分改朝換代被視為貴族革命。", words: ["涿鹿", "商", "周"] },
-            { text: "西周傳至 <span class='dropzone' data-answer='幽王'>請點選填入</span> 時，寵愛妃子 <span class='dropzone' data-answer='褒姒'>請點選填入</span> ，廢掉 <span class='dropzone' data-answer='申后'>請點選填入</span> 和太子 <span class='dropzone' data-answer='宜臼'>請點選填入</span> 。公元前771年，申后父親 <span class='dropzone' data-answer='申侯'>請點選填入</span> 聯合 <span class='dropzone' data-answer='西北犬戎'>請點選填入</span> 攻打幽王。結果 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 陷落， <span class='dropzone' data-answer='幽王'>請點選填入</span> 被殺， <span class='dropzone' data-answer='西周'>請點選填入</span> 滅亡，國祚共 <span class='dropzone' data-answer='二百七十五年'>請點選填入</span> 。", words: ["幽王", "褒姒", "申后", "宜臼", "申侯", "西北犬戎", "鎬京", "西周", "二百七十五年"] },
-            { text: "西周結束後，部分諸侯擁立 <span class='dropzone' data-answer='宜臼'>請點選填入</span> ，是為 <span class='dropzone' data-answer='周平王'>請點選填入</span> 。這時 <span class='dropzone' data-answer='鎬京'>請點選填入</span> 因 <span class='dropzone' data-answer='戰亂'>請點選填入</span> 變得 <span class='dropzone' data-answer='殘破'>請點選填入</span> ，平王遂於公元前770年把 <span class='dropzone' data-answer='都城東遷'>請點選填入</span> <span class='dropzone' data-answer='洛邑'>請點選填入</span> ，史稱「 <span class='dropzone' data-answer='平王東遷'>請點選填入</span> 」。平王東遷後的周朝被稱為 <span class='dropzone' data-answer='東周'>請點選填入</span> ，當中可再分為 <span class='dropzone' data-answer='春秋'>請點選填入</span> 、 <span class='dropzone' data-answer='戰國'>請點選填入</span> 兩個時期。公元前256年，東周為 <span class='dropzone' data-answer='秦國'>請點選填入</span> 所滅，國祚共 <span class='dropzone' data-answer='五百一十五年'>請點選填入</span> 。", words: ["宜臼", "周平王", "鎬京", "戰亂", "殘破", "都城東遷", "洛邑", "平王東遷", "東周", "春秋", "戰國", "秦國", "五百一十五年"] }
+            { text: "商湯聯合各部落在 <span class='dropzone' data-answer='鳴條'>請點選填入</span> 大敗夏桀，建立商朝並定都於 <span class='dropzone' data-answer='亳'>請點選填入</span> 。考古學者在 <span class='dropzone' data-answer='殷都遺址'>請點選填入</span> 發現中國現存最早的文字—— <span class='dropzone' data-answer='甲骨文'>請點選填入</span> 。", words: ["鳴條", "亳", "殷都遺址", "甲骨文"] }
         ]
     };
 
@@ -787,68 +724,8 @@
                 { code: "F", text: "F. 五帝之一。" }
             ]
         },
-        person2: {
-            title: "二、人物配對題（第二部分：夏商建立與暴君）",
-            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
-            items: [
-                { id: 1, label: "1. 禹", target: "C", desc: "接受舜的禪讓建立夏朝，死後由兒子世襲。" },
-                { id: 2, label: "2. 啟", target: "D", desc: "禹之子，他的繼位標誌著世襲制度取代了禪讓制度。" },
-                { id: 3, label: "3. 桀", target: "B", desc: "夏朝最後一個國君，荒廢政事且以虐待民眾為樂。" },
-                { id: 4, label: "4. 妹喜", target: "F", desc: "夏桀的妃子，與桀一同飲酒作樂。" },
-                { id: 5, label: "5. 伊尹", target: "A", desc: "輔助商湯的賢臣，使商朝日益強盛。" },
-                { id: 6, label: "6. 湯", target: "E", desc: "商朝開國君主，在鳴條大敗桀的軍隊。" }
-            ],
-            options: [
-                { code: "A", text: "A. 輔助商湯的賢臣，使商朝日益強盛。" },
-                { code: "B", text: "B. 夏朝最後一個國君，荒廢政事且以虐待民眾為樂。" },
-                { code: "C", text: "C. 接受舜的禪讓建立夏朝，死後由兒子世襲。" },
-                { code: "D", text: "D. 禹之子，他的繼位標誌著世襲制度取代了禪讓制度。" },
-                { code: "E", text: "E. 商朝開國君主，在鳴條大敗桀的軍隊。" },
-                { code: "F", text: "F. 夏桀的妃子，與桀一同飲酒作樂。" }
-            ]
-        },
-        person3: {
-            title: "三、人物配對題（第三部分：商末周初與暴君）",
-            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
-            items: [
-                { id: 1, label: "1. 紂王", target: "C", desc: "商朝末代國君，沉迷酒色且設立炮烙等酷刑。" },
-                { id: 2, label: "2. 妲己", target: "E", desc: "紂王的寵妃，讓紂王動用民力修築奢華的鹿台。" },
-                { id: 3, label: "3. 姬發（周武王）", target: "G", desc: "建立西周的開國君主，在牧野決戰中滅商。" },
-                { id: 4, label: "4. 姜尚", target: "B", desc: "輔助周武王的賢臣，協助推翻商朝。" },
-                { id: 5, label: "5. 周幽王", target: "A", desc: "寵愛妃子並廢掉申后與太子，最終在鎬京被犬戎所殺。" },
-                { id: 6, label: "6. 褒姒", target: "F", desc: "周幽王的寵妃，其被寵愛引發了西周的亡國危機。" },
-                { id: 7, label: "7. 周平王", target: "D", desc: "東遷洛邑建立東周的周朝君主。" }
-            ],
-            options: [
-                { code: "A", text: "A. 寵愛妃子並廢掉申后與太子，最終在鎬京被犬戎所殺。" },
-                { code: "B", text: "B. 輔助周武王的賢臣，協助推翻商朝。" },
-                { code: "C", text: "C. 商朝末代國君，沉迷酒色且設立炮烙等酷刑。" },
-                { code: "D", text: "D. 東遷洛邑建立東周的周朝君主。" },
-                { code: "E", text: "E. 紂王的寵妃，讓紂王動用民力修築奢華的鹿台。" },
-                { code: "F", text: "F. 周幽王的寵妃，其被寵愛引發了西周的亡國危機。" },
-                { code: "G", text: "G. 建立西周的開國君主，在牧野決戰中滅商。" }
-            ]
-        },
-        person4: {
-            title: "四、人物配對題（第四部分：幽王烽火與申后申侯）",
-            intro: "請將左欄的人物與右欄其對應的事跡或身分進行正確配對：",
-            items: [
-                { id: 1, label: "1. 周幽王", target: "B", desc: "寵愛妃子並亂政，最終在鎬京被犬戎所殺。" },
-                { id: 2, label: "2. 褒姒", target: "E", desc: "周幽王的寵妃，其受寵引發了西周的亡國危機。" },
-                { id: 3, label: "3. 申后", target: "A", desc: "被周幽王廢掉后位的申國之女。" },
-                { id: 4, label: "4. 申侯", target: "C", desc: "申后的父親，聯合西北犬戎攻打幽王。" },
-                { id: 5, label: "5. 周平王（宜臼）", target: "D", desc: "東遷洛邑建立東周的周朝君主（原為太子）。" }
-            ],
-            options: [
-                { code: "A", text: "A. 被周幽王廢掉后位的申國之女。" },
-                { code: "B", text: "B. 寵愛妃子並亂政，最終在鎬京被犬戎所殺。" },
-                { code: "C", text: "C. 申后的父親，聯合西北犬戎攻打幽王。" },
-                { code: "D", text: "D. 東遷洛邑建立東周的周朝君主（原為太子）。" },
-                { code: "E", text: "E. 周幽王的寵妃，其受寵引發了西周的亡國危機。" }
-            ]
-        },
         geo: {
-            title: "五、地理與文化遺跡配對題",
+            title: "二、地理與文化遺跡配對題",
             intro: "請將下列文化遺址或歷史地點與其對應特點進行配對：",
             items: [
                 { id: 1, label: "1. 仰韶文化", target: "A", desc: "黃河中上游的彩陶文化" },
@@ -894,71 +771,6 @@
             ],
             correctOrder: ["B", "A", "D", "F", "E", "C"],
             explanation: "正確順序： 黃帝 ➔ 顓頊 ➔ 嚳 ➔ 堯 ➔ 舜 ➔ 禹"
-        },
-        {
-            intro: "請將下列夏商周時期的重要歷史事件按照發生先後順序進行排序（由先至後）：",
-            events: [
-                { key: "A", text: "A. 啟繼位" },
-                { key: "B", text: "B. 桀荒廢政事" },
-                { key: "C", text: "C. 禹執政" },
-                { key: "D", text: "D. 湯建立商朝" },
-                { key: "E", text: "E. 紂王寵愛妲己" },
-                { key: "F", text: "F. 姬發建立周朝" }
-            ],
-            correctOrder: ["C", "A", "B", "D", "E", "F"],
-            explanation: "正確順序： 禹執政 ➔ 啟繼位 ➔ 桀荒廢政事 ➔ 湯建立商朝 ➔ 紂王寵愛妲己 ➔ 姬發建立周朝"
-        },
-        {
-            intro: "請將下列商周時期的歷史事件按照發生先後順序進行排序（由先至後）：",
-            events: [
-                { key: "A", text: "A. 紂王自焚而死" },
-                { key: "B", text: "B. 商湯在鳴條大敗桀的軍隊" },
-                { key: "C", text: "C. 商定都於亳" },
-                { key: "D", text: "D. 商、周雙方在牧野決戰" },
-                { key: "E", text: "E. 周定都於鎬京" }
-            ],
-            correctOrder: ["B", "C", "D", "A", "E"],
-            explanation: "正確順序： 商湯在鳴條大敗桀的軍隊 ➔ 商定都於亳 ➔ 商、周雙方在牧野決戰 ➔ 紂王自焚而死 ➔ 周定都於鎬京"
-        },
-        {
-            intro: "請將下列夏商周朝代興替及重要歷史事件按發生的先後次序排列（由先至後）：",
-            events: [
-                { key: "A", text: "A. 周平王東遷洛邑，東周開始" },
-                { key: "B", text: "B. 禹接受舜的禪讓，夏朝建立" },
-                { key: "C", text: "C. 牧野之戰爆發，周武王滅商建立西周" },
-                { key: "D", text: "D. 申侯聯合犬戎攻打周幽王，西周滅亡" },
-                { key: "E", text: "E. 鳴條之戰爆發，商湯滅夏建立商朝" },
-                { key: "F", text: "F. 東周為秦國所滅" },
-                { key: "G", text: "G. 夏朝被商推翻（夏桀亡國）" }
-            ],
-            correctOrder: ["B", "G", "E", "C", "D", "A", "F"],
-            explanation: "正確順序： 禹接受舜的禪讓，夏朝建立 ➔ 夏朝被商推翻（夏桀亡國） ➔ 鳴條之戰爆發，商湯滅夏建立商朝 ➔ 牧野之戰爆發，周武王滅商建立西周 ➔ 申侯聯合犬戎攻打周幽王，西周滅亡 ➔ 周平王東遷洛邑，東周開始 ➔ 東周為秦國所滅"
-        },
-        {
-            intro: "請判斷以下關於課文中各朝代和事件發生時間的敘述，正確的請選擇「正確」，錯誤的請選擇「錯誤」：",
-            events: [
-                { key: "A", text: "A. 禹建立夏朝的時間大約在公元前2070年至約前1600年之間。" },
-                { key: "B", text: "B. 商朝立國的時間大約在公元前1600年至前1046年之間。" },
-                { key: "C", text: "C. 周武王建立西周（史稱西周）的確切年份是公元前1046年。" },
-                { key: "D", text: "D. 西周滅亡的年份是公元前771年，國祚共二百七十五年。" },
-                { key: "E", text: "E. 周平王東遷洛邑的年份是公元前770年。" },
-                { key: "F", text: "F. 東周最終於公元前256年為秦國所滅，國祚共五百一十五年。" }
-            ],
-            correctOrder: ["A", "B", "C", "D", "E", "F"],
-            explanation: "上述關於夏商周時期各重要紀年與國祚的敘述皆正確無誤。"
-        },
-        {
-            intro: "請根據課文提供的公元前紀年，將下列年份或時間段由「年代最早（距離現代最遠）」至「年代最晚（距離現代最近）」順序排列：",
-            events: [
-                { key: "A", text: "A. 約公元前2070年至約前1600年（夏朝建立與存續期間）" },
-                { key: "B", text: "B. 公元前770年（平王東遷）" },
-                { key: "C", text: "C. 公元前1046年至前771年（西周存續期間）" },
-                { key: "D", text: "D. 約公元前1600年至前1046年（商朝建立與存續期間）" },
-                { key: "E", text: "E. 公元前256年（東周滅亡）" },
-                { key: "F", text: "F. 公元前771年（西周滅亡）" }
-            ],
-            correctOrder: ["A", "D", "C", "F", "B", "E"],
-            explanation: "正確順序： A (約前2070-前1600) ➔ D (約前1600-前1046) ➔ C (前1046-前771) ➔ F (前771) ➔ B (前770) ➔ E (前256)"
         }
     ];
 
@@ -1099,80 +911,138 @@
         }
     }
 
-    function onQuizTypeChange() {
+    function toggleSelectAllTopics(select) {
+        const checkboxes = document.querySelectorAll('input[name="topic-chk"]');
+        checkboxes.forEach(chk => {
+            chk.checked = select;
+        });
+        handleTopicCheckboxChange();
+    }
+
+    function handleTopicCheckboxChange() {
         const quizType = document.getElementById('quizTypeSelect').value;
-        const subMatchingGroup = document.getElementById('sub-matching-group');
-        const topicContainer = document.getElementById('topic-config-container');
-        const extraQtyContainer = document.getElementById('extra-qty-container');
-        const matchingQtyRow = document.querySelector('.matching-qty-row');
-        const sequenceQtyRow = document.querySelector('.sequence-qty-row');
-
-        subMatchingGroup.style.display = 'none';
-        topicContainer.style.display = 'block';
-        extraQtyContainer.style.display = 'block';
-        if (matchingQtyRow) matchingQtyRow.style.display = 'flex';
-        if (sequenceQtyRow) sequenceQtyRow.style.display = 'flex';
-
-        if (quizType === 'mc') {
-            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'flex');
-            extraQtyContainer.style.display = 'none';
-        } else if (quizType === 'drag') {
-            document.querySelectorAll('.mc-row').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
-            extraQtyContainer.style.display = 'none';
-        } else if (quizType === 'matching') {
-            subMatchingGroup.style.display = 'block';
-            topicContainer.style.display = 'none';
-            if (sequenceQtyRow) sequenceQtyRow.style.display = 'none';
-        } else if (quizType === 'sequence') {
-            topicContainer.style.display = 'none';
-            if (matchingQtyRow) matchingQtyRow.style.display = 'none';
-        } else if (quizType === 'comprehensive') {
-            document.querySelectorAll('.mc-row, .drag-basic-row, .drag-adv-row').forEach(el => el.style.display = 'flex');
-            if (matchingQtyRow) matchingQtyRow.style.display = 'flex';
-            if (sequenceQtyRow) sequenceQtyRow.style.display = 'flex';
+        if (quizType === 'comprehensive') {
+            renderComprehensiveConfigInputs();
+        } else {
+            updateMaxTotalLimit();
         }
     }
 
-    function setAllCounts(val) {
-        document.querySelectorAll('.topic-card').forEach(card => {
-            if (card.style.display === 'none') return;
-            const mcInput = card.querySelector('.topic-mc-qty');
-            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+    function getSelectedTopicsMaxLimit() {
+        const quizType = document.getElementById('quizTypeSelect').value;
+        const checkedTopics = document.querySelectorAll('input[name="topic-chk"]:checked');
+        let totalLimit = 0;
 
-            if (mcInput) mcInput.value = val;
-            if (dragBasicInput) dragBasicInput.value = Math.min(val, parseInt(dragBasicInput.max) || val);
-            if (dragAdvInput) dragAdvInput.value = Math.min(val, parseInt(dragAdvInput.max) || 0);
+        checkedTopics.forEach(chk => {
+            const topic = chk.value;
+            if (quizType === 'mc') {
+                totalLimit += mcDatabase[topic] ? mcDatabase[topic].length : 0;
+            } else if (quizType === 'drag') {
+                totalLimit += dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
+            }
         });
-        const mInput = document.getElementById('matching-qty');
-        const sInput = document.getElementById('sequence-qty');
-        if (mInput) mInput.value = Math.min(val, parseInt(mInput.max) || 4);
-        if (sInput) sInput.value = Math.min(val, parseInt(sInput.max) || 4);
+
+        return totalLimit;
     }
 
-    function randomizeCounts() {
-        document.querySelectorAll('.topic-card').forEach(card => {
-            if (card.style.display === 'none') return;
-            const mcInput = card.querySelector('.topic-mc-qty');
-            const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-            const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+    function updateMaxTotalLimit() {
+        const maxLimit = getSelectedTopicsMaxLimit();
+        const infoText = document.getElementById('max-limit-info-text');
+        const targetInput = document.getElementById('target-total-qty');
 
-            if (mcInput) mcInput.value = Math.floor(Math.random() * 3);
-            if (dragBasicInput) {
-                let maxB = parseInt(dragBasicInput.max) || 1;
-                dragBasicInput.value = Math.floor(Math.random() * (maxB + 1));
+        infoText.innerText = `目前所選課題的題庫總上限：${maxLimit} 題`;
+
+        let currentVal = parseInt(targetInput.value) || 0;
+        if (currentVal > maxLimit && maxLimit > 0) {
+            targetInput.value = maxLimit;
+        }
+    }
+
+    function selectAllQuestionsMax() {
+        const maxLimit = getSelectedTopicsMaxLimit();
+        const targetInput = document.getElementById('target-total-qty');
+        targetInput.value = maxLimit > 0 ? maxLimit : 1;
+    }
+
+    function validateTotalQty(inputEl) {
+        let maxLimit = getSelectedTopicsMaxLimit();
+        let rawVal = inputEl.value;
+
+        if (rawVal === "" || rawVal.endsWith("0")) {
+            return;
+        }
+
+        let val = parseInt(rawVal, 10);
+        if (isNaN(val)) return;
+
+        if (maxLimit > 0 && val > maxLimit) {
+            alert(`目標總題數不能超過所選題庫的總上限（${maxLimit} 題）！`);
+            inputEl.value = maxLimit;
+        } else if (val < 1) {
+            inputEl.value = 1;
+        }
+    }
+
+    function onQuizTypeChange() {
+        const quizType = document.getElementById('quizTypeSelect').value;
+        const subMatchingGroup = document.getElementById('sub-matching-group');
+        const totalQtyGroup = document.getElementById('total-qty-group');
+        const comprehensiveBox = document.getElementById('comprehensive-box');
+        const topicsGroupContainer = document.getElementById('topics-group-container');
+        const step2Title = document.getElementById('step2-title');
+
+        subMatchingGroup.style.display = 'none';
+        totalQtyGroup.style.display = 'block';
+        comprehensiveBox.style.display = 'none';
+        topicsGroupContainer.style.display = 'block';
+        step2Title.style.display = 'block';
+
+        if (quizType === 'matching' || quizType === 'sequence') {
+            totalQtyGroup.style.display = 'none';
+            step2Title.style.display = 'none';
+            topicsGroupContainer.style.display = 'none';
+            if (quizType === 'matching') {
+                subMatchingGroup.style.display = 'block';
             }
-            if (dragAdvInput) {
-                let maxA = parseInt(dragAdvInput.max) || 0;
-                dragAdvInput.value = Math.floor(Math.random() * (maxA + 1));
-            }
+        } else if (quizType === 'comprehensive') {
+            totalQtyGroup.style.display = 'none';
+            comprehensiveBox.style.display = 'block';
+            renderComprehensiveConfigInputs();
+        } else {
+            updateMaxTotalLimit();
+        }
+    }
+
+    function renderComprehensiveConfigInputs() {
+        const container = document.getElementById('comp-topics-config-container');
+        const checkedTopics = Array.from(document.querySelectorAll('input[name="topic-chk"]:checked')).map(el => el.value);
+
+        if (checkedTopics.length === 0) {
+            container.innerHTML = `<p style="color: #c0392b; font-size: 13px; margin: 0;">請先在上方勾選至少一個溫習課題，才可設定綜合練習題數。</p>`;
+            return;
+        }
+
+        let html = '';
+        checkedTopics.forEach(topic => {
+            const mcMax = mcDatabase[topic] ? mcDatabase[topic].length : 0;
+            const dragMax = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
+            html += `
+                <div class="comp-topic-row">
+                    <div class="comp-topic-title">${topicNames[topic]}</div>
+                    <div class="comp-inputs-grid">
+                        <div class="comp-input-field">
+                            <label>選擇題數量 (上限 ${mcMax})</label>
+                            <input type="text" id="comp-mc-${topic}" value="${Math.min(2, mcMax)}" data-max="${mcMax}">
+                        </div>
+                        <div class="comp-input-field">
+                            <label>填充題數量 (上限 ${dragMax})</label>
+                            <input type="text" id="comp-drag-${topic}" value="${Math.min(1, dragMax)}" data-max="${dragMax}">
+                        </div>
+                    </div>
+                </div>
+            `;
         });
-        const mInput = document.getElementById('matching-qty');
-        const sInput = document.getElementById('sequence-qty');
-        if (mInput) mInput.value = Math.floor(Math.random() * 5);
-        if (sInput) sInput.value = Math.floor(Math.random() * 5);
+        container.innerHTML = html;
     }
 
     function startQuiz() {
@@ -1186,6 +1056,12 @@
             return;
         }
 
+        const checkedTopics = Array.from(document.querySelectorAll('input[name="topic-chk"]:checked')).map(el => el.value);
+        if (checkedTopics.length === 0 && quizType !== 'matching' && quizType !== 'sequence') {
+            alert("請至少勾選一個溫習課題！");
+            return;
+        }
+
         activeMcQuestions = [];
         activeDragQuestions = [];
         activeMatchingData = null;
@@ -1195,94 +1071,149 @@
 
         if (quizType === 'matching') {
             activeMatchingData = [];
-            let mCount = parseInt(document.getElementById('matching-qty').value) || 1;
-            if (mCount > 0) {
-                let allPersons = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4];
-                if (matchingType === 'person') {
-                    for (let i = 0; i < Math.min(mCount, allPersons.length); i++) {
-                        activeMatchingData.push(allPersons[i]);
-                    }
-                } else if (matchingType === 'geo') {
-                    activeMatchingData.push(matchingDatabase.geo);
-                } else if (matchingType === 'both') {
-                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4, matchingDatabase.geo];
-                    for (let i = 0; i < Math.min(mCount, combined.length); i++) {
-                        activeMatchingData.push(combined[i]);
-                    }
-                }
+            if (matchingType === 'person') {
+                let clonedPerson = JSON.parse(JSON.stringify(matchingDatabase.person));
+                clonedPerson.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedPerson);
+            } else if (matchingType === 'geo') {
+                let clonedGeo = JSON.parse(JSON.stringify(matchingDatabase.geo));
+                clonedGeo.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedGeo);
+            } else if (matchingType === 'both') {
+                let clonedPerson = JSON.parse(JSON.stringify(matchingDatabase.person));
+                clonedPerson.items.sort(() => Math.random() - 0.5);
+                let clonedGeo = JSON.parse(JSON.stringify(matchingDatabase.geo));
+                clonedGeo.items.sort(() => Math.random() - 0.5);
+                activeMatchingData.push(clonedPerson, clonedGeo);
             }
-            totalRequested = activeMatchingData.length;
+            totalRequested = activeMatchingData.reduce((acc, sec) => acc + sec.items.length, 0);
         } else if (quizType === 'sequence') {
-            let sCount = parseInt(document.getElementById('sequence-qty').value) || 1;
-            if (sCount > 0) {
-                let allSeq = [...sequenceDatabase];
-                allSeq.sort(() => Math.random() - 0.5);
-                activeSequenceData = allSeq.slice(0, Math.min(sCount, allSeq.length));
-            }
+            let allSeq = JSON.parse(JSON.stringify(sequenceDatabase));
+            allSeq.sort(() => Math.random() - 0.5);
+            activeSequenceData = [allSeq[0]]; // 時序題固定出1題
             totalRequested = activeSequenceData.length;
-        } else {
-            document.querySelectorAll('.topic-card').forEach(card => {
-                if (card.style.display === 'none') return;
-                const topic = card.getAttribute('data-topic');
-                const mcInput = card.querySelector('.topic-mc-qty');
-                const dragBasicInput = card.querySelector('.topic-drag-basic-qty');
-                const dragAdvInput = card.querySelector('.topic-drag-adv-qty');
+        } else if (quizType === 'comprehensive') {
+            if (checkedTopics.length === 0) {
+                alert("請至少勾選一個溫習課題！");
+                return;
+            }
 
-                const mcCount = (quizType !== 'drag' && mcInput) ? (parseInt(mcInput.value) || 0) : 0;
-                const dragBasicCount = (quizType !== 'mc' && dragBasicInput) ? (parseInt(dragBasicInput.value) || 0) : 0;
-                const dragAdvCount = (quizType !== 'mc' && dragAdvInput) ? (parseInt(dragAdvInput.value) || 0) : 0;
+            checkedTopics.forEach(topic => {
+                const mcInput = document.getElementById(`comp-mc-${topic}`);
+                const dragInput = document.getElementById(`comp-drag-${topic}`);
+                const mcMax = mcDatabase[topic] ? mcDatabase[topic].length : 0;
+                const dragMax = dragDatabaseBasic[topic] ? dragDatabaseBasic[topic].length : 0;
 
-                totalRequested += (mcCount + dragBasicCount + dragAdvCount);
+                let mcReq = mcInput ? parseInt(mcInput.value, 10) || 0 : 0;
+                let dragReq = dragInput ? parseInt(dragInput.value, 10) || 0 : 0;
 
-                if (mcCount > 0 && mcDatabase[topic]) {
-                    let items = [...mcDatabase[topic]];
-                    items.sort(() => Math.random() - 0.5);
-                    items.slice(0, mcCount).forEach(item => {
-                        activeMcQuestions.push({ topicKey: topic, ...item });
+                if (mcReq > mcMax) mcReq = mcMax;
+                if (dragReq > dragMax) dragReq = dragMax;
+
+                if (mcReq > 0 && mcDatabase[topic]) {
+                    let pool = [...mcDatabase[topic]].sort(() => Math.random() - 0.5);
+                    pool.slice(0, mcReq).forEach(item => {
+                        activeMcQuestions.push({ type: 'mc', topicKey: topic, ...item });
+                        totalRequested++;
                     });
                 }
 
-                if (dragBasicCount > 0 && dragDatabaseBasic[topic]) {
-                    let items = [...dragDatabaseBasic[topic]];
-                    items.sort(() => Math.random() - 0.5);
-                    items.slice(0, dragBasicCount).forEach(item => {
-                        activeDragQuestions.push({ topicKey: topic, ...item });
+                if (dragReq > 0 && dragDatabaseBasic[topic]) {
+                    let pool = [...dragDatabaseBasic[topic]].sort(() => Math.random() - 0.5);
+                    pool.slice(0, dragReq).forEach(item => {
+                        activeDragQuestions.push({ type: 'drag', topicKey: topic, ...item });
+                        totalRequested++;
                     });
-                }
-
-                if (dragAdvCount > 0) {
-                    let dbKey = topic.startsWith('1.') ? '1_adv' : '2_adv';
-                    if (dragDatabaseAdvanced[dbKey]) {
-                        let items = [...dragDatabaseAdvanced[dbKey]];
-                        items.sort(() => Math.random() - 0.5);
-                        items.slice(0, dragAdvCount).forEach(item => {
-                            activeDragQuestions.push({ topicKey: dbKey, ...item });
-                        });
-                    }
                 }
             });
 
-            if (quizType === 'comprehensive') {
-                let mCount = parseInt(document.getElementById('matching-qty').value) || 0;
-                let sCount = parseInt(document.getElementById('sequence-qty').value) || 0;
-                if (mCount > 0) {
-                    let combined = [matchingDatabase.person, matchingDatabase.person2, matchingDatabase.person3, matchingDatabase.person4, matchingDatabase.geo];
-                    activeMatchingData = [];
-                    for (let i = 0; i < Math.min(mCount, combined.length); i++) {
-                        activeMatchingData.push(combined[i]);
+            // 綜合練習中的配對題與時序題各自固定隨機出 1 題
+            let chosenMatchSource = Math.random() < 0.5 ? matchingDatabase.person : matchingDatabase.geo;
+            let clonedCompMatch = JSON.parse(JSON.stringify(chosenMatchSource));
+            clonedCompMatch.items.sort(() => Math.random() - 0.5);
+            activeMatchingData = [clonedCompMatch];
+            totalRequested += clonedCompMatch.items.length;
+
+            let allSeq = JSON.parse(JSON.stringify(sequenceDatabase));
+            allSeq.sort(() => Math.random() - 0.5);
+            activeSequenceData = [allSeq[0]];
+            totalRequested += activeSequenceData.length;
+
+        } else {
+            const targetTotalInput = document.getElementById('target-total-qty');
+            let targetTotal = parseInt(targetTotalInput.value, 10) || 10;
+            let maxLimit = getSelectedTopicsMaxLimit();
+
+            if (targetTotal > maxLimit && maxLimit > 0) {
+                targetTotal = maxLimit;
+                targetTotalInput.value = maxLimit;
+            }
+
+            let topicPools = {};
+            let availableTotal = 0;
+
+            checkedTopics.forEach(topic => {
+                let pool = [];
+                if (quizType === 'mc') {
+                    if (mcDatabase[topic]) pool = pool.concat(mcDatabase[topic].map(item => ({ type: 'mc', topicKey: topic, ...item })));
+                } else if (quizType === 'drag') {
+                    if (dragDatabaseBasic[topic]) pool = pool.concat(dragDatabaseBasic[topic].map(item => ({ type: 'drag', topicKey: topic, ...item })));
+                }
+                pool.sort(() => Math.random() - 0.5);
+                topicPools[topic] = pool;
+                availableTotal += pool.length;
+            });
+
+            if (targetTotal > availableTotal) {
+                targetTotal = availableTotal;
+            }
+
+            let distribution = {};
+            let assignedCount = 0;
+
+            let basePerTopic = Math.floor(targetTotal / checkedTopics.length);
+            checkedTopics.forEach(topic => {
+                let limit = topicPools[topic].length;
+                let assign = Math.min(limit, basePerTopic);
+                distribution[topic] = assign;
+                assignedCount += assign;
+            });
+
+            let remaining = targetTotal - assignedCount;
+            let attempts = 0;
+            while (remaining > 0 && attempts < 100) {
+                let shuffledTopics = [...checkedTopics].sort(() => Math.random() - 0.5);
+                let distributedInLoop = false;
+                for (let topic of shuffledTopics) {
+                    if (remaining > 0 && distribution[topic] < topicPools[topic].length) {
+                        distribution[topic]++;
+                        remaining--;
+                        distributedInLoop = true;
                     }
                 }
-                if (sCount > 0) {
-                    let allSeq = [...sequenceDatabase];
-                    allSeq.sort(() => Math.random() - 0.5);
-                    activeSequenceData = allSeq.slice(0, Math.min(sCount, allSeq.length));
-                }
-                totalRequested += (activeMatchingData ? activeMatchingData.length : 0) + (activeSequenceData ? activeSequenceData.length : 0);
+                if (!distributedInLoop) break;
+                attempts++;
             }
+
+            checkedTopics.forEach(topic => {
+                let count = distribution[topic] || 0;
+                let pool = topicPools[topic];
+                let chosen = pool.slice(0, count);
+
+                chosen.forEach(item => {
+                    if (quizType === 'mc') {
+                        activeMcQuestions.push(item);
+                        totalRequested++;
+                    } else if (quizType === 'drag') {
+                        activeDragQuestions.push(item);
+                        totalRequested++;
+                    }
+                });
+            });
         }
 
         if (totalRequested === 0) {
-            alert("請至少在某個項目設定 1 道或以上的數量！");
+            alert("請至少設定大於 0 的目標總題數，或確認有勾選對應課題及數量！");
             return;
         }
 
@@ -1335,7 +1266,7 @@
 
         if (activeMatchingData && activeMatchingData.length > 0) {
             activeMatchingData.forEach((matchSec, sIdx) => {
-                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四五、]+/, '')}</h2>`;
+                html += `<h2 class="section-divider">${toChineseNum(sectionNum++)}、${matchSec.title.replace(/^[一二三四五、]+/, '')}（共 ${matchSec.items.length} 題）</h2>`;
                 html += `<p><strong>${matchSec.intro}</strong></p>`;
                 
                 html += `<div style="background: #f8fafc; padding: 12px 15px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 15px;">`;
@@ -1386,8 +1317,7 @@
                 html += `</tr></thead><tbody><tr>`;
                 for (let i = 0; i < seqSec.correctOrder.length; i++) {
                     const selectId = `seq-step-${sIdx}-${i}`;
-                    const isT_F = seqSec.events[0].text.includes("正確的請選擇") || seqSec.events[0].text.includes("正確的請寫");
-                    const optionsList = isT_F ? ["正確", "錯誤"] : seqSec.events.map(ev => ev.key);
+                    const optionsList = seqSec.events.map(ev => ev.key);
                     html += `<td><select id="${selectId}" class="seq-select-${sIdx}" data-correct="${seqSec.correctOrder[i]}" onchange="updateSequenceOptions(${sIdx})">
                         <option value="" disabled selected>-- 選擇 --</option>
                         ${optionsList.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
@@ -1413,7 +1343,6 @@
             const currentValue = sel.value;
             Array.from(sel.options).forEach(opt => {
                 if (opt.value === "") return;
-                if (opt.value === "正確" || opt.value === "錯誤") return;
                 if (selectedValues.includes(opt.value) && opt.value !== currentValue) {
                     opt.disabled = true;
                 } else {
